@@ -1,0 +1,1073 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Part 1: Getting the Data Ready &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'fantasyfootball_winner';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="More About Me" href="aboutme.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Prabhjot Singh’s Data Science and Machine Learning Portfolio
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">More About Me</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="aboutme.html">More About Me</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hacking Football</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Part 1: Getting the Data Ready</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Ffantasyfootball_winner.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/fantasyfootball_winner.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Part 1: Getting the Data Ready</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-goal-target-and-intermediate-target-variables">Defining Goal - Target and Intermediate Target Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-the-features">Defining the Features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#packages-used">Packages Used</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-0-acquiring-the-data-espn-fantasy-football-api">Step 0: Acquiring the Data - ESPN Fantasy Football API</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-0-data-cleaning-and-manipulation">Step 1.0: Data Cleaning and Manipulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-our-index-team-id-year">Making Our Index: Team Id, Year</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-1-data-exploration">Step 1.1 Data Exploration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-2-data-engineering">Step 1.2 Data Engineering</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptive-statistics">Descriptive Statistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-building-predictive-models">Part 2: Building Predictive Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="part-1-getting-the-data-ready">
+<h1>Part 1: Getting the Data Ready<a class="headerlink" href="#part-1-getting-the-data-ready" title="Permalink to this heading">#</a></h1>
+<p>For the past several years I have been struggling to win a championship in my ESPN Fantasy Football League. Therefore I aim to put my software egineer, analytics and machine learning skills to the test and come up with a data driven approach to winning my league this year.</p>
+<section id="defining-goal-target-and-intermediate-target-variables">
+<h2>Defining Goal - Target and Intermediate Target Variables<a class="headerlink" href="#defining-goal-target-and-intermediate-target-variables" title="Permalink to this heading">#</a></h2>
+<p>Success in a fantasy football league can be guaged in a variety of ways - but we only care about one thing: winning the whole thing. Therefore the main target variable will indicate for any given team in a given year, whether or not they won:</p>
+<ul class="simple">
+<li><p>LeagueWin_Binary: Indicator of League Win or Not</p></li>
+</ul>
+<p>However, considering there is only 1 winner every year and the league has only been active since 2016, a major flaw to the model could be an incredibly imbalanced dataset. In addition, I fear that there is a lot of variablity in winning that can be attribtued to plain luck. Therefore anticipating the difficulty in predicting a leauge win or not, I will also be including a list of some intermediate target variables that may serve as an alternative measure of success:</p>
+<ul class="simple">
+<li><p>LeagueWin_Categorical: Categorical Variable that divides the final standings into 4 different groups: Group1: Place 1-3, Group2: Place:3-6, Group3: 6-9, and Group4: 9-12.</p></li>
+<li><p>LeaguePlayoffStandings_Categorical: Final playoff standings.</p></li>
+<li><p>LeaguePlayoff_Binary: Whether or not a team made the playoffs.</p></li>
+<li><p>LeagueTotalPoints_Numerical: Numerical variable for total points scored in regular season</p></li>
+</ul>
+</section>
+<section id="defining-the-features">
+<h2>Defining the Features<a class="headerlink" href="#defining-the-features" title="Permalink to this heading">#</a></h2>
+<p>There are an abundance of ways in which we can extrapolate “draft strategies”, but I will be focused on type of position and ADP pre-season ranks of position picked in the various different rounds. Although it would be difficult to write a comprehensive list of all variables, here are some of the features I am interested in manufacturing.</p>
+<ul class="simple">
+<li><p>FirstOverallPick_Pos - LastOverallPick_Pos: For each round, a variable indicating the position that was drafted, and the overall ranking that the player had.</p></li>
+<li><p>OrderofPositionPicks_5Rounds: A sequential list of positions that were drafted from the first 5 rounds.</p></li>
+<li><p>AverageDraftPick_Position: The average of all the picks by a position.</p></li>
+<li><p>NumberRookiePicks: Integer number of rookie selections.</p></li>
+<li><p>AverageAgeofPicks: Float age of overall team.</p></li>
+<li><p>DiversityTeams: How many different divisions are present in the team.</p></li>
+<li><p>ByeWeekDifferential: Variance of bye weeks.</p></li>
+<li><p>HandcuffPicks: If a player from the same team and position are selected.</p></li>
+</ul>
+<p>For now, the focus on this first part will be on creating the first bullet point of variables and seeing how picks can be used to make predictive insights. Beyond that, I would also like to emphasize how important the step iof creating reliable and accurate data is as a data scientist/machine learning engineer. Yes our job is to create models and pipelines, but these outputs are entirely dependent on how clean and ready the inputted variables are. Therefore, I always take the time to massage and manufacture variables that I believe are accurately capturing intersting aspect of the problem at hand.</p>
+<p>Lastly, I find it helpful to understand problems in terms of dataframes. As a visual learner and data practicioner that relies heavily on pandas dataframes, I am able to better engineer data when I have a <em>final dataframe</em> that I am working towards. Therefore, in this case, I would envision the final dataframe looking something like this:w</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Team ID</p></th>
+<th class="head"><p>LeagueWin_Binary</p></th>
+<th class="head"><p>First_Overall_Pick_Type</p></th>
+<th class="head"><p>…</p></th>
+<th class="head"><p>ByeWeekDifferential</p></th>
+<th class="head"><p>HandcuffPicks</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Team 1_2020</p></td>
+<td><p>0</p></td>
+<td><p>RB</p></td>
+<td><p>…</p></td>
+<td><p>2.5</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>Team 2_2020</p></td>
+<td><p>1</p></td>
+<td><p>WR</p></td>
+<td><p>…</p></td>
+<td><p>0</p></td>
+<td><p>3</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="packages-used">
+<h2>Packages Used<a class="headerlink" href="#packages-used" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># imporing packages</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="c1"># other packages</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="c1"># visualization packages</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-0-acquiring-the-data-espn-fantasy-football-api">
+<h2>Step 0: Acquiring the Data - ESPN Fantasy Football API<a class="headerlink" href="#step-0-acquiring-the-data-espn-fantasy-football-api" title="Permalink to this heading">#</a></h2>
+<p>As with every data science project, the first step is to actually acquire the data. Although, I don’t want to just amatuerly copy and paste data into an excel file. Therefore isntead, I am going to be relying on the poorly documented ESPN API to assemble the data. would much rather create a webscraper to do this for me. In order to do this, I will need to leverage a combination APIs with some “cookies” that are needed to login to my private league.</p>
+<p>First off, its a bit tricky locating cookies, but I highly recommend visiting some of the resources that I have listed, but I found this <a class="reference external" href="https://cran.r-project.org/web/packages/ffscrapr/vignettes/espn_authentication.html">tutorial</a> from Tan Ho the most helpful. From this you can see the two main cookies you need are the swid, and espn_s2. Just save those as a variable - as it is needed whenever submitting a get request to the ESPN APIs.</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># historical drafts pull</span>
+<span class="k">def</span> <span class="nf">draft_pull</span><span class="p">(</span><span class="n">league_id</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">SWID_COOKIE</span><span class="p">,</span> <span class="n">ESPN_S2</span><span class="p">):</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; draft pull for league &quot;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">league_id</span><span class="p">))</span>
+    <span class="n">draft_historical</span> <span class="o">=</span> <span class="s2">&quot;https://fantasy.espn.com/apis/v3/games/ffl/leagueHistory/&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">league_id</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;?view=mDraftDetail&amp;view=mSettings&amp;view=mTeam&amp;view=modular&amp;view=mNav&amp;seasonId=&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span>
+    <span class="c1"># requests for the url </span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">draft_historical</span><span class="p">,</span> <span class="n">cookies</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;swid&quot;</span><span class="p">:</span> <span class="n">SWID_COOKIE</span><span class="p">,</span> <span class="s2">&quot;espn_s2&quot;</span><span class="p">:</span><span class="n">ESPN_S2</span><span class="p">})</span>
+    
+    <span class="c1"># request for </span>
+    <span class="n">espn_draft_raw</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="c1"># expracting the mapping doc of member ids/names</span>
+    <span class="n">members_raw</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">espn_draft_raw</span><span class="p">[</span><span class="s1">&#39;teams&#39;</span><span class="p">])</span>
+    
+    <span class="c1"># extracting actual picks -- limiting to only columns that we need</span>
+    <span class="n">draft_picks</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">espn_draft_raw</span><span class="p">[</span><span class="s1">&#39;draftDetail&#39;</span><span class="p">][</span><span class="s1">&#39;picks&#39;</span><span class="p">])</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">draft_picks</span><span class="p">[[</span><span class="s2">&quot;teamId&quot;</span><span class="p">,</span> <span class="s2">&quot;autoDraftTypeId&quot;</span><span class="p">,</span> <span class="s2">&quot;roundId&quot;</span><span class="p">,</span> <span class="s2">&quot;roundPickNumber&quot;</span><span class="p">,</span> <span class="s2">&quot;overallPickNumber&quot;</span><span class="p">,</span> <span class="s2">&quot;playerId&quot;</span><span class="p">,</span> <span class="s2">&quot;lineupSlotId&quot;</span><span class="p">]]</span>
+
+    <span class="c1"># map the team ids to get names onto the draft</span>
+    <span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">members_raw</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s2">&quot;teamId&quot;</span><span class="p">,</span> <span class="n">right_on</span> <span class="o">=</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Completed &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; draft pull for league &quot;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">league_id</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">df2</span>
+
+<span class="c1"># mapping an actual name for any player id</span>
+<span class="k">def</span> <span class="nf">player_map</span><span class="p">(</span><span class="n">league_id</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">SWID_COOKIE</span><span class="p">,</span> <span class="n">ESPN_S2</span><span class="p">):</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; player detail pull for league &quot;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">league_id</span><span class="p">))</span>
+
+    <span class="c1"># player url</span>
+    <span class="n">player_info</span> <span class="o">=</span> <span class="s2">&quot;https://fantasy.espn.com/apis/v3/games/ffl/seasons/</span><span class="si">{}</span><span class="s2">/players?scoringPeriodId=0&amp;view=players_wl&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">year</span><span class="p">)</span>
+    
+    <span class="c1"># need this to make sure players don&#39;t get filtered out</span>
+    <span class="n">player_filter</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;players&quot;</span><span class="p">:</span> 
+                     <span class="p">{</span><span class="s2">&quot;limit&quot;</span><span class="p">:</span> <span class="mi">1500</span><span class="p">,</span>
+                      <span class="s2">&quot;sortDraftRanks&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;sortPriority&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s2">&quot;sortAsc&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;STANDARD&quot;</span><span class="p">}</span>
+                     <span class="p">}}</span> 
+    <span class="c1"># ensures connection doesn&#39;t time out</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;Connection&#39;</span><span class="p">:</span> <span class="s1">&#39;keep-alive&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;Accept&#39;</span><span class="p">:</span> <span class="s1">&#39;application/json, text/plain, */*&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;User-Agent&#39;</span><span class="p">:</span> <span class="s1">&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;x-fantasy-filter&#39;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">player_filter</span><span class="p">),</span>
+         <span class="s1">&#39;x-fantasy-platform&#39;</span><span class="p">:</span> <span class="s1">&#39;kona-PROD-1dc40132dc2070ef47881dc95b633e62cebc9913&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;x-fantasy-source&#39;</span><span class="p">:</span> <span class="s1">&#39;kona&#39;</span><span class="p">}</span>
+    
+    <span class="n">r2</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">player_info</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">cookies</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;swid&quot;</span><span class="p">:</span> <span class="n">SWID_COOKIE</span><span class="p">,</span> <span class="s2">&quot;espn_s2&quot;</span><span class="p">:</span><span class="n">ESPN_S2</span><span class="p">})</span>
+    <span class="n">player_data</span> <span class="o">=</span> <span class="n">r2</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">player_data</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Completed &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; player detail pull for league &quot;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">league_id</span><span class="p">))</span>
+    
+    <span class="k">return</span> <span class="n">df2</span>
+
+<span class="c1"># mapping team name to each id</span>
+<span class="k">def</span> <span class="nf">team_map</span><span class="p">(</span><span class="n">league_id</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">SWID_COOKIE</span><span class="p">,</span> <span class="n">ESPN_S2</span><span class="p">):</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Started &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; team detail pull for league &quot;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">league_id</span><span class="p">))</span>
+
+    <span class="c1"># team url </span>
+    <span class="n">team_info</span> <span class="o">=</span> <span class="s2">&quot;https://fantasy.espn.com/apis/v3/games/ffl/seasons/</span><span class="si">{}</span><span class="s2">?view=proTeamSchedules_wl&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">year</span><span class="p">)</span>
+    
+    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">team_info</span><span class="p">,</span> <span class="n">cookies</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;swid&quot;</span><span class="p">:</span> <span class="n">SWID_COOKIE</span><span class="p">,</span> <span class="s2">&quot;espn_s2&quot;</span><span class="p">:</span><span class="n">ESPN_S2</span><span class="p">})</span>
+    <span class="n">team_data</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;settings&#39;</span><span class="p">][</span><span class="s1">&#39;proTeams&#39;</span><span class="p">]</span>
+    
+    <span class="n">team_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">team_data</span><span class="p">)</span>
+    
+    <span class="n">team_df</span> <span class="o">=</span> <span class="n">team_df</span><span class="p">[[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;location&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">]]</span>
+    <span class="n">team_df</span><span class="p">[</span><span class="s1">&#39;team_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">team_df</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="o">+</span><span class="s2">&quot;_&quot;</span><span class="o">+</span> <span class="n">team_df</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+    
+    <span class="c1"># rename in column</span>
+    <span class="n">team_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span><span class="s1">&#39;team_id&#39;</span><span class="p">},</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Completed &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; team detail pull for league &quot;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">league_id</span><span class="p">))</span>
+    
+    <span class="k">return</span> <span class="n">team_df</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># helper function to iterate through each year</span>
+<span class="k">def</span> <span class="nf">league_compiler</span><span class="p">(</span><span class="n">league_id</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">SWID_COOKIE</span><span class="p">,</span> <span class="n">ESPN_S2</span><span class="p">):</span>
+    
+    <span class="c1"># function to call all the different necessary tables</span>
+    <span class="n">raw_draft</span> <span class="o">=</span> <span class="n">draft_pull</span><span class="p">(</span><span class="n">league_id</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">SWID_COOKIE</span><span class="p">,</span> <span class="n">ESPN_S2</span><span class="p">)</span>
+    
+    <span class="c1"># function to get </span>
+    <span class="n">player_details</span> <span class="o">=</span> <span class="n">player_map</span><span class="p">(</span><span class="n">league_id</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">SWID_COOKIE</span><span class="p">,</span> <span class="n">ESPN_S2</span><span class="p">)</span>
+    <span class="n">team_details</span> <span class="o">=</span> <span class="n">team_map</span><span class="p">(</span><span class="n">league_id</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">SWID_COOKIE</span><span class="p">,</span> <span class="n">ESPN_S2</span><span class="p">)</span>
+    
+    <span class="c1"># combine all the dataframes</span>
+    
+    <span class="c1"># map player ids with player_map to get player names</span>
+    <span class="n">df_main1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">raw_draft</span><span class="p">,</span> <span class="n">player_details</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s2">&quot;playerId&quot;</span><span class="p">,</span> <span class="n">right_on</span><span class="o">=</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+    <span class="c1"># map team ids with team_map to get team names</span>
+    <span class="n">df_main2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_main1</span><span class="p">,</span> <span class="n">team_details</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s2">&quot;proTeamId&quot;</span><span class="p">,</span> <span class="n">right_on</span><span class="o">=</span><span class="s2">&quot;team_id&quot;</span> <span class="p">)</span>
+    <span class="n">df_main2</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">year</span>
+    <span class="k">return</span> <span class="n">df_main2</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># league_id = 431462</span>
+<span class="c1"># years = [2016, 2017, 2018, 2019,2020,2021,2022]</span>
+
+<span class="c1"># all_years_draft = pd.DataFrame()</span>
+<span class="c1"># for year in years: </span>
+<span class="c1">#     raw_draft = league_compiler(league_id, year, SWID_COOKIE, ESPN_S2)</span>
+<span class="c1">#     all_years_draft = pd.concat([all_years_draft, raw_draft], ignore_index=True)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># all_years_draft.head()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># save the data to a csv so we don&#39;t have to do this again!</span>
+<span class="c1"># all_years_draft.to_csv(&quot;ff_alldraft_raw.csv&quot;,  index=False)</span>
+<span class="n">all_years_draft</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;ff_alldraft_raw.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-1-0-data-cleaning-and-manipulation">
+<h2>Step 1.0: Data Cleaning and Manipulation<a class="headerlink" href="#step-1-0-data-cleaning-and-manipulation" title="Permalink to this heading">#</a></h2>
+<section id="making-our-index-team-id-year">
+<h3>Making Our Index: Team Id, Year<a class="headerlink" href="#making-our-index-team-id-year" title="Permalink to this heading">#</a></h3>
+<p>As mentioned earlier, we are trying to build a model that will give us insight on how to draft players to win the league. Therefore each row in our final dataframe should represent a team during a given year, and variables that encompass the drafting stratgies they used.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">all_years_draft</span><span class="p">[</span><span class="s2">&quot;teamId&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">all_years_draft</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+
+<span class="c1"># creating the main index </span>
+<span class="n">all_years_draft</span><span class="p">[</span><span class="s2">&quot;team_year&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">all_years_draft</span><span class="p">[</span><span class="s2">&quot;teamId&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="o">+</span><span class="s2">&quot;_&quot;</span><span class="o">+</span> <span class="n">all_years_draft</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 3  1  9  6  8  4 10 12 11  7  5  2 13 14 17 16 15 18 19]
+[2016 2017 2018 2019 2020 2021 2022]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># creating the other target variables</span>
+<span class="k">def</span> <span class="nf">winner_indictor</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+
+    <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;rankCalculatedFinal&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+<span class="k">def</span> <span class="nf">top3_indictor</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+
+    <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;rankCalculatedFinal&#39;</span><span class="p">]</span><span class="o">&lt;=</span><span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    
+<span class="k">def</span> <span class="nf">split_by3_indicator</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+    
+    <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;rankCalculatedFinal&#39;</span><span class="p">]</span><span class="o">&lt;=</span><span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;rankCalculatedFinal&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">3</span> <span class="ow">and</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;rankCalculatedFinal&#39;</span><span class="p">]</span><span class="o">&lt;=</span><span class="mi">6</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">2</span>
+    <span class="k">elif</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;rankCalculatedFinal&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">6</span> <span class="ow">and</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;rankCalculatedFinal&#39;</span><span class="p">]</span><span class="o">&lt;=</span><span class="mi">9</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">3</span>
+    <span class="k">elif</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;rankCalculatedFinal&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">9</span> <span class="ow">and</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;rankCalculatedFinal&#39;</span><span class="p">]</span><span class="o">&lt;=</span><span class="mi">12</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">4</span>
+
+<span class="c1"># win vs no win </span>
+<span class="n">all_years_draft</span><span class="p">[</span><span class="s1">&#39;LeagueWin_Bin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">all_years_draft</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">winner_indictor</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">all_years_draft</span><span class="p">[</span><span class="s1">&#39;LeagueTop2_Bin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">all_years_draft</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">top3_indictor</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">all_years_draft</span><span class="p">[</span><span class="s1">&#39;LeagueFinish_Cat4&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">all_years_draft</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">split_by3_indicator</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_years_draft</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>teamId</th>
+      <th>autoDraftTypeId</th>
+      <th>roundId</th>
+      <th>roundPickNumber</th>
+      <th>overallPickNumber</th>
+      <th>playerId</th>
+      <th>lineupSlotId</th>
+      <th>abbrev</th>
+      <th>currentProjectedRank</th>
+      <th>divisionId</th>
+      <th>...</th>
+      <th>location_y</th>
+      <th>name_y</th>
+      <th>team_name</th>
+      <th>year</th>
+      <th>watchList</th>
+      <th>valuesByStat</th>
+      <th>team_year</th>
+      <th>LeagueWin_Bin</th>
+      <th>LeagueTop2_Bin</th>
+      <th>LeagueFinish_Cat4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1380</th>
+      <td>16</td>
+      <td>3</td>
+      <td>16</td>
+      <td>11</td>
+      <td>191</td>
+      <td>4372485</td>
+      <td>20</td>
+      <td>Hd</td>
+      <td>0</td>
+      <td>1</td>
+      <td>...</td>
+      <td>Arizona</td>
+      <td>Cardinals</td>
+      <td>Arizona_Cardinals</td>
+      <td>2022</td>
+      <td>[]</td>
+      <td>{'128': 0.0, '129': 1.0, '130': 5.0, '4': 25.0...</td>
+      <td>16_2022</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1381</th>
+      <td>14</td>
+      <td>0</td>
+      <td>16</td>
+      <td>12</td>
+      <td>192</td>
+      <td>3025433</td>
+      <td>20</td>
+      <td>FRLO</td>
+      <td>0</td>
+      <td>1</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>FA</td>
+      <td>_FA</td>
+      <td>2022</td>
+      <td>NaN</td>
+      <td>{'128': 0.0, '129': 0.0, '130': 5.0, '4': 40.0...</td>
+      <td>14_2022</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+<p>2 rows × 50 columns</p>
+</div></div></div>
+</div>
+</section>
+</section>
+<section id="step-1-1-data-exploration">
+<h2>Step 1.1 Data Exploration<a class="headerlink" href="#step-1-1-data-exploration" title="Permalink to this heading">#</a></h2>
+<p><strong>Are different positions being drafted at different rounds when winning and non winning teams?</strong><br />
+The first way I can do this is by creating a boxplot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;defaultPositionId&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;overallPickNumber&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;LeagueFinish_Cat4&#39;</span><span class="p">,</span><span class="n">data</span> <span class="o">=</span> <span class="n">all_years_draft</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Position&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Overall Pick Number&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distributions of Pick Numbers for Drafted Positions&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Distributions of Pick Numbers for Drafted Positions&#39;)
+</pre></div>
+</div>
+<img alt="_images/85d1a3fe81df7ff1f01c83ff8725260c5db59068e945d66a30c0281987a9c5b0.png" src="_images/85d1a3fe81df7ff1f01c83ff8725260c5db59068e945d66a30c0281987a9c5b0.png" />
+</div>
+</div>
+<p>Disapointingly, the boxplot doesn’t reveal any statistically significant results - highlighting the immense degree of randomness that exists in ESPN Fantasy Football. However, I am not detered yet, as there are still many other ways that we can attempt gain insight into optimal drafting strategies.</p>
+<p>However, one immediate things that needs to be tackled, is the dataframe. Currently as it exists, it doesn’t exist in the format that we want - a single row for each team and year that they played. As it exists right now, there are up to 12 different rows for each of these instances, capturing the overall pick, round, and round pick for that team. A simple fix for this is to create an “anchoring” dataframe. This anchor will be the main dataframe that what engineered variables will be added to, joining on team_year:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># all_years_draft.columns -- filtered out only those columns that are related to the target variable</span>
+<span class="n">target_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;playoffSeed&#39;</span><span class="p">,</span> <span class="s1">&#39;points&#39;</span><span class="p">,</span> <span class="s1">&#39;rankCalculatedFinal&#39;</span><span class="p">]</span>
+<span class="n">index_col</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;team_year&quot;</span><span class="p">]</span>
+
+<span class="c1"># save this df as the anchor data frame - we will concat all variables joining on team_year</span>
+<span class="n">main_df1</span> <span class="o">=</span> <span class="n">all_years_draft</span><span class="p">[</span><span class="n">index_col</span><span class="o">+</span><span class="n">target_cols</span><span class="p">]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Are winning teams scoring more points?</strong><br />
+The spread defintively indicates that winning teams tend to score more points. However, it is also intersting to note that sometimes there are some exceptions: there is a year that an 8 ranked final team scored what would be considered “winning points”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># visualizing points </span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">main_df1</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;points&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;rankCalculatedFinal&quot;</span><span class="p">)</span>
+<span class="c1"># fig.show()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6550cdbbb7aba80c551c9a282d8cf75c288312664ab4c7636f0244f673019422.png" src="_images/6550cdbbb7aba80c551c9a282d8cf75c288312664ab4c7636f0244f673019422.png" />
+</div>
+</div>
+</section>
+<section id="step-1-2-data-engineering">
+<h2>Step 1.2 Data Engineering<a class="headerlink" href="#step-1-2-data-engineering" title="Permalink to this heading">#</a></h2>
+<p>Now that we have our index, the next step is to craft the features. The best way to approach this is to just go down the list of some of the ideas that were described earlier. By tackling each of those ideas one at a time, it makes the process of engineering features a lot less intimidating. So first on the list is creating a variable that captures each of the picks in the draft:</p>
+<ul class="simple">
+<li><p>1_RoundOverallPosition - Last_RoundOverallPosition: For each round, a variable indicating the position that was drafted, and the overall ranking that the player had.</p></li>
+</ul>
+<p>In order to do this we need to pivot the table to pull out the position that was drafted for any given round:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># positions_map = {1:&quot;QB&quot;, 2:&quot;RB&quot;, 3:&quot;WR&quot;, 4:&quot;TE&quot;, 5:&quot;K&quot;, 16:&quot;D&quot;}</span>
+
+<span class="n">all_years_draft</span><span class="p">[</span><span class="s1">&#39;defaultPositionId&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">all_years_draft</span><span class="p">[</span><span class="s1">&#39;defaultPositionId&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;str&quot;</span><span class="p">)</span>
+
+<span class="c1"># pivot the table -- using round id as the column we pivot on and the value is the position that was drafted</span>
+<span class="n">draftedpivot</span> <span class="o">=</span> <span class="n">all_years_draft</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;team_year&#39;</span><span class="p">],</span> 
+                                  <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;roundId&#39;</span><span class="p">,</span> 
+                                  <span class="n">values</span><span class="o">=</span><span class="s1">&#39;defaultPositionId&#39;</span><span class="p">,</span>
+                                    <span class="n">aggfunc</span><span class="o">=</span><span class="s1">&#39;first&#39;</span><span class="p">)</span>
+
+<span class="c1"># renaming for clarity on what column represents</span>
+<span class="n">draftedpivot</span> <span class="o">=</span> <span class="n">draftedpivot</span><span class="o">.</span><span class="n">add_suffix</span><span class="p">(</span><span class="s1">&#39;RoundOverallPosition&#39;</span><span class="p">)</span>
+
+<span class="c1"># getting rid of the index so its a dataframe now</span>
+<span class="n">drafted_final</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">draftedpivot</span><span class="o">.</span><span class="n">to_records</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># joining the dataframe to the anchor dataframe</span>
+<span class="n">joined_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">main_df1</span><span class="p">,</span> <span class="n">drafted_final</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;team_year&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next I need to extract concate the first 5 picks of the draft for each row.</p>
+<ul class="simple">
+<li><p>OrderofPositionPicks_5Rounds: A sequential list of positions that were drafted from the first 5 rounds.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># joing the first 5 positions to create a combined list.</span>
+<span class="n">first5</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;1RoundOverallPosition&quot;</span><span class="p">,</span> <span class="s2">&quot;2RoundOverallPosition&quot;</span><span class="p">,</span> <span class="s2">&quot;3RoundOverallPosition&quot;</span><span class="p">]</span>
+<span class="n">joined_df</span><span class="p">[</span><span class="s2">&quot;OrderofPositionPicks_3Rounds&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">joined_df</span><span class="p">[</span><span class="n">first5</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">joined_df</span><span class="p">[</span><span class="s1">&#39;OrderofPositionPicks_3Rounds&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0     [3, 3, 3]
+1     [3, 2, 3]
+2     [2, 2, 3]
+3     [3, 3, 2]
+4     [2, 1, 2]
+        ...    
+77    [2, 3, 2]
+78    [3, 2, 2]
+79    [2, 3, 3]
+80    [2, 2, 2]
+81    [2, 4, 3]
+Name: OrderofPositionPicks_3Rounds, Length: 82, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>AverageDraftPick_Position: The average of all the picks by a position.</p></li>
+</ul>
+<p>Now that we have a dataframe that sort of captures what I had envisioned, I want to create some other visuals that might give us some preliminary insights into what strategy makes a winning team.</p>
+<p><strong>How are winning teams drafting? Is there a difference between winning and non-winning teams in drafting strategies?</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;LeagueWin_Bin&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">joined_df</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">joined_df</span><span class="mf">.1</span><span class="n">RoundOverallPosition</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Biden&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">anes</span><span class="o">.</span><span class="n">fttrump</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Trump&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Thermometer rating&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Distribution of Thermometer Ratings&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">  File</span><span class="nn"> &quot;&lt;ipython-input-18-023537bbbf29&gt;&quot;</span><span class="gt">, line </span><span class="mi">4</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">joined_df</span><span class="mf">.1</span><span class="n">RoundOverallPosition</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Biden&#39;</span><span class="p">)</span>
+                           <span class="o">^</span>
+<span class="ne">SyntaxError</span>: invalid syntax
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="descriptive-statistics">
+<h2>Descriptive Statistics<a class="headerlink" href="#descriptive-statistics" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="part-2-building-predictive-models">
+<h2>Part 2: Building Predictive Models<a class="headerlink" href="#part-2-building-predictive-models" title="Permalink to this heading">#</a></h2>
+<section id="resources">
+<h3>Resources<a class="headerlink" href="#resources" title="Permalink to this heading">#</a></h3>
+<p><a class="reference external" href="https://stmorse.github.io/journal/espn-fantasy-python.html">https://stmorse.github.io/journal/espn-fantasy-python.html</a><br />
+<a class="reference external" href="https://stmorse.github.io/journal/espn-fantasy-3-python.html">https://stmorse.github.io/journal/espn-fantasy-3-python.html</a><br />
+<a class="reference external" href="https://cran.r-project.org/web/packages/ffscrapr/vignettes/espn_authentication.html">https://cran.r-project.org/web/packages/ffscrapr/vignettes/espn_authentication.html</a><br />
+<a class="reference external" href="https://jman4190.medium.com/how-to-use-python-with-the-espn-fantasy-draft-api-ecde38621b1b">https://jman4190.medium.com/how-to-use-python-with-the-espn-fantasy-draft-api-ecde38621b1b</a></p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="aboutme.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">More About Me</p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-goal-target-and-intermediate-target-variables">Defining Goal - Target and Intermediate Target Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-the-features">Defining the Features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#packages-used">Packages Used</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-0-acquiring-the-data-espn-fantasy-football-api">Step 0: Acquiring the Data - ESPN Fantasy Football API</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-0-data-cleaning-and-manipulation">Step 1.0: Data Cleaning and Manipulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-our-index-team-id-year">Making Our Index: Team Id, Year</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-1-data-exploration">Step 1.1 Data Exploration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-2-data-engineering">Step 1.2 Data Engineering</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptive-statistics">Descriptive Statistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-building-predictive-models">Part 2: Building Predictive Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

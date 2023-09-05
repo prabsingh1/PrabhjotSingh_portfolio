@@ -1,0 +1,2837 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Hierachical Logisitc Regression &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'bayes_hierarchical';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Application of Neural Networks to Enable Efficient Use of Wind Energy Final Writeup" href="windenergy_preds.html" />
+    <link rel="prev" title="Variational Approximation" href="bayes_variational.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Prabhjot Singh’s Data Science and Machine Learning Portfolio
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">More About Me</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="aboutme.html">My Journey into Data Science</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Amateur Meterology</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="weathernarratives.html">NLP Analysis of Storm Report Final Writeup</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="nlp_clean.html">Data Exploration and Cleaning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nlp_TableCreation.html">Creating LIB, TOKEN, VOCAB, BOW, TFIDF Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nlp_Clustering.html">Vector Space Models &amp; Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nlp_PCA.html">Principal Component Analysis (PCA)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nlp_TopicModeling2.html">Topic Modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nlp_SentimentAnalysis.html">Sentiment Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="bayes_writeup.html">Bayesian Methods to Assess Uncertainties related to the Classification of Tornado Magnitude</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bayes_clean.html">Data Cleaning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bayes_naivebayes.html">Naive Bayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bayes_sampling.html">Sampling, Trace and Forest plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bayes_variational.html">Variational Approximation</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Hierachical Logisitc Regression</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="windenergy_preds.html">Application of Neural Networks to Enable Efficient Use of Wind Energy Final Writeup</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="dl_apps_clean.html">Data Cleaning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dl_apps_initial.html">Initial Long-Short Term Memory Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dl_apps_tuning.html">Model Building</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hacking Fantasy Football</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="fantasyfootball_winner_part1.html">Assembling, Preparing and Exploring the Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fantasyfootball_winner_part2.html">Building Models to Predict Draft Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Other Projects</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="other.html">Other Projects</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fbayes_hierarchical.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/bayes_hierarchical.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Hierachical Logisitc Regression</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-1-all-predictors-grouped-by-state">Model 1: All predictors, grouped by state</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-2-all-predictors-grouped-by-region">Model 2: All predictors, grouped by region</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-4-len-wid-weather-grouped-by-region">Model 4: len, wid + weather, grouped by region</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-averaging">Model Averaging</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="hierachical-logisitc-regression">
+<h1>Hierachical Logisitc Regression<a class="headerlink" href="#hierachical-logisitc-regression" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">import</span> <span class="nn">theano.tensor</span> <span class="k">as</span> <span class="nn">tt</span>
+<span class="kn">import</span> <span class="nn">theano</span>
+<span class="kn">import</span> <span class="nn">pymc3</span> <span class="k">as</span> <span class="nn">pm</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tornados_clean</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;combined_tornado_weather_clean.csv&quot;</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">tornados</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="n">c0b11666bcf6</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">tornados_clean</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;combined_tornado_weather_clean.csv&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">tornados</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
+
+<span class="nn">~\anaconda3\lib\site-packages\pandas\io\parsers.py</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, dialect, error_bad_lines, warn_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">608</span>     <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">609</span> 
+<span class="ne">--&gt; </span><span class="mi">610</span>     <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">611</span> 
+<span class="g g-Whitespace">    </span><span class="mi">612</span> 
+
+<span class="nn">~\anaconda3\lib\site-packages\pandas\io\parsers.py</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">460</span> 
+<span class="g g-Whitespace">    </span><span class="mi">461</span>     <span class="c1"># Create the parser.</span>
+<span class="ne">--&gt; </span><span class="mi">462</span>     <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">463</span> 
+<span class="g g-Whitespace">    </span><span class="mi">464</span>     <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
+
+<span class="nn">~\anaconda3\lib\site-packages\pandas\io\parsers.py</span> in <span class="ni">__init__</span><span class="nt">(self, f, engine, **kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">817</span>             <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">818</span> 
+<span class="ne">--&gt; </span><span class="mi">819</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">820</span> 
+<span class="g g-Whitespace">    </span><span class="mi">821</span>     <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="nn">~\anaconda3\lib\site-packages\pandas\io\parsers.py</span> in <span class="ni">_make_engine</span><span class="nt">(self, engine)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1048</span>             <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1049</span>         <span class="c1"># error: Too many arguments for &quot;ParserBase&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1050</span>         <span class="k">return</span> <span class="n">mapping</span><span class="p">[</span><span class="n">engine</span><span class="p">](</span><span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>  <span class="c1"># type: ignore[call-arg]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1051</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1052</span>     <span class="k">def</span> <span class="nf">_failover_to_python</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="nn">~\anaconda3\lib\site-packages\pandas\io\parsers.py</span> in <span class="ni">__init__</span><span class="nt">(self, src, **kwds)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1865</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1866</span>         <span class="c1"># open handles</span>
+<span class="ne">-&gt; </span><span class="mi">1867</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_open_handles</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1868</span>         <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">1869</span>         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;storage_options&quot;</span><span class="p">,</span> <span class="s2">&quot;encoding&quot;</span><span class="p">,</span> <span class="s2">&quot;memory_map&quot;</span><span class="p">,</span> <span class="s2">&quot;compression&quot;</span><span class="p">):</span>
+
+<span class="nn">~\anaconda3\lib\site-packages\pandas\io\parsers.py</span> in <span class="ni">_open_handles</span><span class="nt">(self, src, kwds)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1366</span>             <span class="n">compression</span><span class="o">=</span><span class="n">kwds</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;compression&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1367</span>             <span class="n">memory_map</span><span class="o">=</span><span class="n">kwds</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;memory_map&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+<span class="ne">-&gt; </span><span class="mi">1368</span>             <span class="n">storage_options</span><span class="o">=</span><span class="n">kwds</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;storage_options&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1369</span>         <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1370</span> 
+
+<span class="nn">~\anaconda3\lib\site-packages\pandas\io\common.py</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">645</span>                 <span class="n">encoding</span><span class="o">=</span><span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">646</span>                 <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span>
+<span class="ne">--&gt; </span><span class="mi">647</span>                 <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">648</span>             <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">649</span>         <span class="k">else</span><span class="p">:</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;combined_tornado_weather_clean.csv&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Create a new column called regions to simplify the number of groups. These regions come from</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a list of our conditions</span>
+<span class="n">conditions</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="n">tornados_clean</span><span class="p">[</span><span class="s1">&#39;st&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;IL&#39;</span><span class="p">,</span> <span class="s1">&#39;IN&#39;</span><span class="p">,</span> <span class="s1">&#39;KY&#39;</span><span class="p">,</span> <span class="s1">&#39;MO&#39;</span><span class="p">,</span> <span class="s1">&#39;OH&#39;</span><span class="p">,</span> <span class="s1">&#39;TN&#39;</span><span class="p">,</span> <span class="s1">&#39;WV&#39;</span><span class="p">])),</span>
+    <span class="p">(</span><span class="n">tornados_clean</span><span class="p">[</span><span class="s1">&#39;st&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;IA&#39;</span><span class="p">,</span> <span class="s1">&#39;MI&#39;</span><span class="p">,</span> <span class="s1">&#39;MN&#39;</span><span class="p">,</span> <span class="s1">&#39;WI&#39;</span><span class="p">])),</span>
+    <span class="p">(</span><span class="n">tornados_clean</span><span class="p">[</span><span class="s1">&#39;st&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;CT&#39;</span><span class="p">,</span> <span class="s1">&#39;DE&#39;</span><span class="p">,</span> <span class="s1">&#39;ME&#39;</span><span class="p">,</span> <span class="s1">&#39;MD&#39;</span><span class="p">,</span> <span class="s1">&#39;MA&#39;</span><span class="p">,</span> <span class="s1">&#39;NH&#39;</span><span class="p">,</span> <span class="s1">&#39;NJ&#39;</span><span class="p">,</span> <span class="s1">&#39;NY&#39;</span><span class="p">,</span> <span class="s1">&#39;PA&#39;</span><span class="p">,</span> <span class="s1">&#39;RI&#39;</span><span class="p">,</span> <span class="s1">&#39;VT&#39;</span><span class="p">])),</span>
+    <span class="p">(</span><span class="n">tornados_clean</span><span class="p">[</span><span class="s1">&#39;st&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;ID&#39;</span><span class="p">,</span> <span class="s1">&#39;OR&#39;</span><span class="p">,</span> <span class="s1">&#39;WA&#39;</span><span class="p">])),</span>
+    <span class="p">(</span><span class="n">tornados_clean</span><span class="p">[</span><span class="s1">&#39;st&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;AR&#39;</span><span class="p">,</span> <span class="s1">&#39;KS&#39;</span><span class="p">,</span> <span class="s1">&#39;LA&#39;</span><span class="p">,</span> <span class="s1">&#39;MS&#39;</span><span class="p">,</span> <span class="s1">&#39;OK&#39;</span><span class="p">,</span> <span class="s1">&#39;TX&#39;</span><span class="p">])),</span>
+    <span class="p">(</span><span class="n">tornados_clean</span><span class="p">[</span><span class="s1">&#39;st&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;AL&#39;</span><span class="p">,</span> <span class="s1">&#39;FL&#39;</span><span class="p">,</span> <span class="s1">&#39;GA&#39;</span><span class="p">,</span> <span class="s1">&#39;NC&#39;</span><span class="p">,</span> <span class="s1">&#39;SC&#39;</span><span class="p">,</span> <span class="s1">&#39;VA&#39;</span><span class="p">,</span> <span class="s1">&#39;PR&#39;</span><span class="p">,</span><span class="s1">&#39;DC&#39;</span><span class="p">])),</span>
+    <span class="p">(</span><span class="n">tornados_clean</span><span class="p">[</span><span class="s1">&#39;st&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;AZ&#39;</span><span class="p">,</span> <span class="s1">&#39;CO&#39;</span><span class="p">,</span> <span class="s1">&#39;NM&#39;</span><span class="p">,</span> <span class="s1">&#39;UT&#39;</span><span class="p">])),</span>
+    <span class="p">(</span><span class="n">tornados_clean</span><span class="p">[</span><span class="s1">&#39;st&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;CA&#39;</span><span class="p">,</span> <span class="s1">&#39;NV&#39;</span><span class="p">,</span> <span class="s1">&#39;HI&#39;</span><span class="p">])),</span>
+    <span class="p">(</span><span class="n">tornados_clean</span><span class="p">[</span><span class="s1">&#39;st&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;MT&#39;</span><span class="p">,</span> <span class="s1">&#39;NE&#39;</span><span class="p">,</span> <span class="s1">&#39;ND&#39;</span><span class="p">,</span> <span class="s1">&#39;SD&#39;</span><span class="p">,</span> <span class="s1">&#39;WY&#39;</span><span class="p">])),</span>
+    <span class="p">]</span>
+
+<span class="c1"># create a list of the values we want to assign for each condition</span>
+<span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Central&#39;</span><span class="p">,</span> <span class="s1">&#39;East North Central&#39;</span><span class="p">,</span> <span class="s1">&#39;Northeast&#39;</span><span class="p">,</span> <span class="s1">&#39;Northwest&#39;</span><span class="p">,</span> <span class="s1">&#39;South&#39;</span><span class="p">,</span> <span class="s1">&#39;Southeast&#39;</span><span class="p">,</span> <span class="s1">&#39;Southwest&#39;</span><span class="p">,</span> <span class="s1">&#39;West&#39;</span><span class="p">,</span> <span class="s1">&#39;West North Central&#39;</span><span class="p">]</span>
+
+<span class="c1"># create a new column and use np.select to assign values to it using our lists as arguments</span>
+<span class="n">tornados_clean</span><span class="p">[</span><span class="s1">&#39;region&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">conditions</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
+<span class="n">tornados_clean</span><span class="p">[</span><span class="s1">&#39;region&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>South                 1414
+Southeast             1109
+Central                963
+East North Central     687
+West North Central     312
+Northeast              238
+Southwest              151
+West                    51
+Northwest               30
+Name: region, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Generate a test and train set. Standarize all numeric predictors.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tornados_clean</span><span class="p">[</span><span class="n">numeric_predictors</span><span class="p">]</span> <span class="o">=</span> <span class="n">tornados_clean</span><span class="p">[</span><span class="n">numeric_predictors</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+<span class="c1"># Numeric predictors</span>
+<span class="n">numeric_predictors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;inj&#39;</span><span class="p">,</span> <span class="s1">&#39;fat&#39;</span><span class="p">,</span> <span class="s1">&#39;loss&#39;</span><span class="p">,</span> <span class="s1">&#39;closs&#39;</span><span class="p">,</span> <span class="s1">&#39;slat&#39;</span><span class="p">,</span> <span class="s1">&#39;slon&#39;</span><span class="p">,</span> <span class="s1">&#39;elat&#39;</span><span class="p">,</span> <span class="s1">&#39;elon&#39;</span><span class="p">,</span> <span class="s1">&#39;len&#39;</span><span class="p">,</span> <span class="s1">&#39;wid&#39;</span><span class="p">,</span> <span class="s1">&#39;wind_speed&#39;</span><span class="p">,</span><span class="s1">&#39;visibility_distance&#39;</span><span class="p">,</span><span class="s1">&#39;temperature&#39;</span><span class="p">,</span><span class="s1">&#39;temperature_dewpoint&#39;</span><span class="p">,</span><span class="s1">&#39;air_pressure&#39;</span><span class="p">,</span><span class="s1">&#39;wind_speed_2&#39;</span><span class="p">,</span><span class="s1">&#39;visibility_distance_2&#39;</span><span class="p">,</span><span class="s1">&#39;temperature_2&#39;</span><span class="p">,</span><span class="s1">&#39;temperature_dewpoint_2&#39;</span><span class="p">,</span><span class="s1">&#39;air_pressure_2&#39;</span><span class="p">]</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">tornados_clean</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1"># Numeric, categorical predictors and response, y`</span>
+<span class="n">x_num</span> <span class="o">=</span> <span class="n">tornados_clean</span><span class="p">[</span><span class="n">numeric_predictors</span><span class="p">]</span>
+<span class="n">x_cat</span> <span class="o">=</span> <span class="n">tornados_clean</span><span class="p">[[</span><span class="s1">&#39;st&#39;</span><span class="p">,</span><span class="s1">&#39;region&#39;</span><span class="p">,</span><span class="s1">&#39;time_binned&#39;</span><span class="p">]]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">tornados_clean</span><span class="p">[</span><span class="s1">&#39;mag&#39;</span><span class="p">]</span>
+<span class="n">all_predictors</span> <span class="o">=</span> <span class="n">numeric_predictors</span>
+<span class="c1"># No. of predictors</span>
+<span class="n">k</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_predictors</span><span class="p">)</span>
+<span class="c1"># Standardize numeric columns, to mean 0 variance 1</span>
+<span class="n">mean</span> <span class="o">=</span> <span class="n">x_num</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">std</span> <span class="o">=</span> <span class="n">x_num</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="n">x_num</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">x_num</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span> <span class="o">/</span> <span class="n">std</span><span class="p">)</span>
+<span class="c1"># Put them into one data matrix</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">x_num</span><span class="p">,</span> <span class="n">x_cat</span><span class="p">),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">),</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">numeric_predictors</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;st&#39;</span><span class="p">,</span> <span class="s1">&#39;region&#39;</span><span class="p">,</span> <span class="s1">&#39;time_binned&#39;</span><span class="p">])</span>
+<span class="n">X</span><span class="p">[</span><span class="n">numeric_predictors</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">numeric_predictors</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>inj</th>
+      <th>fat</th>
+      <th>loss</th>
+      <th>closs</th>
+      <th>slat</th>
+      <th>slon</th>
+      <th>elat</th>
+      <th>elon</th>
+      <th>len</th>
+      <th>wid</th>
+      <th>wind_speed</th>
+      <th>visibility_distance</th>
+      <th>temperature</th>
+      <th>temperature_dewpoint</th>
+      <th>air_pressure</th>
+      <th>wind_speed_2</th>
+      <th>visibility_distance_2</th>
+      <th>temperature_2</th>
+      <th>temperature_dewpoint_2</th>
+      <th>air_pressure_2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>4.955000e+03</td>
+      <td>4.955000e+03</td>
+      <td>4.955000e+03</td>
+      <td>4.955000e+03</td>
+      <td>4.955000e+03</td>
+      <td>4.955000e+03</td>
+      <td>4.955000e+03</td>
+      <td>4.955000e+03</td>
+      <td>4.955000e+03</td>
+      <td>4.955000e+03</td>
+      <td>4.955000e+03</td>
+      <td>4.955000e+03</td>
+      <td>4.955000e+03</td>
+      <td>4.955000e+03</td>
+      <td>4.955000e+03</td>
+      <td>4.955000e+03</td>
+      <td>4.955000e+03</td>
+      <td>4.955000e+03</td>
+      <td>4.955000e+03</td>
+      <td>4.955000e+03</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>-2.249311e-15</td>
+      <td>6.652488e-16</td>
+      <td>-1.091192e-15</td>
+      <td>-1.023249e-15</td>
+      <td>-1.388619e-14</td>
+      <td>-3.214071e-14</td>
+      <td>8.246974e-15</td>
+      <td>5.186232e-16</td>
+      <td>-1.935620e-15</td>
+      <td>1.058913e-16</td>
+      <td>-7.224628e-16</td>
+      <td>-5.049442e-16</td>
+      <td>-1.743196e-16</td>
+      <td>-2.815194e-15</td>
+      <td>2.868214e-13</td>
+      <td>-1.413535e-15</td>
+      <td>3.846861e-15</td>
+      <td>-9.222357e-16</td>
+      <td>-1.564843e-15</td>
+      <td>7.389006e-13</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>-6.317011e-02</td>
+      <td>-4.430249e-02</td>
+      <td>-4.258022e-02</td>
+      <td>-2.408248e-02</td>
+      <td>-3.740291e+00</td>
+      <td>-7.863424e+00</td>
+      <td>-3.746887e+00</td>
+      <td>-7.861067e+00</td>
+      <td>-5.749167e-01</td>
+      <td>-6.602515e-01</td>
+      <td>-1.820898e+00</td>
+      <td>-3.425157e+00</td>
+      <td>-4.324916e+00</td>
+      <td>-6.605050e+00</td>
+      <td>-6.479175e+00</td>
+      <td>-1.766459e+00</td>
+      <td>-3.296568e+00</td>
+      <td>-3.787919e+00</td>
+      <td>-6.272212e+00</td>
+      <td>-6.909185e+00</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>-6.317011e-02</td>
+      <td>-4.430249e-02</td>
+      <td>-4.258022e-02</td>
+      <td>-2.408248e-02</td>
+      <td>-7.814103e-01</td>
+      <td>-6.249652e-01</td>
+      <td>-7.814471e-01</td>
+      <td>-6.274335e-01</td>
+      <td>-5.081225e-01</td>
+      <td>-4.623451e-01</td>
+      <td>-6.847673e-01</td>
+      <td>-2.688190e-01</td>
+      <td>-6.269870e-01</td>
+      <td>-5.071305e-01</td>
+      <td>-6.305490e-01</td>
+      <td>-8.014137e-01</td>
+      <td>-2.275483e-01</td>
+      <td>-5.820205e-01</td>
+      <td>-5.691494e-01</td>
+      <td>-5.797124e-01</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>-6.317011e-02</td>
+      <td>-4.430249e-02</td>
+      <td>-4.258022e-02</td>
+      <td>-2.408248e-02</td>
+      <td>-3.551835e-02</td>
+      <td>3.295985e-02</td>
+      <td>-3.649734e-02</td>
+      <td>3.499585e-02</td>
+      <td>-3.289186e-01</td>
+      <td>-3.613725e-01</td>
+      <td>-1.350265e-01</td>
+      <td>5.200816e-01</td>
+      <td>1.011027e-01</td>
+      <td>1.780290e-01</td>
+      <td>4.159159e-02</td>
+      <td>-5.907128e-02</td>
+      <td>5.397067e-01</td>
+      <td>2.862679e-02</td>
+      <td>1.912589e-01</td>
+      <td>4.522288e-02</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>-6.317011e-02</td>
+      <td>-4.430249e-02</td>
+      <td>-4.258009e-02</td>
+      <td>-2.408248e-02</td>
+      <td>7.702174e-01</td>
+      <td>6.471189e-01</td>
+      <td>7.690598e-01</td>
+      <td>6.491629e-01</td>
+      <td>9.139615e-02</td>
+      <td>1.434908e-01</td>
+      <td>6.346105e-01</td>
+      <td>5.200816e-01</td>
+      <td>6.759104e-01</td>
+      <td>6.348020e-01</td>
+      <td>6.083967e-01</td>
+      <td>6.795594e-01</td>
+      <td>5.397067e-01</td>
+      <td>6.774396e-01</td>
+      <td>6.832878e-01</td>
+      <td>5.900383e-01</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>5.710949e+01</td>
+      <td>6.478556e+01</td>
+      <td>5.230487e+01</td>
+      <td>6.862553e+01</td>
+      <td>2.388728e+00</td>
+      <td>2.873164e+00</td>
+      <td>2.388919e+00</td>
+      <td>2.865499e+00</td>
+      <td>1.527975e+01</td>
+      <td>1.234503e+01</td>
+      <td>5.142485e+00</td>
+      <td>1.630152e+01</td>
+      <td>3.971474e+00</td>
+      <td>2.461894e+00</td>
+      <td>5.233125e+00</td>
+      <td>4.729037e+00</td>
+      <td>1.588528e+01</td>
+      <td>3.654345e+00</td>
+      <td>2.472484e+00</td>
+      <td>5.322454e+00</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Show correlations of all variables to later remove correlated predictors</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">heatmap</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">numeric_predictors</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">(),</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">heatmap</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Correlations&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/8a94d749de17f0d15d0df0f3261037ab4cf3018c8fd6d542e47520bcc74a1f07.png" src="_images/8a94d749de17f0d15d0df0f3261037ab4cf3018c8fd6d542e47520bcc74a1f07.png" />
+</div>
+</div>
+<p>Display all the pairs of columns that have a correlation greater than 0.75</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">numeric_predictors</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
+<span class="c1"># Ignore postive correlations of 1</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="p">[(</span><span class="n">s</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">s</span> <span class="o">&gt;</span> <span class="mf">0.75</span><span class="p">))]</span>
+<span class="n">so</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">so</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>elat                    slat                      0.999942
+slat                    elat                      0.999942
+elon                    slon                      0.999940
+slon                    elon                      0.999940
+temperature_dewpoint_2  temperature_dewpoint      0.979438
+temperature_dewpoint    temperature_dewpoint_2    0.979438
+temperature_2           temperature               0.974365
+temperature             temperature_2             0.974365
+fat                     inj                       0.875551
+inj                     fat                       0.875551
+air_pressure_2          air_pressure              0.875207
+air_pressure            air_pressure_2            0.875207
+wind_speed_2            wind_speed                0.822527
+wind_speed              wind_speed_2              0.822527
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Functions for grouping data into states and regions</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_state_idxs</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="c1"># Create our group of states</span>
+    <span class="n">states</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">st</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+    <span class="n">states_lookup</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">))))</span>
+
+    <span class="n">n_states</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">)</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">st</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">states_lookup</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+    
+    <span class="k">return</span> <span class="n">state</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_region_idxs</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="c1"># Create our group of states</span>
+    <span class="n">regions</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">region</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+    <span class="n">regions_lookup</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">regions</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">regions</span><span class="p">))))</span>
+
+    <span class="n">region</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">region</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">regions_lookup</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+    
+    <span class="k">return</span> <span class="n">region</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Followed this tutorial: <a class="reference external" href="https://docs.pymc.io/notebooks/variational_api_quickstart.html?highlight=softmax#Multilabel-logistic-regression">https://docs.pymc.io/notebooks/variational_api_quickstart.html?highlight=softmax#Multilabel-logistic-regression</a></p>
+<section id="model-1-all-predictors-grouped-by-state">
+<h2>Model 1: All predictors, grouped by state<a class="headerlink" href="#model-1-all-predictors-grouped-by-state" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">theano.tensor</span> <span class="k">as</span> <span class="nn">tt</span>
+<span class="kn">import</span> <span class="nn">theano</span>
+<span class="kn">import</span> <span class="nn">pymc3</span> <span class="k">as</span> <span class="nn">pm</span>
+
+<span class="n">n_classes</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">num_predictors</span> <span class="o">=</span> <span class="mi">21</span>
+<span class="n">theano</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;fast_compile&#39;</span>  
+
+<span class="n">n_states</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">st</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+
+<span class="n">X_train_clean</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;st&#39;</span><span class="p">,</span> <span class="s1">&#39;region&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">tornado_model</span><span class="p">:</span>
+
+    <span class="c1"># Priors</span>
+    <span class="n">mu_intercept</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;mu_intercept&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">sigma_intercept</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s1">&#39;sigma_intercept&#39;</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">mu_beta</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;mu_beta&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">sigma_beta</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s1">&#39;sigma_beta&#39;</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="c1"># Create shared variables to be replaced with test data</span>
+    <span class="n">Xt</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Data</span><span class="p">(</span><span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="n">X_train_clean</span><span class="p">)</span>
+    <span class="n">yt</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Data</span><span class="p">(</span><span class="s2">&quot;output&quot;</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Data</span><span class="p">(</span><span class="s2">&quot;state&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">create_state_idxs</span><span class="p">(</span><span class="n">X_train</span><span class="p">)))</span>
+
+    <span class="c1"># Define our parameters</span>
+    <span class="n">beta</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;beta&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu_beta</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma_beta</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">n_states</span><span class="p">,</span> <span class="n">n_classes</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_predictors</span><span class="p">))</span>
+    <span class="n">Intercept</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;Intercept&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu_intercept</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma_intercept</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">n_states</span><span class="p">,</span> <span class="n">n_classes</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    
+    
+    <span class="c1"># Use softmax to get probabilities</span>
+    <span class="n">est</span> <span class="o">=</span> <span class="n">Intercept</span><span class="p">[</span><span class="n">state</span><span class="p">]</span> <span class="o">+</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">beta</span><span class="p">[</span><span class="n">state</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">*</span> <span class="n">Xt</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">Xt</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Xt</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">est</span> <span class="o">=</span> <span class="n">tt</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">tensor_list</span><span class="o">=</span><span class="p">[</span><span class="n">est</span><span class="p">,</span> 
+                                              <span class="n">tt</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">Xt</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">))],</span>
+                                 <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="n">p</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="n">tt</span><span class="o">.</span><span class="n">nnet</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">est</span><span class="p">))</span>
+
+    <span class="n">likelihood</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">yt</span><span class="p">)</span>
+    
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="k">with</span> <span class="n">tornado_model</span><span class="p">:</span>
+    <span class="n">hierarchical_approx</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="mi">30000</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;advi&#39;</span><span class="p">)</span>
+
+<span class="n">advi_elbo</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span><span class="s1">&#39;ELBO&#39;</span><span class="p">:</span> <span class="o">-</span><span class="n">hierarchical_approx</span><span class="o">.</span><span class="n">hist</span><span class="p">,</span>
+     <span class="s1">&#39;n&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">hierarchical_approx</span><span class="o">.</span><span class="n">hist</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])})</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;ELBO&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">advi_elbo</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='30000' class='' max='30000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [30000/30000 03:21<00:00 Average Loss = 5,533.3]
+    </div>
+    </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Finished [100%]: Average Loss = 5,532.9
+</pre></div>
+</div>
+<img alt="_images/3790a1714e9df1f4e0a4037977bed12ea2ed4465f20ce9349c930ccb378741cc.png" src="_images/3790a1714e9df1f4e0a4037977bed12ea2ed4465f20ce9349c930ccb378741cc.png" />
+</div>
+</div>
+<p>Predict using variational inference. Best accuracy is 50%.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Predict from variational</span>
+<span class="n">theano</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">exception_verbosity</span><span class="o">=</span><span class="s1">&#39;high&#39;</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">create_state_idxs</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">X_test_clean</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;st&#39;</span><span class="p">,</span><span class="s1">&#39;region&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">tornado_model</span><span class="p">:</span>
+    <span class="n">pm</span><span class="o">.</span><span class="n">set_data</span><span class="p">({</span><span class="s1">&#39;input&#39;</span><span class="p">:</span> <span class="n">X_test_clean</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="n">y_test</span><span class="p">,</span> <span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="n">state</span><span class="p">})</span>
+    <span class="n">model_1_preds</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample_posterior_predictive</span><span class="p">(</span><span class="n">hierarchical_approx</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">50000</span><span class="p">),</span> <span class="n">var_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;p&quot;</span><span class="p">],</span> <span class="n">model</span><span class="o">=</span><span class="n">tornado_model</span><span class="p">,</span> <span class="n">samples</span><span class="o">=</span><span class="mi">50000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='50000' class='' max='50000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [50000/50000 00:23<00:00]
+    </div>
+    </div></div>
+</div>
+<p>Sample the posterior distribution using the NUTS sampler and 4 chains.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Accuracy by making a hard classification on the class with the highest mean probability from sampling the posterior </span>
+<span class="n">correct</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">model_1_preds</span><span class="p">[</span><span class="s1">&#39;p&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="n">accuracy</span> <span class="o">=</span> <span class="n">correct</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">accuracy</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="nn">az</span>
+<span class="k">with</span> <span class="n">tornado_model</span><span class="p">:</span>
+    <span class="n">hierarchical_trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="n">step</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">NUTS</span><span class="p">(</span><span class="n">target_accept</span> <span class="o">=</span> <span class="mf">0.95</span><span class="p">),</span> <span class="n">cores</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">tune</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span>
+<span class="n">hierarchical_idata</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">from_pymc3</span><span class="p">(</span><span class="n">hierarchical_trace</span><span class="p">)</span>
+<span class="n">az</span><span class="o">.</span><span class="n">plot_trace</span><span class="p">(</span><span class="n">hierarchical_trace</span><span class="p">,</span> <span class="n">var_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Intercept&quot;</span><span class="p">,</span><span class="s2">&quot;beta&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [Intercept, beta, sigma_beta, mu_beta, sigma_intercept, mu_intercept]
+</pre></div>
+</div>
+<div class="output text_html">
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='16000' class='' max='16000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [16000/16000 26:51<00:00 Sampling 4 chains, 0 divergences]
+    </div>
+    </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 2_000 tune and 2_000 draw iterations (8_000 + 8_000 draws total) took 1623 seconds.
+The estimated number of effective samples is smaller than 200 for some parameters.
+/Users/kevin/opt/anaconda3/lib/python3.7/site-packages/arviz/data/io_pymc3.py:91: FutureWarning: Using `from_pymc3` without the model will be deprecated in a future release. Not using the model will return less accurate and less useful results. Make sure you use the model argument or call from_pymc3 within a model context.
+  FutureWarning,
+/Users/kevin/opt/anaconda3/lib/python3.7/site-packages/arviz/plots/traceplot.py:195: UserWarning: rcParams[&#39;plot.max_subplots&#39;] (20) is smaller than the number of variables to plot (4312), generating only 20 plots
+  UserWarning,
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[&lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n0, 0&#39;}&gt;,
+        &lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n0, 0&#39;}&gt;],
+       [&lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n0, 1&#39;}&gt;,
+        &lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n0, 1&#39;}&gt;],
+       [&lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n0, 2&#39;}&gt;,
+        &lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n0, 2&#39;}&gt;],
+       [&lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n0, 3&#39;}&gt;,
+        &lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n0, 3&#39;}&gt;],
+       [&lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n1, 0&#39;}&gt;,
+        &lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n1, 0&#39;}&gt;],
+       [&lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n1, 1&#39;}&gt;,
+        &lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n1, 1&#39;}&gt;],
+       [&lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n1, 2&#39;}&gt;,
+        &lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n1, 2&#39;}&gt;],
+       [&lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n1, 3&#39;}&gt;,
+        &lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n1, 3&#39;}&gt;],
+       [&lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n2, 0&#39;}&gt;,
+        &lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n2, 0&#39;}&gt;],
+       [&lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n2, 1&#39;}&gt;,
+        &lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n2, 1&#39;}&gt;],
+       [&lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n2, 2&#39;}&gt;,
+        &lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n2, 2&#39;}&gt;],
+       [&lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n2, 3&#39;}&gt;,
+        &lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n2, 3&#39;}&gt;],
+       [&lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n3, 0&#39;}&gt;,
+        &lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n3, 0&#39;}&gt;],
+       [&lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n3, 1&#39;}&gt;,
+        &lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n3, 1&#39;}&gt;],
+       [&lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n3, 2&#39;}&gt;,
+        &lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n3, 2&#39;}&gt;],
+       [&lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n3, 3&#39;}&gt;,
+        &lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n3, 3&#39;}&gt;],
+       [&lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n4, 0&#39;}&gt;,
+        &lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n4, 0&#39;}&gt;],
+       [&lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n4, 1&#39;}&gt;,
+        &lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n4, 1&#39;}&gt;],
+       [&lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n4, 2&#39;}&gt;,
+        &lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n4, 2&#39;}&gt;],
+       [&lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n4, 3&#39;}&gt;,
+        &lt;AxesSubplot:title={&#39;center&#39;:&#39;Intercept\n4, 3&#39;}&gt;]], dtype=object)
+</pre></div>
+</div>
+<img alt="_images/7b1e6144abc4aa93ce7fc1260e83b70ce8bdf9906d7e636ab8085bdc160076d9.png" src="_images/7b1e6144abc4aa93ce7fc1260e83b70ce8bdf9906d7e636ab8085bdc160076d9.png" />
+</div>
+</div>
+<p><a class="reference external" href="https://docs.pymc.io/notebooks/posterior_predictive.html">https://docs.pymc.io/notebooks/posterior_predictive.html</a></p>
+<p>Predict using sampling. Best accuracy is 56%</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Predict from trace</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">create_state_idxs</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">tornado_model</span><span class="p">:</span>
+    <span class="n">pm</span><span class="o">.</span><span class="n">set_data</span><span class="p">({</span><span class="s1">&#39;input&#39;</span><span class="p">:</span> <span class="n">X_test_clean</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="n">y_test</span><span class="p">,</span> <span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="n">state</span><span class="p">})</span>
+    <span class="n">model_preds_trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample_posterior_predictive</span><span class="p">(</span><span class="n">hierarchical_trace</span><span class="p">,</span> <span class="n">var_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;p&quot;</span><span class="p">],</span> <span class="n">model</span><span class="o">=</span><span class="n">tornado_model</span><span class="p">,</span> <span class="n">samples</span><span class="o">=</span><span class="mi">50000</span><span class="p">)</span>
+
+<span class="c1">#Accuracy</span>
+<span class="n">correct</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">model_preds_trace</span><span class="p">[</span><span class="s1">&#39;p&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="n">accuracy</span> <span class="o">=</span> <span class="n">correct</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">accuracy</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='50000' class='' max='50000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [50000/50000 00:18<00:00]
+    </div>
+    </div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5612244897959183
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="model-2-all-predictors-grouped-by-region">
+<h2>Model 2: All predictors, grouped by region<a class="headerlink" href="#model-2-all-predictors-grouped-by-region" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_classes</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">num_predictors</span> <span class="o">=</span> <span class="mi">21</span> 
+
+<span class="n">n_regions</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">region</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+
+<span class="n">X_train_clean</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;st&#39;</span><span class="p">,</span> <span class="s1">&#39;region&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">tornado_regions_model</span><span class="p">:</span>
+
+    <span class="c1"># Priors</span>
+    <span class="n">mu_intercept</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;mu_intercept&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">sigma_intercept</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s1">&#39;sigma_intercept&#39;</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">mu_beta</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;mu_beta&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+    <span class="n">sigma_beta</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s1">&#39;sigma_beta&#39;</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    
+    <span class="c1"># Create shared variables to be replaced with test data</span>
+    <span class="n">Xt</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Data</span><span class="p">(</span><span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="n">X_train_clean</span><span class="p">)</span>
+    <span class="n">yt</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Data</span><span class="p">(</span><span class="s2">&quot;output&quot;</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">region</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Data</span><span class="p">(</span><span class="s2">&quot;region&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">create_region_idxs</span><span class="p">(</span><span class="n">X_train</span><span class="p">)))</span>
+
+    <span class="c1"># Define our parameters</span>
+    <span class="n">beta</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;beta&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu_beta</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma_beta</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">n_regions</span><span class="p">,</span> <span class="n">n_classes</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_predictors</span><span class="p">))</span>
+    <span class="n">Intercept</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;Intercept&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu_intercept</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma_intercept</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">n_regions</span><span class="p">,</span> <span class="n">n_classes</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    
+    
+    <span class="c1"># Use softmax to get probabilities</span>
+    <span class="n">est</span> <span class="o">=</span> <span class="n">Intercept</span><span class="p">[</span><span class="n">region</span><span class="p">]</span> <span class="o">+</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">beta</span><span class="p">[</span><span class="n">region</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">*</span> <span class="n">Xt</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">Xt</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Xt</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">est</span> <span class="o">=</span> <span class="n">tt</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">tensor_list</span><span class="o">=</span><span class="p">[</span><span class="n">est</span><span class="p">,</span> 
+                                              <span class="n">tt</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">Xt</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">))],</span>
+                                 <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="n">p</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="n">tt</span><span class="o">.</span><span class="n">nnet</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">est</span><span class="p">))</span>
+
+    <span class="n">likelihood</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">yt</span><span class="p">)</span>
+
+<span class="n">pm</span><span class="o">.</span><span class="n">model_to_graphviz</span><span class="p">(</span><span class="n">tornado_regions_model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/81fd4185243c040f28319843c23d4fada73770a12944ee9c15e641965ba17467.svg" src="_images/81fd4185243c040f28319843c23d4fada73770a12944ee9c15e641965ba17467.svg" /></div>
+</div>
+<p>Approximate the posterior with variational inference and make predictions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="k">with</span> <span class="n">tornado_regions_model</span><span class="p">:</span>
+    <span class="n">hierarchical_approx_2</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="mi">40000</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;advi&#39;</span><span class="p">)</span>
+
+<span class="n">advi_elbo</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span><span class="s1">&#39;ELBO&#39;</span><span class="p">:</span> <span class="o">-</span><span class="n">hierarchical_approx_2</span><span class="o">.</span><span class="n">hist</span><span class="p">,</span>
+     <span class="s1">&#39;n&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">hierarchical_approx_2</span><span class="o">.</span><span class="n">hist</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])})</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;ELBO&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">advi_elbo</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='40000' class='' max='40000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [40000/40000 03:56<00:00 Average Loss = 4,169.1]
+    </div>
+    </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Finished [100%]: Average Loss = 4,169
+</pre></div>
+</div>
+<img alt="_images/63c49405602f735b3370e42719138080e1f43fce58ed003f6a9a1baa1cd43083.png" src="_images/63c49405602f735b3370e42719138080e1f43fce58ed003f6a9a1baa1cd43083.png" />
+</div>
+</div>
+<p>The above plot of the ELBO shows nice convergence. The accuracy is 53%</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Predict from variational</span>
+<span class="n">region</span> <span class="o">=</span> <span class="n">create_region_idxs</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">X_test_clean</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;st&#39;</span><span class="p">,</span><span class="s1">&#39;region&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">tornado_regions_model</span><span class="p">:</span>
+    <span class="n">pm</span><span class="o">.</span><span class="n">set_data</span><span class="p">({</span><span class="s1">&#39;input&#39;</span><span class="p">:</span> <span class="n">X_test_clean</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="n">y_test</span><span class="p">,</span> <span class="s1">&#39;region&#39;</span><span class="p">:</span> <span class="n">region</span><span class="p">})</span>
+    <span class="n">model_2_preds</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample_posterior_predictive</span><span class="p">(</span><span class="n">hierarchical_approx_2</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">50000</span><span class="p">),</span> <span class="n">var_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;p&quot;</span><span class="p">],</span> <span class="n">samples</span><span class="o">=</span><span class="mi">50000</span><span class="p">)</span>
+    
+<span class="c1">#Accuracy</span>
+<span class="n">correct</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">model_2_preds</span><span class="p">[</span><span class="s1">&#39;p&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="n">accuracy</span> <span class="o">=</span> <span class="n">correct</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">accuracy</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='50000' class='' max='50000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [50000/50000 00:23<00:00]
+    </div>
+    </div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.530241935483871
+</pre></div>
+</div>
+</div>
+</div>
+<p>Predict from sampling. The best accuracy is 57% with all predictors.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">tornado_regions_model</span><span class="p">:</span>
+    <span class="c1">#db = pm.backends.Text(&#39;tornado_regions_model&#39;)</span>
+    <span class="n">hierarchical_trace_2</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="n">step</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">NUTS</span><span class="p">(</span><span class="n">target_accept</span> <span class="o">=</span> <span class="mf">0.95</span><span class="p">),</span> <span class="n">cores</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">tune</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [Intercept, beta, sigma_beta, mu_beta, sigma_intercept, mu_intercept]
+</pre></div>
+</div>
+<div class="output text_html">
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='6000' class='' max='6000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [6000/6000 1:09:45<00:00 Sampling 4 chains, 0 divergences]
+    </div>
+    </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 500 draw iterations (4_000 + 2_000 draws total) took 4197 seconds.
+The estimated number of effective samples is smaller than 200 for some parameters.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Predict from trace</span>
+<span class="n">region</span> <span class="o">=</span> <span class="n">create_region_idxs</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">X_test_clean</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;st&#39;</span><span class="p">,</span><span class="s1">&#39;region&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">tornado_regions_model</span><span class="p">:</span>
+    <span class="n">pm</span><span class="o">.</span><span class="n">set_data</span><span class="p">({</span><span class="s1">&#39;input&#39;</span><span class="p">:</span> <span class="n">X_test_clean</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="n">y_test</span><span class="p">,</span> <span class="s1">&#39;region&#39;</span><span class="p">:</span> <span class="n">region</span><span class="p">})</span>
+    <span class="n">model_preds_trace_2</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample_posterior_predictive</span><span class="p">(</span><span class="n">hierarchical_trace_2</span><span class="p">,</span> <span class="n">var_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;p&quot;</span><span class="p">],</span> <span class="n">model</span><span class="o">=</span><span class="n">tornado_regions_model</span><span class="p">,</span> <span class="n">samples</span><span class="o">=</span><span class="mi">50000</span><span class="p">)</span>
+
+<span class="c1">#Accuracy</span>
+<span class="n">correct</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">model_preds_trace_2</span><span class="p">[</span><span class="s1">&#39;p&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="n">accuracy</span> <span class="o">=</span> <span class="n">correct</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">accuracy</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='50000' class='' max='50000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [50000/50000 00:21<00:00]
+    </div>
+    </div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5665322580645161
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#hierarchical_idata = az.from_pymc3(hierarchical_trace)</span>
+<span class="n">summary_df</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">hierarchical_trace_2</span><span class="p">,</span> <span class="n">var_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;beta&quot;</span><span class="p">])</span>
+<span class="n">summary_df</span><span class="p">[</span><span class="o">~</span><span class="p">((</span><span class="n">summary_df</span><span class="p">[</span><span class="s1">&#39;hdi_3%&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">summary_df</span><span class="p">[</span><span class="s1">&#39;hdi_97%&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">))]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/kevin/opt/anaconda3/lib/python3.7/site-packages/arviz/data/io_pymc3.py:91: FutureWarning: Using `from_pymc3` without the model will be deprecated in a future release. Not using the model will return less accurate and less useful results. Make sure you use the model argument or call from_pymc3 within a model context.
+  FutureWarning,
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>sd</th>
+      <th>hdi_3%</th>
+      <th>hdi_97%</th>
+      <th>mcse_mean</th>
+      <th>mcse_sd</th>
+      <th>ess_mean</th>
+      <th>ess_sd</th>
+      <th>ess_bulk</th>
+      <th>ess_tail</th>
+      <th>r_hat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>beta[0,0,8]</th>
+      <td>-1.013</td>
+      <td>0.324</td>
+      <td>-1.592</td>
+      <td>-0.364</td>
+      <td>0.007</td>
+      <td>0.005</td>
+      <td>2033.0</td>
+      <td>2014.0</td>
+      <td>2035.0</td>
+      <td>1719.0</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>beta[0,0,9]</th>
+      <td>-1.876</td>
+      <td>0.365</td>
+      <td>-2.559</td>
+      <td>-1.221</td>
+      <td>0.008</td>
+      <td>0.006</td>
+      <td>1943.0</td>
+      <td>1943.0</td>
+      <td>1936.0</td>
+      <td>1666.0</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>beta[0,3,9]</th>
+      <td>0.995</td>
+      <td>0.370</td>
+      <td>0.348</td>
+      <td>1.758</td>
+      <td>0.008</td>
+      <td>0.006</td>
+      <td>2006.0</td>
+      <td>1720.0</td>
+      <td>2031.0</td>
+      <td>1641.0</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>beta[1,0,8]</th>
+      <td>-1.599</td>
+      <td>0.401</td>
+      <td>-2.345</td>
+      <td>-0.835</td>
+      <td>0.009</td>
+      <td>0.006</td>
+      <td>2176.0</td>
+      <td>1972.0</td>
+      <td>2180.0</td>
+      <td>1709.0</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>beta[1,0,9]</th>
+      <td>-1.738</td>
+      <td>0.375</td>
+      <td>-2.438</td>
+      <td>-1.034</td>
+      <td>0.008</td>
+      <td>0.006</td>
+      <td>2129.0</td>
+      <td>2038.0</td>
+      <td>2119.0</td>
+      <td>1440.0</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>beta[1,4,9]</th>
+      <td>0.702</td>
+      <td>0.361</td>
+      <td>0.066</td>
+      <td>1.408</td>
+      <td>0.008</td>
+      <td>0.006</td>
+      <td>2023.0</td>
+      <td>1630.0</td>
+      <td>2067.0</td>
+      <td>1718.0</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>beta[2,0,8]</th>
+      <td>-1.848</td>
+      <td>0.315</td>
+      <td>-2.393</td>
+      <td>-1.226</td>
+      <td>0.008</td>
+      <td>0.006</td>
+      <td>1580.0</td>
+      <td>1580.0</td>
+      <td>1578.0</td>
+      <td>1691.0</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>beta[2,0,9]</th>
+      <td>-2.697</td>
+      <td>0.370</td>
+      <td>-3.387</td>
+      <td>-2.017</td>
+      <td>0.009</td>
+      <td>0.006</td>
+      <td>1689.0</td>
+      <td>1670.0</td>
+      <td>1701.0</td>
+      <td>1495.0</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>beta[2,1,0]</th>
+      <td>-1.178</td>
+      <td>0.486</td>
+      <td>-2.046</td>
+      <td>-0.259</td>
+      <td>0.008</td>
+      <td>0.007</td>
+      <td>3317.0</td>
+      <td>2360.0</td>
+      <td>3396.0</td>
+      <td>1498.0</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>beta[2,3,8]</th>
+      <td>0.635</td>
+      <td>0.278</td>
+      <td>0.111</td>
+      <td>1.137</td>
+      <td>0.008</td>
+      <td>0.006</td>
+      <td>1325.0</td>
+      <td>1240.0</td>
+      <td>1333.0</td>
+      <td>1458.0</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>beta[2,3,9]</th>
+      <td>0.953</td>
+      <td>0.317</td>
+      <td>0.391</td>
+      <td>1.580</td>
+      <td>0.008</td>
+      <td>0.006</td>
+      <td>1462.0</td>
+      <td>1462.0</td>
+      <td>1454.0</td>
+      <td>1583.0</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>beta[2,4,1]</th>
+      <td>-0.655</td>
+      <td>0.327</td>
+      <td>-1.274</td>
+      <td>-0.062</td>
+      <td>0.008</td>
+      <td>0.006</td>
+      <td>1882.0</td>
+      <td>1648.0</td>
+      <td>1917.0</td>
+      <td>1461.0</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>beta[3,0,0]</th>
+      <td>-1.281</td>
+      <td>0.445</td>
+      <td>-2.206</td>
+      <td>-0.537</td>
+      <td>0.008</td>
+      <td>0.007</td>
+      <td>2927.0</td>
+      <td>2157.0</td>
+      <td>2989.0</td>
+      <td>1228.0</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>beta[3,0,8]</th>
+      <td>-1.579</td>
+      <td>0.285</td>
+      <td>-2.067</td>
+      <td>-1.026</td>
+      <td>0.007</td>
+      <td>0.005</td>
+      <td>1725.0</td>
+      <td>1718.0</td>
+      <td>1725.0</td>
+      <td>1393.0</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>beta[3,0,9]</th>
+      <td>-1.959</td>
+      <td>0.253</td>
+      <td>-2.427</td>
+      <td>-1.473</td>
+      <td>0.008</td>
+      <td>0.005</td>
+      <td>1129.0</td>
+      <td>1121.0</td>
+      <td>1128.0</td>
+      <td>1663.0</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>beta[3,1,0]</th>
+      <td>-1.810</td>
+      <td>0.426</td>
+      <td>-2.602</td>
+      <td>-1.020</td>
+      <td>0.010</td>
+      <td>0.008</td>
+      <td>1767.0</td>
+      <td>1605.0</td>
+      <td>1801.0</td>
+      <td>1371.0</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>beta[3,2,1]</th>
+      <td>-1.040</td>
+      <td>0.441</td>
+      <td>-1.880</td>
+      <td>-0.185</td>
+      <td>0.009</td>
+      <td>0.007</td>
+      <td>2600.0</td>
+      <td>1849.0</td>
+      <td>2698.0</td>
+      <td>1317.0</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>beta[3,3,8]</th>
+      <td>0.555</td>
+      <td>0.259</td>
+      <td>0.055</td>
+      <td>1.026</td>
+      <td>0.006</td>
+      <td>0.004</td>
+      <td>1677.0</td>
+      <td>1662.0</td>
+      <td>1684.0</td>
+      <td>1621.0</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>beta[3,3,14]</th>
+      <td>-0.756</td>
+      <td>0.348</td>
+      <td>-1.413</td>
+      <td>-0.111</td>
+      <td>0.008</td>
+      <td>0.006</td>
+      <td>1893.0</td>
+      <td>1550.0</td>
+      <td>1895.0</td>
+      <td>1335.0</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>beta[4,0,8]</th>
+      <td>-1.637</td>
+      <td>0.264</td>
+      <td>-2.122</td>
+      <td>-1.118</td>
+      <td>0.007</td>
+      <td>0.005</td>
+      <td>1517.0</td>
+      <td>1479.0</td>
+      <td>1519.0</td>
+      <td>1334.0</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>beta[4,0,9]</th>
+      <td>-2.444</td>
+      <td>0.312</td>
+      <td>-3.000</td>
+      <td>-1.830</td>
+      <td>0.008</td>
+      <td>0.005</td>
+      <td>1651.0</td>
+      <td>1634.0</td>
+      <td>1658.0</td>
+      <td>1644.0</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>beta[4,1,0]</th>
+      <td>-1.204</td>
+      <td>0.466</td>
+      <td>-2.061</td>
+      <td>-0.304</td>
+      <td>0.009</td>
+      <td>0.007</td>
+      <td>2881.0</td>
+      <td>2342.0</td>
+      <td>2920.0</td>
+      <td>1427.0</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>beta[4,1,1]</th>
+      <td>-1.241</td>
+      <td>0.419</td>
+      <td>-2.020</td>
+      <td>-0.484</td>
+      <td>0.008</td>
+      <td>0.006</td>
+      <td>2998.0</td>
+      <td>2369.0</td>
+      <td>3139.0</td>
+      <td>1421.0</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>beta[4,1,2]</th>
+      <td>-0.848</td>
+      <td>0.424</td>
+      <td>-1.675</td>
+      <td>-0.109</td>
+      <td>0.008</td>
+      <td>0.006</td>
+      <td>2785.0</td>
+      <td>2253.0</td>
+      <td>2799.0</td>
+      <td>1668.0</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>beta[4,1,8]</th>
+      <td>-0.441</td>
+      <td>0.221</td>
+      <td>-0.844</td>
+      <td>-0.023</td>
+      <td>0.007</td>
+      <td>0.005</td>
+      <td>1085.0</td>
+      <td>1085.0</td>
+      <td>1099.0</td>
+      <td>1193.0</td>
+      <td>1.01</td>
+    </tr>
+    <tr>
+      <th>beta[4,2,1]</th>
+      <td>-1.088</td>
+      <td>0.327</td>
+      <td>-1.722</td>
+      <td>-0.476</td>
+      <td>0.007</td>
+      <td>0.005</td>
+      <td>2510.0</td>
+      <td>2143.0</td>
+      <td>2588.0</td>
+      <td>1723.0</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>beta[4,3,0]</th>
+      <td>0.820</td>
+      <td>0.347</td>
+      <td>0.186</td>
+      <td>1.485</td>
+      <td>0.010</td>
+      <td>0.007</td>
+      <td>1266.0</td>
+      <td>1204.0</td>
+      <td>1289.0</td>
+      <td>1631.0</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>beta[4,3,1]</th>
+      <td>-0.809</td>
+      <td>0.277</td>
+      <td>-1.357</td>
+      <td>-0.319</td>
+      <td>0.006</td>
+      <td>0.004</td>
+      <td>2385.0</td>
+      <td>2020.0</td>
+      <td>2483.0</td>
+      <td>1655.0</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>beta[4,4,0]</th>
+      <td>0.807</td>
+      <td>0.349</td>
+      <td>0.148</td>
+      <td>1.434</td>
+      <td>0.009</td>
+      <td>0.007</td>
+      <td>1388.0</td>
+      <td>1379.0</td>
+      <td>1415.0</td>
+      <td>1360.0</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>beta[5,0,9]</th>
+      <td>-1.647</td>
+      <td>0.419</td>
+      <td>-2.469</td>
+      <td>-0.893</td>
+      <td>0.009</td>
+      <td>0.006</td>
+      <td>2202.0</td>
+      <td>2139.0</td>
+      <td>2178.0</td>
+      <td>1562.0</td>
+      <td>1.01</td>
+    </tr>
+    <tr>
+      <th>beta[5,2,9]</th>
+      <td>0.833</td>
+      <td>0.387</td>
+      <td>0.121</td>
+      <td>1.549</td>
+      <td>0.009</td>
+      <td>0.006</td>
+      <td>1962.0</td>
+      <td>1864.0</td>
+      <td>1964.0</td>
+      <td>1633.0</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>beta[7,0,8]</th>
+      <td>-0.993</td>
+      <td>0.491</td>
+      <td>-1.964</td>
+      <td>-0.113</td>
+      <td>0.008</td>
+      <td>0.007</td>
+      <td>3588.0</td>
+      <td>2510.0</td>
+      <td>3621.0</td>
+      <td>1655.0</td>
+      <td>1.01</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Because the weather observations are highly correlated with the prevous ones, create a delta column that represents the change between the two. Also removed other correlated columns like elon, elat, and fat (corr with inj)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tornados_clean_2</span> <span class="o">=</span> <span class="n">tornados_clean</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">tornados_clean_2</span><span class="p">[</span><span class="s1">&#39;delta_wind_speed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tornados_clean_2</span><span class="p">[</span><span class="s1">&#39;wind_speed&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">tornados_clean_2</span><span class="p">[</span><span class="s1">&#39;wind_speed_2&#39;</span><span class="p">]</span>
+<span class="n">tornados_clean_2</span><span class="p">[</span><span class="s1">&#39;delta_visibility_distance&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tornados_clean_2</span><span class="p">[</span><span class="s1">&#39;visibility_distance&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">tornados_clean_2</span><span class="p">[</span><span class="s1">&#39;visibility_distance_2&#39;</span><span class="p">]</span>
+<span class="n">tornados_clean_2</span><span class="p">[</span><span class="s1">&#39;delta_temperature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tornados_clean_2</span><span class="p">[</span><span class="s1">&#39;temperature&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">tornados_clean_2</span><span class="p">[</span><span class="s1">&#39;temperature_2&#39;</span><span class="p">]</span>
+<span class="n">tornados_clean_2</span><span class="p">[</span><span class="s1">&#39;delta_temperature_dewpoint&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tornados_clean_2</span><span class="p">[</span><span class="s1">&#39;temperature_dewpoint&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">tornados_clean_2</span><span class="p">[</span><span class="s1">&#39;temperature_dewpoint_2&#39;</span><span class="p">]</span>
+<span class="n">tornados_clean_2</span><span class="p">[</span><span class="s1">&#39;delta_air_pressure&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tornados_clean_2</span><span class="p">[</span><span class="s1">&#39;air_pressure&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">tornados_clean_2</span><span class="p">[</span><span class="s1">&#39;air_pressure_2&#39;</span><span class="p">]</span>
+<span class="c1"># Numeric predictors</span>
+<span class="n">small_predictors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;inj&#39;</span><span class="p">,</span> <span class="s1">&#39;loss&#39;</span><span class="p">,</span> <span class="s1">&#39;closs&#39;</span><span class="p">,</span> <span class="s1">&#39;slat&#39;</span><span class="p">,</span> <span class="s1">&#39;slon&#39;</span><span class="p">,</span> <span class="s1">&#39;len&#39;</span><span class="p">,</span> <span class="s1">&#39;wid&#39;</span><span class="p">,</span> <span class="s1">&#39;delta_wind_speed&#39;</span><span class="p">,</span><span class="s1">&#39;delta_visibility_distance&#39;</span><span class="p">,</span><span class="s1">&#39;delta_temperature&#39;</span><span class="p">,</span><span class="s1">&#39;delta_temperature_dewpoint&#39;</span><span class="p">,</span><span class="s1">&#39;delta_air_pressure&#39;</span><span class="p">]</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">tornados_clean_2</span><span class="p">[</span><span class="n">small_predictors</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>inj</th>
+      <th>loss</th>
+      <th>closs</th>
+      <th>slat</th>
+      <th>slon</th>
+      <th>len</th>
+      <th>wid</th>
+      <th>delta_wind_speed</th>
+      <th>delta_visibility_distance</th>
+      <th>delta_temperature</th>
+      <th>delta_temperature_dewpoint</th>
+      <th>delta_air_pressure</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>4955.000000</td>
+      <td>4.955000e+03</td>
+      <td>4.955000e+03</td>
+      <td>4955.000000</td>
+      <td>4955.000000</td>
+      <td>4955.000000</td>
+      <td>4955.000000</td>
+      <td>4955.000000</td>
+      <td>4955.000000</td>
+      <td>4955.000000</td>
+      <td>4955.000000</td>
+      <td>4955.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>1.270636</td>
+      <td>2.524028e+05</td>
+      <td>2.631022e+03</td>
+      <td>37.038310</td>
+      <td>-90.655885</td>
+      <td>3.538987</td>
+      <td>164.472856</td>
+      <td>2.092795</td>
+      <td>142.583169</td>
+      <td>6.223451</td>
+      <td>2.756650</td>
+      <td>-6.365045</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>20.114509</td>
+      <td>5.927700e+06</td>
+      <td>1.092504e+05</td>
+      <td>5.000523</td>
+      <td>8.570581</td>
+      <td>6.138257</td>
+      <td>247.591792</td>
+      <td>16.156923</td>
+      <td>3108.627408</td>
+      <td>11.843436</td>
+      <td>9.020643</td>
+      <td>19.455782</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.000000</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>18.334900</td>
+      <td>-158.050000</td>
+      <td>0.010000</td>
+      <td>1.000000</td>
+      <td>-88.000000</td>
+      <td>-15691.000000</td>
+      <td>-70.000000</td>
+      <td>-100.000000</td>
+      <td>-181.400000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>0.000000</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>33.130850</td>
+      <td>-96.012200</td>
+      <td>0.420000</td>
+      <td>50.000000</td>
+      <td>-6.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>-11.800000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>0.000000</td>
+      <td>1.000000e-02</td>
+      <td>0.000000e+00</td>
+      <td>36.860700</td>
+      <td>-90.373400</td>
+      <td>1.520000</td>
+      <td>75.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>5.000000</td>
+      <td>0.000000</td>
+      <td>-5.200000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>0.000000</td>
+      <td>7.500000e-01</td>
+      <td>0.000000e+00</td>
+      <td>40.889800</td>
+      <td>-85.109700</td>
+      <td>4.100000</td>
+      <td>200.000000</td>
+      <td>11.000000</td>
+      <td>0.000000</td>
+      <td>11.000000</td>
+      <td>8.000000</td>
+      <td>0.800000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>1150.000000</td>
+      <td>3.103000e+08</td>
+      <td>7.500000e+06</td>
+      <td>48.983200</td>
+      <td>-66.031200</td>
+      <td>97.330000</td>
+      <td>3221.000000</td>
+      <td>103.000000</td>
+      <td>15892.000000</td>
+      <td>67.000000</td>
+      <td>62.400000</td>
+      <td>162.200000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Recreate the train and test set with the new set of predictors</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="n">tornados_clean_2</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1"># Numeric, categorical predictors and response, y`</span>
+<span class="n">x_num</span> <span class="o">=</span> <span class="n">tornados_clean_2</span><span class="p">[</span><span class="n">small_predictors</span><span class="p">]</span>
+<span class="n">x_cat</span> <span class="o">=</span> <span class="n">tornados_clean_2</span><span class="p">[[</span><span class="s1">&#39;st&#39;</span><span class="p">,</span><span class="s1">&#39;region&#39;</span><span class="p">,</span> <span class="s1">&#39;time_binned&#39;</span><span class="p">]]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">tornados_clean_2</span><span class="p">[</span><span class="s1">&#39;mag&#39;</span><span class="p">]</span>
+<span class="c1">#y = tornados_clean_2[&#39;mag&#39;] &gt;= 2 else 0</span>
+<span class="n">all_predictors</span> <span class="o">=</span> <span class="n">numeric_predictors</span>
+<span class="c1"># No. of predictors</span>
+<span class="n">k</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_predictors</span><span class="p">)</span>
+<span class="c1"># Standardize numeric columns, to mean 0 variance 1</span>
+<span class="n">mean</span> <span class="o">=</span> <span class="n">x_num</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">std</span> <span class="o">=</span> <span class="n">x_num</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="n">x_num</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">x_num</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span> <span class="o">/</span> <span class="n">std</span><span class="p">)</span>
+<span class="c1"># Put them into one data matrix</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">x_num</span><span class="p">,</span> <span class="n">x_cat</span><span class="p">),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">),</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">small_predictors</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;st&#39;</span><span class="p">,</span> <span class="s1">&#39;region&#39;</span><span class="p">,</span> <span class="s1">&#39;time_binned&#39;</span><span class="p">])</span>
+<span class="n">X</span><span class="p">[</span><span class="n">small_predictors</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">small_predictors</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>inj                           float64
+loss                          float64
+closs                         float64
+slat                          float64
+slon                          float64
+len                           float64
+wid                           float64
+delta_wind_speed              float64
+delta_visibility_distance     float64
+delta_temperature             float64
+delta_temperature_dewpoint    float64
+delta_air_pressure            float64
+st                             object
+region                         object
+time_binned                    object
+dtype: object
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0       1.0
+1       1.0
+2       0.0
+3       0.0
+4       0.0
+       ... 
+4950    0.0
+4951    1.0
+4952    2.0
+4953    0.0
+4954    2.0
+Name: mag, Length: 4955, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="model-4-len-wid-weather-grouped-by-region">
+<h2>Model 4: len, wid + weather, grouped by region<a class="headerlink" href="#model-4-len-wid-weather-grouped-by-region" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_classes</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">num_predictors</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">theano</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;fast_compile&#39;</span>  
+
+<span class="n">n_regions</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">region</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+
+<span class="n">cols_to_drop_4</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;st&#39;</span><span class="p">,</span> <span class="s1">&#39;region&#39;</span><span class="p">,</span> <span class="s1">&#39;inj&#39;</span><span class="p">,</span> <span class="s1">&#39;loss&#39;</span><span class="p">,</span> <span class="s1">&#39;closs&#39;</span><span class="p">,</span> <span class="s1">&#39;slat&#39;</span><span class="p">,</span> <span class="s1">&#39;slon&#39;</span><span class="p">,</span> <span class="s1">&#39;time_binned&#39;</span><span class="p">]</span>
+<span class="n">X_train_clean</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">cols_to_drop_4</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">X_train_clean</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+
+<span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">tornado_regions_small_model_4</span><span class="p">:</span>
+
+    <span class="c1"># Priors</span>
+    <span class="n">mu_intercept</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;mu_intercept&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">sigma_intercept</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s1">&#39;sigma_intercept&#39;</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">mu_beta</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;mu_beta&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+    <span class="n">sigma_beta</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s1">&#39;sigma_beta&#39;</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+    
+    <span class="c1"># Create shared variables to be replaced with test data</span>
+    <span class="n">Xt</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Data</span><span class="p">(</span><span class="s2">&quot;features&quot;</span><span class="p">,</span> <span class="n">X_train_clean</span><span class="p">)</span>
+    <span class="n">yt</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Data</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">region</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Data</span><span class="p">(</span><span class="s2">&quot;region&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">create_region_idxs</span><span class="p">(</span><span class="n">X_train</span><span class="p">)))</span>
+
+    <span class="c1"># Define our parameters</span>
+    <span class="n">beta</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;beta&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu_beta</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma_beta</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">n_regions</span><span class="p">,</span> <span class="n">n_classes</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_predictors</span><span class="p">))</span>
+    <span class="n">Intercept</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;Intercept&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu_intercept</span><span class="p">,</span><span class="n">sigma</span><span class="o">=</span><span class="n">sigma_intercept</span><span class="p">,</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">n_regions</span><span class="p">,</span> <span class="n">n_classes</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    
+    
+    <span class="c1"># Use softmax to get probabilities</span>
+    <span class="n">est</span> <span class="o">=</span> <span class="n">Intercept</span><span class="p">[</span><span class="n">region</span><span class="p">]</span> <span class="o">+</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">beta</span><span class="p">[</span><span class="n">region</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">*</span> <span class="n">Xt</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">Xt</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Xt</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">est</span> <span class="o">=</span> <span class="n">tt</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">tensor_list</span><span class="o">=</span><span class="p">[</span><span class="n">est</span><span class="p">,</span> 
+                                              <span class="n">tt</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">Xt</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">))],</span>
+                                 <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="n">p</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="n">tt</span><span class="o">.</span><span class="n">nnet</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">est</span><span class="p">))</span>
+
+    <span class="n">likelihood</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">yt</span><span class="p">)</span>
+
+<span class="n">pm</span><span class="o">.</span><span class="n">model_to_graphviz</span><span class="p">(</span><span class="n">tornado_regions_small_model_4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>len</th>
+      <th>wid</th>
+      <th>delta_wind_speed</th>
+      <th>delta_visibility_distance</th>
+      <th>delta_temperature</th>
+      <th>delta_temperature_dewpoint</th>
+      <th>delta_air_pressure</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>4459.000000</td>
+      <td>4459.000000</td>
+      <td>4459.000000</td>
+      <td>4459.000000</td>
+      <td>4459.000000</td>
+      <td>4459.000000</td>
+      <td>4459.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>0.003973</td>
+      <td>0.000827</td>
+      <td>-0.001876</td>
+      <td>0.001268</td>
+      <td>-0.005835</td>
+      <td>-0.001305</td>
+      <td>0.002111</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>1.014140</td>
+      <td>1.006573</td>
+      <td>1.008780</td>
+      <td>0.999720</td>
+      <td>1.007127</td>
+      <td>0.994667</td>
+      <td>1.007092</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>-0.574917</td>
+      <td>-0.660252</td>
+      <td>-5.576111</td>
+      <td>-5.093432</td>
+      <td>-6.435924</td>
+      <td>-11.391278</td>
+      <td>-8.996552</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>-0.511381</td>
+      <td>-0.462345</td>
+      <td>-0.500887</td>
+      <td>-0.045867</td>
+      <td>-0.525477</td>
+      <td>-0.305594</td>
+      <td>-0.274209</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>-0.332177</td>
+      <td>-0.361372</td>
+      <td>-0.129529</td>
+      <td>-0.045867</td>
+      <td>-0.103302</td>
+      <td>-0.305594</td>
+      <td>0.059882</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>0.091396</td>
+      <td>0.143491</td>
+      <td>0.551293</td>
+      <td>-0.045867</td>
+      <td>0.403308</td>
+      <td>0.581261</td>
+      <td>0.378553</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>15.279746</td>
+      <td>12.345026</td>
+      <td>6.245447</td>
+      <td>5.066357</td>
+      <td>5.131665</td>
+      <td>5.237249</td>
+      <td>8.664008</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="_images/077885dd0700ff88df881117348c6ebdea52eda0c09c0573ca0186e84aed5045.svg" src="_images/077885dd0700ff88df881117348c6ebdea52eda0c09c0573ca0186e84aed5045.svg" /></div>
+</div>
+<p>Use varitional inference to approximate the posterior and predict on the test set. The elbo plot shows convergence. The accuracy is 63.3%.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="k">with</span> <span class="n">tornado_regions_small_model_4</span><span class="p">:</span>
+    <span class="n">hierarchical_approx_4</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="mi">30000</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;advi&#39;</span><span class="p">)</span>
+
+<span class="n">advi_elbo</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span><span class="s1">&#39;ELBO&#39;</span><span class="p">:</span> <span class="o">-</span><span class="n">hierarchical_approx_4</span><span class="o">.</span><span class="n">hist</span><span class="p">,</span>
+     <span class="s1">&#39;n&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">hierarchical_approx_4</span><span class="o">.</span><span class="n">hist</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])})</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;ELBO&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">advi_elbo</span><span class="p">)</span>
+
+<span class="c1"># Predict from variational</span>
+<span class="n">region</span> <span class="o">=</span> <span class="n">create_region_idxs</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">X_test_clean</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">cols_to_drop_4</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">tornado_regions_small_model_4</span><span class="p">:</span>
+    <span class="n">pm</span><span class="o">.</span><span class="n">set_data</span><span class="p">({</span><span class="s1">&#39;features&#39;</span><span class="p">:</span> <span class="n">X_test_clean</span><span class="p">,</span> <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="n">y_test</span><span class="p">,</span> <span class="s1">&#39;region&#39;</span><span class="p">:</span> <span class="n">region</span><span class="p">})</span>
+    <span class="n">model_preds</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample_posterior_predictive</span><span class="p">(</span><span class="n">hierarchical_approx_4</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">50000</span><span class="p">),</span> <span class="n">var_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;p&quot;</span><span class="p">],</span> <span class="n">samples</span><span class="o">=</span><span class="mi">50000</span><span class="p">)</span>
+    
+<span class="c1">#Accuracy</span>
+<span class="n">correct</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">model_preds</span><span class="p">[</span><span class="s1">&#39;p&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="n">accuracy</span> <span class="o">=</span> <span class="n">correct</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">accuracy</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='30000' class='' max='30000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [30000/30000 02:01<00:00 Average Loss = 3,889.1]
+    </div>
+    </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Finished [100%]: Average Loss = 3,889
+</pre></div>
+</div>
+<div class="output text_html">
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='50000' class='' max='50000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [50000/50000 00:21<00:00]
+    </div>
+    </div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6330645161290323
+</pre></div>
+</div>
+<img alt="_images/fb74aad81db3a91741bd959bc921acbae0dfe2e55c4258ff441c77911bbd913f.png" src="_images/fb74aad81db3a91741bd959bc921acbae0dfe2e55c4258ff441c77911bbd913f.png" />
+</div>
+</div>
+<p>Using sampling, the accuracy only increased slightly to 63.5%.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">tornado_regions_small_model_4</span><span class="p">:</span>
+    <span class="n">db</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="s1">&#39;tornado_regions_small_model_4&#39;</span><span class="p">)</span>
+    <span class="n">hierarchical_trace_4</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="n">step</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">NUTS</span><span class="p">(</span><span class="n">target_accept</span> <span class="o">=</span> <span class="mf">0.95</span><span class="p">),</span> <span class="n">cores</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">tune</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">trace</span><span class="o">=</span><span class="n">db</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [Intercept, beta, sigma_beta, mu_beta, sigma_intercept, mu_intercept]
+</pre></div>
+</div>
+<div class="output text_html">
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='6000' class='' max='6000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [6000/6000 16:22<00:00 Sampling 4 chains, 0 divergences]
+    </div>
+    </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 500 draw iterations (4_000 + 2_000 draws total) took 994 seconds.
+The estimated number of effective samples is smaller than 200 for some parameters.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Predict from trace</span>
+<span class="n">region</span> <span class="o">=</span> <span class="n">create_region_idxs</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">X_test_clean</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">cols_to_drop_4</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">tornado_regions_small_model_4</span><span class="p">:</span>
+    <span class="n">pm</span><span class="o">.</span><span class="n">set_data</span><span class="p">({</span><span class="s1">&#39;features&#39;</span><span class="p">:</span> <span class="n">X_test_clean</span><span class="p">,</span> <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="n">y_test</span><span class="p">,</span> <span class="s1">&#39;region&#39;</span><span class="p">:</span> <span class="n">region</span><span class="p">})</span>
+    <span class="n">model_preds_trace_4</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample_posterior_predictive</span><span class="p">(</span><span class="n">hierarchical_trace_4</span><span class="p">,</span> <span class="n">var_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;p&quot;</span><span class="p">],</span> <span class="n">samples</span><span class="o">=</span><span class="mi">50000</span><span class="p">)</span>
+
+<span class="c1">#Accuracy</span>
+<span class="n">correct</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">model_preds_trace_4</span><span class="p">[</span><span class="s1">&#39;p&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="n">accuracy</span> <span class="o">=</span> <span class="n">correct</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">accuracy</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='50000' class='' max='50000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [50000/50000 00:25<00:00]
+    </div>
+    </div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6350806451612904
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="nn">az</span>
+<span class="k">with</span> <span class="n">az</span><span class="o">.</span><span class="n">rc_context</span><span class="p">({</span><span class="s2">&quot;plot.max_subplots&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">}):</span>
+    <span class="n">az</span><span class="o">.</span><span class="n">plot_trace</span><span class="p">(</span><span class="n">hierarchical_trace_4</span><span class="p">,</span> <span class="n">var_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;beta&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/kevin/opt/anaconda3/lib/python3.7/site-packages/arviz/data/io_pymc3.py:91: FutureWarning: Using `from_pymc3` without the model will be deprecated in a future release. Not using the model will return less accurate and less useful results. Make sure you use the model argument or call from_pymc3 within a model context.
+  FutureWarning,
+/Users/kevin/opt/anaconda3/lib/python3.7/site-packages/arviz/plots/traceplot.py:195: UserWarning: rcParams[&#39;plot.max_subplots&#39;] (25) is smaller than the number of variables to plot (315), generating only 25 plots
+  UserWarning,
+</pre></div>
+</div>
+<img alt="_images/541fbd84bfa5d78442629ccce36aab39900ee3e6e427933c4814ccaaeb19c680.png" src="_images/541fbd84bfa5d78442629ccce36aab39900ee3e6e427933c4814ccaaeb19c680.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summary_df</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">hierarchical_trace_4</span><span class="p">,</span> <span class="n">var_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;beta&quot;</span><span class="p">])</span>
+<span class="n">small_summary</span> <span class="o">=</span> <span class="n">summary_df</span><span class="p">[</span><span class="o">~</span><span class="p">((</span><span class="n">summary_df</span><span class="p">[</span><span class="s1">&#39;hdi_3%&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">summary_df</span><span class="p">[</span><span class="s1">&#39;hdi_97%&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">))]</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">small_summary</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/kevin/opt/anaconda3/lib/python3.7/site-packages/arviz/data/io_pymc3.py:91: FutureWarning: Using `from_pymc3` without the model will be deprecated in a future release. Not using the model will return less accurate and less useful results. Make sure you use the model argument or call from_pymc3 within a model context.
+  FutureWarning,
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              mean     sd  hdi_3%  hdi_97%  mcse_mean  mcse_sd  ess_mean  \
+beta[4,3,2] -0.872  0.365  -1.557   -0.212      0.013    0.009     819.0   
+beta[2,1,1] -1.124  0.324  -1.738   -0.538      0.011    0.008     899.0   
+beta[8,2,6] -1.153  0.547  -2.181   -0.129      0.012    0.009    2121.0   
+beta[1,2,2] -0.723  0.374  -1.487   -0.062      0.010    0.007    1375.0   
+beta[2,0,0] -2.246  0.344  -2.874   -1.600      0.010    0.007    1086.0   
+
+             ess_sd  ess_bulk  ess_tail  r_hat  
+beta[4,3,2]   781.0     823.0    1365.0   1.01  
+beta[2,1,1]   899.0     898.0    1352.0   1.01  
+beta[8,2,6]  1751.0    2157.0    1520.0   1.00  
+beta[1,2,2]  1375.0    1360.0    1584.0   1.00  
+beta[2,0,0]  1086.0    1086.0    1278.0   1.00  
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">small_summary</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">small_summary</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;beta[4,3,2]&#39;</span><span class="p">:</span><span class="s1">&#39;R4, C3, delta_wind_speed&#39;</span><span class="p">,</span>  <span class="s1">&#39;beta[2,1,1]&#39;</span><span class="p">:</span> <span class="s1">&#39;R2, C1, wid&#39;</span><span class="p">,</span> <span class="s1">&#39;beta[8,2,6]&#39;</span><span class="p">:</span> <span class="s1">&#39;R8, C2, delta_air_pressure&#39;</span><span class="p">,</span> <span class="s1">&#39;beta[1,2,2]&#39;</span><span class="p">:</span> <span class="s1">&#39;R1, C2, delta_wind_speed&#39;</span><span class="p">,</span><span class="s1">&#39;beta[2,0,0]&#39;</span><span class="p">:</span> <span class="s1">&#39;R2, C0, len&#39;</span><span class="p">}))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;beta[4,3,2]&#39;, &#39;beta[2,1,1]&#39;, &#39;beta[8,2,6]&#39;, &#39;beta[1,2,2]&#39;,
+       &#39;beta[2,0,0]&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>sd</th>
+      <th>hdi_3%</th>
+      <th>hdi_97%</th>
+      <th>mcse_mean</th>
+      <th>mcse_sd</th>
+      <th>ess_mean</th>
+      <th>ess_sd</th>
+      <th>ess_bulk</th>
+      <th>ess_tail</th>
+      <th>r_hat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>R4, C3, delta_wind_speed</th>
+      <td>-0.872</td>
+      <td>0.365</td>
+      <td>-1.557</td>
+      <td>-0.212</td>
+      <td>0.013</td>
+      <td>0.009</td>
+      <td>819.0</td>
+      <td>781.0</td>
+      <td>823.0</td>
+      <td>1365.0</td>
+      <td>1.01</td>
+    </tr>
+    <tr>
+      <th>R2, C1, wid</th>
+      <td>-1.124</td>
+      <td>0.324</td>
+      <td>-1.738</td>
+      <td>-0.538</td>
+      <td>0.011</td>
+      <td>0.008</td>
+      <td>899.0</td>
+      <td>899.0</td>
+      <td>898.0</td>
+      <td>1352.0</td>
+      <td>1.01</td>
+    </tr>
+    <tr>
+      <th>R8, C2, delta_air_pressure</th>
+      <td>-1.153</td>
+      <td>0.547</td>
+      <td>-2.181</td>
+      <td>-0.129</td>
+      <td>0.012</td>
+      <td>0.009</td>
+      <td>2121.0</td>
+      <td>1751.0</td>
+      <td>2157.0</td>
+      <td>1520.0</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>R1, C2, delta_wind_speed</th>
+      <td>-0.723</td>
+      <td>0.374</td>
+      <td>-1.487</td>
+      <td>-0.062</td>
+      <td>0.010</td>
+      <td>0.007</td>
+      <td>1375.0</td>
+      <td>1375.0</td>
+      <td>1360.0</td>
+      <td>1584.0</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>R2, C0, len</th>
+      <td>-2.246</td>
+      <td>0.344</td>
+      <td>-2.874</td>
+      <td>-1.600</td>
+      <td>0.010</td>
+      <td>0.007</td>
+      <td>1086.0</td>
+      <td>1086.0</td>
+      <td>1086.0</td>
+      <td>1278.0</td>
+      <td>1.00</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="model-averaging">
+<h2>Model Averaging<a class="headerlink" href="#model-averaging" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">traces</span> <span class="o">=</span> <span class="p">[</span><span class="n">hierarchical_trace_3</span><span class="p">,</span> <span class="n">hierarchical_trace_4</span><span class="p">]</span>
+<span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="n">tornado_regions_model</span><span class="p">,</span> <span class="n">tornado_regions_small_model_4</span><span class="p">]</span>
+<span class="n">comp</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">compare</span><span class="p">({</span><span class="s2">&quot;Full model&quot;</span><span class="p">:</span> <span class="n">hierarchical_trace_2</span><span class="p">,</span> <span class="s2">&quot;Small model&quot;</span><span class="p">:</span> <span class="n">hierarchical_trace_4</span><span class="p">},</span>  <span class="n">ic</span><span class="o">=</span><span class="s1">&#39;WAIC&#39;</span><span class="p">)</span>
+<span class="n">comp</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/kevin/opt/anaconda3/lib/python3.7/site-packages/arviz/stats/stats.py:150: UserWarning: 
+The scale is now log by default. Use &#39;scale&#39; argument or &#39;stats.ic_scale&#39; rcParam if you rely on a specific value.
+A higher log-score (or a lower deviance) indicates a model with better predictive accuracy.
+  &quot;\nThe scale is now log by default. Use &#39;scale&#39; argument or &quot;
+/Users/kevin/opt/anaconda3/lib/python3.7/site-packages/arviz/data/io_pymc3.py:91: FutureWarning: Using `from_pymc3` without the model will be deprecated in a future release. Not using the model will return less accurate and less useful results. Make sure you use the model argument or call from_pymc3 within a model context.
+  FutureWarning,
+/Users/kevin/opt/anaconda3/lib/python3.7/site-packages/arviz/stats/stats.py:1427: UserWarning: For one or more samples the posterior variance of the log predictive densities exceeds 0.4. This could be indication of WAIC starting to fail. 
+See http://arxiv.org/abs/1507.04544 for details
+  &quot;For one or more samples the posterior variance of the log predictive &quot;
+/Users/kevin/opt/anaconda3/lib/python3.7/site-packages/arviz/data/io_pymc3.py:91: FutureWarning: Using `from_pymc3` without the model will be deprecated in a future release. Not using the model will return less accurate and less useful results. Make sure you use the model argument or call from_pymc3 within a model context.
+  FutureWarning,
+/Users/kevin/opt/anaconda3/lib/python3.7/site-packages/arviz/stats/stats.py:1427: UserWarning: For one or more samples the posterior variance of the log predictive densities exceeds 0.4. This could be indication of WAIC starting to fail. 
+See http://arxiv.org/abs/1507.04544 for details
+  &quot;For one or more samples the posterior variance of the log predictive &quot;
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>rank</th>
+      <th>waic</th>
+      <th>p_waic</th>
+      <th>d_waic</th>
+      <th>weight</th>
+      <th>se</th>
+      <th>dse</th>
+      <th>warning</th>
+      <th>waic_scale</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Small model</th>
+      <td>0</td>
+      <td>-489.962</td>
+      <td>62.8839</td>
+      <td>0</td>
+      <td>1</td>
+      <td>51.5962</td>
+      <td>0</td>
+      <td>True</td>
+      <td>log</td>
+    </tr>
+    <tr>
+      <th>Full model</th>
+      <td>1</td>
+      <td>-868.083</td>
+      <td>379.742</td>
+      <td>378.121</td>
+      <td>4.60839e-122</td>
+      <td>26.4885</td>
+      <td>41.3509</td>
+      <td>True</td>
+      <td>log</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The small model will dominate the full model because it’s WAIC is much better.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weighted_model_preds</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample_posterior_predictive_w</span><span class="p">(</span><span class="n">traces</span><span class="o">=</span><span class="n">traces</span><span class="p">,</span> <span class="n">models</span><span class="o">=</span><span class="n">models</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">comp</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;weight&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="s2">&quot;weight&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='2000' class='' max='2000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [2000/2000 02:58<00:00]
+    </div>
+    </div></div>
+</div>
+<p>We can calulate the accuracy only on the training set using the majority class from sampling</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Accuracy</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">mode</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mode</span><span class="p">(</span><span class="n">weighted_model_preds</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">weighted_model_preds</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">correct</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">mode</span><span class="p">(</span><span class="n">weighted_model_preds</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">accuracy</span> <span class="o">=</span> <span class="n">correct</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">accuracy</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1 0 0 ... 0 2 0]]
+(2000, 4459)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6777304328324737
+</pre></div>
+</div>
+</div>
+</div>
+<p>Plot the standard deviation of the probabilities from our trace for each class, representing the uncertainity.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="c1"># Create a 3 x 4 subplot grid for our plots</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">12</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+    
+    <span class="c1"># Calculate the x,y position for our subplot</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">idx</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">idx</span> <span class="o">%</span> <span class="mi">3</span>
+    <span class="n">axis</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">]</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">hierarchical_trace_4</span><span class="p">[</span><span class="s1">&#39;p&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="mi">0</span><span class="p">)[:,</span><span class="n">idx</span><span class="p">])</span>
+    <span class="n">axis</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SD of class EF-</span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2"> predictions&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/kevin/opt/anaconda3/lib/python3.7/site-packages/ipykernel_launcher.py:14: UserWarning: Matplotlib is currently using module://ipykernel.pylab.backend_inline, which is a non-GUI backend, so cannot show the figure.
+  
+</pre></div>
+</div>
+<img alt="_images/2dd95162a1ffa612300067f9ab3590a56574debe66057046ebe35417e2cfc401.png" src="_images/2dd95162a1ffa612300067f9ab3590a56574debe66057046ebe35417e2cfc401.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="bayes_variational.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Variational Approximation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="windenergy_preds.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Application of Neural Networks to Enable Efficient Use of Wind Energy Final Writeup</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-1-all-predictors-grouped-by-state">Model 1: All predictors, grouped by state</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-2-all-predictors-grouped-by-region">Model 2: All predictors, grouped by region</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-4-len-wid-weather-grouped-by-region">Model 4: len, wid + weather, grouped by region</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-averaging">Model Averaging</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

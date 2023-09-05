@@ -1,0 +1,2491 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Model Building &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'dl_apps_tuning';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Assembling, Preparing and Exploring the Data" href="fantasyfootball_winner_part1.html" />
+    <link rel="prev" title="Initial Long-Short Term Memory Models" href="dl_apps_initial.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Prabhjot Singh’s Data Science and Machine Learning Portfolio
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">More About Me</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="aboutme.html">My Journey into Data Science</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Amateur Meterology</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="weathernarratives.html">NLP Analysis of Storm Report Final Writeup</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="nlp_clean.html">Data Exploration and Cleaning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nlp_TableCreation.html">Creating LIB, TOKEN, VOCAB, BOW, TFIDF Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nlp_Clustering.html">Vector Space Models &amp; Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nlp_PCA.html">Principal Component Analysis (PCA)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nlp_TopicModeling2.html">Topic Modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nlp_SentimentAnalysis.html">Sentiment Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="bayes_writeup.html">Bayesian Methods to Assess Uncertainties related to the Classification of Tornado Magnitude</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="bayes_clean.html">Data Cleaning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bayes_naivebayes.html">Naive Bayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bayes_sampling.html">Sampling, Trace and Forest plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bayes_variational.html">Variational Approximation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bayes_hierarchical.html">Hierachical Logisitc Regression</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="windenergy_preds.html">Application of Neural Networks to Enable Efficient Use of Wind Energy Final Writeup</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="dl_apps_clean.html">Data Cleaning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dl_apps_initial.html">Initial Long-Short Term Memory Models</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Model Building</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hacking Fantasy Football</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="fantasyfootball_winner_part1.html">Assembling, Preparing and Exploring the Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fantasyfootball_winner_part2.html">Building Models to Predict Draft Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Other Projects</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="other.html">Other Projects</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fdl_apps_tuning.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/dl_apps_tuning.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Model Building</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cory-clayton-emily-lien-prabhjot-singh">Cory Clayton, Emily Lien, Prabhjot Singh</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-lstm">Basic LSTM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-lstm-1-recreating-based-on-another-approach">Deep LSTM 1 – Recreating based on Another Approach</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-rnn">Basic RNN</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-rnn">Deep RNN</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-lstm">Deep LSTM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-tuning">Model Tuning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization">Regularization</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-rnn-based-off-other-code">Deep RNN Based off Other Code</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#other-deep-lstm">Other Deep LSTM</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wavenet-implementation">WaveNet Implementation</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="model-building">
+<h1>Model Building<a class="headerlink" href="#model-building" title="Permalink to this heading">#</a></h1>
+<section id="cory-clayton-emily-lien-prabhjot-singh">
+<h2>Cory Clayton, Emily Lien, Prabhjot Singh<a class="headerlink" href="#cory-clayton-emily-lien-prabhjot-singh" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">from</span> <span class="nn">tensorflow</span> <span class="kn">import</span> <span class="n">keras</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span>
+<span class="kn">import</span> <span class="nn">sklearn</span>
+<span class="kn">import</span> <span class="nn">sklearn.preprocessing</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Activation</span><span class="p">,</span> <span class="n">Flatten</span><span class="p">,</span> <span class="n">Dropout</span><span class="p">,</span> <span class="n">BatchNormalization</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">LSTM</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">concatenate</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Data was cleaned in the data cleaning notebook. In Part 4 and 5, the cleaned csv was read in and various models were build. These models include:</p>
+<ul class="simple">
+<li><p>LSTM</p></li>
+<li><p>RNN</p></li>
+<li><p>Deep LSTM</p></li>
+<li><p>Deep RNN</p></li>
+</ul>
+<p>Following this, in Part 6 the model were tuned. This section specifically focused on attemtpting to improve the model via the hyperparameters. Regularization tactics included the integration of dropout and batch normlalization.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#read in the data</span>
+<span class="n">hourly</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;wind_cleaned.csv&#39;</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;DATE&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="n">a2ed6767325b</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1">#read in the data</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">hourly</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;wind_cleaned.csv&#39;</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;DATE&#39;</span><span class="p">)</span>
+
+<span class="nn">~\anaconda3\lib\site-packages\pandas\io\parsers.py</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, dialect, error_bad_lines, warn_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">608</span>     <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">609</span> 
+<span class="ne">--&gt; </span><span class="mi">610</span>     <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">611</span> 
+<span class="g g-Whitespace">    </span><span class="mi">612</span> 
+
+<span class="nn">~\anaconda3\lib\site-packages\pandas\io\parsers.py</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">460</span> 
+<span class="g g-Whitespace">    </span><span class="mi">461</span>     <span class="c1"># Create the parser.</span>
+<span class="ne">--&gt; </span><span class="mi">462</span>     <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">463</span> 
+<span class="g g-Whitespace">    </span><span class="mi">464</span>     <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
+
+<span class="nn">~\anaconda3\lib\site-packages\pandas\io\parsers.py</span> in <span class="ni">__init__</span><span class="nt">(self, f, engine, **kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">817</span>             <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">818</span> 
+<span class="ne">--&gt; </span><span class="mi">819</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">820</span> 
+<span class="g g-Whitespace">    </span><span class="mi">821</span>     <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="nn">~\anaconda3\lib\site-packages\pandas\io\parsers.py</span> in <span class="ni">_make_engine</span><span class="nt">(self, engine)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1048</span>             <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1049</span>         <span class="c1"># error: Too many arguments for &quot;ParserBase&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1050</span>         <span class="k">return</span> <span class="n">mapping</span><span class="p">[</span><span class="n">engine</span><span class="p">](</span><span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>  <span class="c1"># type: ignore[call-arg]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1051</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1052</span>     <span class="k">def</span> <span class="nf">_failover_to_python</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="nn">~\anaconda3\lib\site-packages\pandas\io\parsers.py</span> in <span class="ni">__init__</span><span class="nt">(self, src, **kwds)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1865</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1866</span>         <span class="c1"># open handles</span>
+<span class="ne">-&gt; </span><span class="mi">1867</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_open_handles</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1868</span>         <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">1869</span>         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;storage_options&quot;</span><span class="p">,</span> <span class="s2">&quot;encoding&quot;</span><span class="p">,</span> <span class="s2">&quot;memory_map&quot;</span><span class="p">,</span> <span class="s2">&quot;compression&quot;</span><span class="p">):</span>
+
+<span class="nn">~\anaconda3\lib\site-packages\pandas\io\parsers.py</span> in <span class="ni">_open_handles</span><span class="nt">(self, src, kwds)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1366</span>             <span class="n">compression</span><span class="o">=</span><span class="n">kwds</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;compression&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1367</span>             <span class="n">memory_map</span><span class="o">=</span><span class="n">kwds</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;memory_map&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+<span class="ne">-&gt; </span><span class="mi">1368</span>             <span class="n">storage_options</span><span class="o">=</span><span class="n">kwds</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;storage_options&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1369</span>         <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1370</span> 
+
+<span class="nn">~\anaconda3\lib\site-packages\pandas\io\common.py</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">645</span>                 <span class="n">encoding</span><span class="o">=</span><span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">646</span>                 <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span>
+<span class="ne">--&gt; </span><span class="mi">647</span>                 <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">648</span>             <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">649</span>         <span class="k">else</span><span class="p">:</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;wind_cleaned.csv&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">split_fraction</span> <span class="o">=</span> <span class="mf">0.715</span>   <span class="c1">#train / validation split</span>
+<span class="n">train_split</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">split_fraction</span> <span class="o">*</span> <span class="nb">int</span><span class="p">(</span><span class="n">hourly</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">step</span> <span class="o">=</span> <span class="mi">1</span>   <span class="c1">#used if you want to skip hours</span>
+
+<span class="n">past</span> <span class="o">=</span> <span class="mi">120</span>  <span class="c1">#number of past hours to look at</span>
+<span class="n">future</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1">#how many hours in the future to predict</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.001</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1">#normalize the data</span>
+<span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">train_split</span><span class="p">):</span>                 
+    <span class="n">data_mean</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:</span><span class="n">train_split</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">data_std</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:</span><span class="n">train_split</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">data</span> <span class="o">-</span> <span class="n">data_mean</span><span class="p">)</span> <span class="o">/</span> <span class="n">data_std</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hourly</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>wnd_speed</th>
+      <th>temp_change</th>
+      <th>hourly_liq_depth_dim</th>
+      <th>liq_depth_dim</th>
+      <th>fan_speed</th>
+      <th>fan_speed2</th>
+      <th>fan_speed3</th>
+      <th>rh_air_temp</th>
+      <th>rel_humiditiy</th>
+      <th>min_hourly_air_temp</th>
+      <th>...</th>
+      <th>min_solar_rad</th>
+      <th>max_solar_rad</th>
+      <th>std_solar_rad</th>
+      <th>surface_temp</th>
+      <th>std_surface_temp</th>
+      <th>ex_air_temp</th>
+      <th>ex_air_temp_2</th>
+      <th>hourly_gust</th>
+      <th>wind_std</th>
+      <th>hour</th>
+    </tr>
+    <tr>
+      <th>DATE</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2020-01-01 00:00:00</th>
+      <td>23</td>
+      <td>75</td>
+      <td>0</td>
+      <td>0</td>
+      <td>816</td>
+      <td>959</td>
+      <td>1102</td>
+      <td>77</td>
+      <td>412</td>
+      <td>77</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>81</td>
+      <td>3</td>
+      <td>89</td>
+      <td>75</td>
+      <td>47</td>
+      <td>65</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2020-01-01 01:00:00</th>
+      <td>18</td>
+      <td>63</td>
+      <td>0</td>
+      <td>0</td>
+      <td>813</td>
+      <td>957</td>
+      <td>1099</td>
+      <td>64</td>
+      <td>438</td>
+      <td>63</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>66</td>
+      <td>4</td>
+      <td>76</td>
+      <td>62</td>
+      <td>56</td>
+      <td>84</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2020-01-01 02:00:00</th>
+      <td>20</td>
+      <td>59</td>
+      <td>0</td>
+      <td>0</td>
+      <td>811</td>
+      <td>955</td>
+      <td>1096</td>
+      <td>60</td>
+      <td>443</td>
+      <td>59</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>57</td>
+      <td>2</td>
+      <td>63</td>
+      <td>58</td>
+      <td>54</td>
+      <td>87</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2020-01-01 03:00:00</th>
+      <td>30</td>
+      <td>52</td>
+      <td>0</td>
+      <td>0</td>
+      <td>810</td>
+      <td>955</td>
+      <td>1093</td>
+      <td>53</td>
+      <td>483</td>
+      <td>53</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>56</td>
+      <td>2</td>
+      <td>61</td>
+      <td>52</td>
+      <td>70</td>
+      <td>98</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2020-01-01 04:00:00</th>
+      <td>24</td>
+      <td>49</td>
+      <td>0</td>
+      <td>0</td>
+      <td>808</td>
+      <td>953</td>
+      <td>1091</td>
+      <td>49</td>
+      <td>506</td>
+      <td>47</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>47</td>
+      <td>2</td>
+      <td>54</td>
+      <td>46</td>
+      <td>56</td>
+      <td>94</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2020-12-31 19:00:00</th>
+      <td>19</td>
+      <td>113</td>
+      <td>0</td>
+      <td>0</td>
+      <td>886</td>
+      <td>1019</td>
+      <td>1185</td>
+      <td>113</td>
+      <td>721</td>
+      <td>105</td>
+      <td>...</td>
+      <td>1130</td>
+      <td>5483</td>
+      <td>794</td>
+      <td>130</td>
+      <td>8</td>
+      <td>114</td>
+      <td>105</td>
+      <td>34</td>
+      <td>54</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>2020-12-31 20:00:00</th>
+      <td>15</td>
+      <td>104</td>
+      <td>0</td>
+      <td>0</td>
+      <td>866</td>
+      <td>999</td>
+      <td>1160</td>
+      <td>105</td>
+      <td>714</td>
+      <td>105</td>
+      <td>...</td>
+      <td>559</td>
+      <td>4638</td>
+      <td>913</td>
+      <td>140</td>
+      <td>13</td>
+      <td>118</td>
+      <td>104</td>
+      <td>37</td>
+      <td>62</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>2020-12-31 21:00:00</th>
+      <td>13</td>
+      <td>98</td>
+      <td>0</td>
+      <td>0</td>
+      <td>819</td>
+      <td>957</td>
+      <td>1102</td>
+      <td>98</td>
+      <td>724</td>
+      <td>98</td>
+      <td>...</td>
+      <td>263</td>
+      <td>621</td>
+      <td>96</td>
+      <td>108</td>
+      <td>5</td>
+      <td>104</td>
+      <td>97</td>
+      <td>36</td>
+      <td>58</td>
+      <td>21</td>
+    </tr>
+    <tr>
+      <th>2020-12-31 22:00:00</th>
+      <td>12</td>
+      <td>93</td>
+      <td>0</td>
+      <td>0</td>
+      <td>812</td>
+      <td>950</td>
+      <td>1094</td>
+      <td>94</td>
+      <td>728</td>
+      <td>94</td>
+      <td>...</td>
+      <td>0</td>
+      <td>507</td>
+      <td>186</td>
+      <td>99</td>
+      <td>4</td>
+      <td>98</td>
+      <td>93</td>
+      <td>32</td>
+      <td>55</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <th>2020-12-31 23:00:00</th>
+      <td>11</td>
+      <td>80</td>
+      <td>0</td>
+      <td>0</td>
+      <td>807</td>
+      <td>945</td>
+      <td>1088</td>
+      <td>82</td>
+      <td>693</td>
+      <td>82</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>90</td>
+      <td>2</td>
+      <td>93</td>
+      <td>80</td>
+      <td>33</td>
+      <td>58</td>
+      <td>23</td>
+    </tr>
+  </tbody>
+</table>
+<p>8784 rows × 31 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">hourly</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">train_split</span><span class="p">)</span>  <span class="c1">#extract the features normalized</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
+<span class="n">features</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+      <th>...</th>
+      <th>21</th>
+      <th>22</th>
+      <th>23</th>
+      <th>24</th>
+      <th>25</th>
+      <th>26</th>
+      <th>27</th>
+      <th>28</th>
+      <th>29</th>
+      <th>30</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.666842</td>
+      <td>-0.889331</td>
+      <td>-0.031372</td>
+      <td>-0.025799</td>
+      <td>-0.563459</td>
+      <td>-0.404292</td>
+      <td>-0.518017</td>
+      <td>-0.876069</td>
+      <td>-1.111618</td>
+      <td>-0.819877</td>
+      <td>...</td>
+      <td>-0.544143</td>
+      <td>-0.729012</td>
+      <td>-0.61152</td>
+      <td>-0.883275</td>
+      <td>-0.388901</td>
+      <td>-0.789128</td>
+      <td>-0.484175</td>
+      <td>0.443108</td>
+      <td>0.183482</td>
+      <td>-1.660325</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.107474</td>
+      <td>-1.026942</td>
+      <td>-0.031372</td>
+      <td>-0.025799</td>
+      <td>-0.655199</td>
+      <td>-0.472108</td>
+      <td>-0.592012</td>
+      <td>-1.024685</td>
+      <td>-0.990544</td>
+      <td>-0.980986</td>
+      <td>...</td>
+      <td>-0.544143</td>
+      <td>-0.729012</td>
+      <td>-0.61152</td>
+      <td>-1.034583</td>
+      <td>-0.185799</td>
+      <td>-0.937480</td>
+      <td>-0.569980</td>
+      <td>0.922227</td>
+      <td>0.887507</td>
+      <td>-1.515821</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.331221</td>
+      <td>-1.072812</td>
+      <td>-0.031372</td>
+      <td>-0.025799</td>
+      <td>-0.716359</td>
+      <td>-0.539925</td>
+      <td>-0.666008</td>
+      <td>-1.070413</td>
+      <td>-0.967260</td>
+      <td>-1.027017</td>
+      <td>...</td>
+      <td>-0.544143</td>
+      <td>-0.729012</td>
+      <td>-0.61152</td>
+      <td>-1.125368</td>
+      <td>-0.592002</td>
+      <td>-1.085833</td>
+      <td>-0.596381</td>
+      <td>0.815756</td>
+      <td>0.998669</td>
+      <td>-1.371317</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.449957</td>
+      <td>-1.153085</td>
+      <td>-0.031372</td>
+      <td>-0.025799</td>
+      <td>-0.746939</td>
+      <td>-0.539925</td>
+      <td>-0.740004</td>
+      <td>-1.150437</td>
+      <td>-0.780992</td>
+      <td>-1.096063</td>
+      <td>...</td>
+      <td>-0.544143</td>
+      <td>-0.729012</td>
+      <td>-0.61152</td>
+      <td>-1.135456</td>
+      <td>-0.592002</td>
+      <td>-1.108656</td>
+      <td>-0.635983</td>
+      <td>1.667522</td>
+      <td>1.406263</td>
+      <td>-1.226813</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.778715</td>
+      <td>-1.187488</td>
+      <td>-0.031372</td>
+      <td>-0.025799</td>
+      <td>-0.808098</td>
+      <td>-0.607742</td>
+      <td>-0.789334</td>
+      <td>-1.196165</td>
+      <td>-0.673888</td>
+      <td>-1.165110</td>
+      <td>...</td>
+      <td>-0.544143</td>
+      <td>-0.729012</td>
+      <td>-0.61152</td>
+      <td>-1.226240</td>
+      <td>-0.592002</td>
+      <td>-1.188538</td>
+      <td>-0.675585</td>
+      <td>0.922227</td>
+      <td>1.258047</td>
+      <td>-1.082309</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 31 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span> <span class="p">:</span> <span class="n">train_split</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>  <span class="c1">#split the data</span>
+<span class="n">val_data</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">train_split</span><span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">start</span> <span class="o">=</span> <span class="n">past</span> <span class="o">+</span> <span class="n">future</span>   <span class="c1">#set the start and end of the for looking to the future</span>
+<span class="n">end</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="n">train_split</span>
+
+<span class="n">x_train</span> <span class="o">=</span> <span class="n">train_data</span><span class="o">.</span><span class="n">values</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">][[</span><span class="mi">0</span><span class="p">]]</span>  <span class="c1">#get the first column (wind) as response</span>
+
+<span class="n">sequence_length</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">past</span> <span class="o">/</span> <span class="n">step</span><span class="p">)</span> <span class="c1">#used if skipping hours</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset_train</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">timeseries_dataset_from_array</span><span class="p">(</span>
+    <span class="n">x_train</span><span class="p">,</span>
+    <span class="n">y_train</span><span class="p">,</span>
+    <span class="n">sequence_length</span><span class="o">=</span><span class="n">sequence_length</span><span class="p">,</span>
+    <span class="n">sampling_rate</span><span class="o">=</span><span class="n">step</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+<span class="p">)</span>     <span class="c1">#set up a time series dataset</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_end</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">val_data</span><span class="p">)</span> <span class="o">-</span> <span class="n">past</span> <span class="o">-</span> <span class="n">future</span>    <span class="c1">#accounting for previous data</span>
+
+<span class="n">label_start</span> <span class="o">=</span> <span class="n">train_split</span> <span class="o">+</span> <span class="n">past</span> <span class="o">+</span> <span class="n">future</span>   
+
+<span class="n">x_val</span> <span class="o">=</span> <span class="n">val_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="n">x_end</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">y_val</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">label_start</span><span class="p">:][[</span><span class="mi">0</span><span class="p">]]</span>
+
+<span class="n">dataset_val</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">timeseries_dataset_from_array</span><span class="p">(</span>
+    <span class="n">x_val</span><span class="p">,</span>
+    <span class="n">y_val</span><span class="p">,</span>
+    <span class="n">sequence_length</span><span class="o">=</span><span class="n">sequence_length</span><span class="p">,</span>
+    <span class="n">sampling_rate</span><span class="o">=</span><span class="n">step</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+<span class="p">)</span>  <span class="c1">#validation data set</span>
+
+
+<span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">dataset_train</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">inputs</span><span class="p">,</span> <span class="n">targets</span> <span class="o">=</span> <span class="n">batch</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Input shape:&quot;</span><span class="p">,</span> <span class="n">inputs</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Target shape:&quot;</span><span class="p">,</span> <span class="n">targets</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Input shape: (32, 120, 31)
+Target shape: (32, 1)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_val</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2383, 1)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_val</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2383, 31)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="basic-lstm">
+<h2>Basic LSTM<a class="headerlink" href="#basic-lstm" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#simple model with 32 LSTM layers</span>
+
+<span class="n">inputs</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">inputs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+<span class="n">lstm_out</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span><span class="mi">64</span><span class="p">)(</span><span class="n">inputs</span><span class="p">)</span>
+<span class="n">outputs</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">)(</span><span class="n">lstm_out</span><span class="p">)</span>
+
+<span class="c1">#set the model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">outputs</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">),</span> <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;mse&quot;</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;functional_1&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input_1 (InputLayer)         [(None, 120, 31)]         0         
+_________________________________________________________________
+lstm (LSTM)                  (None, 64)                24576     
+_________________________________________________________________
+dense (Dense)                (None, 1)                 65        
+=================================================================
+Total params: 24,641
+Trainable params: 24,641
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#set an early stopping callback</span>
+<span class="n">path_checkpoint</span> <span class="o">=</span> <span class="s2">&quot;model_checkpoint.h5&quot;</span>
+<span class="n">es_callback</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">EarlyStopping</span><span class="p">(</span><span class="n">monitor</span><span class="o">=</span><span class="s2">&quot;val_loss&quot;</span><span class="p">,</span> <span class="n">min_delta</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">patience</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+
+<span class="n">modelckpt_callback</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">ModelCheckpoint</span><span class="p">(</span>
+    <span class="n">monitor</span><span class="o">=</span><span class="s2">&quot;val_loss&quot;</span><span class="p">,</span>
+    <span class="n">filepath</span><span class="o">=</span><span class="n">path_checkpoint</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">save_weights_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">save_best_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="c1">#fit the model</span>
+<span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">dataset_train</span><span class="p">,</span>
+    <span class="n">epochs</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span>
+    <span class="n">validation_data</span><span class="o">=</span><span class="n">dataset_val</span><span class="p">,</span>
+    <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">es_callback</span><span class="p">,</span> <span class="n">modelckpt_callback</span><span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/10
+193/193 [==============================] - ETA: 0s - loss: 0.6237
+Epoch 00001: val_loss improved from inf to 0.64920, saving model to model_checkpoint.h5
+193/193 [==============================] - 17s 89ms/step - loss: 0.6237 - val_loss: 0.6492
+Epoch 2/10
+193/193 [==============================] - ETA: 0s - loss: 0.4664
+Epoch 00002: val_loss did not improve from 0.64920
+193/193 [==============================] - 18s 96ms/step - loss: 0.4664 - val_loss: 0.7121
+Epoch 3/10
+193/193 [==============================] - ETA: 0s - loss: 0.4263
+Epoch 00003: val_loss did not improve from 0.64920
+193/193 [==============================] - 20s 101ms/step - loss: 0.4263 - val_loss: 0.7713
+Epoch 4/10
+193/193 [==============================] - ETA: 0s - loss: 0.4058
+Epoch 00004: val_loss did not improve from 0.64920
+193/193 [==============================] - 19s 98ms/step - loss: 0.4058 - val_loss: 0.7539
+Epoch 5/10
+193/193 [==============================] - ETA: 0s - loss: 0.3933
+Epoch 00005: val_loss did not improve from 0.64920
+193/193 [==============================] - 19s 98ms/step - loss: 0.3933 - val_loss: 0.7441
+Epoch 6/10
+193/193 [==============================] - ETA: 0s - loss: 0.3828- ETA
+Epoch 00006: val_loss did not improve from 0.64920
+193/193 [==============================] - 19s 100ms/step - loss: 0.3828 - val_loss: 0.7589
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#visualize the loss over epochs</span>
+
+<span class="k">def</span> <span class="nf">visualize_loss</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">]</span>
+    <span class="n">val_loss</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;val_loss&quot;</span><span class="p">]</span>
+    <span class="n">epochs</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">loss</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Training loss&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">val_loss</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Validation loss&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Epochs&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Loss&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="n">visualize_loss</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="s2">&quot;Training and Validation Loss&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6925853ddc03e4d5342df7ce920494b321dc88c8cd268f9d142a6a5ba7f73729.png" src="_images/6925853ddc03e4d5342df7ce920494b321dc88c8cd268f9d142a6a5ba7f73729.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#function to visualize the predictions</span>
+
+<span class="k">def</span> <span class="nf">show_plot</span><span class="p">(</span><span class="n">plot_data</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;History&quot;</span><span class="p">,</span> <span class="s2">&quot;True Future&quot;</span><span class="p">,</span> <span class="s2">&quot;Model Prediction&quot;</span><span class="p">]</span>
+    <span class="n">marker</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;.-&quot;</span><span class="p">,</span> <span class="s2">&quot;rx&quot;</span><span class="p">,</span> <span class="s2">&quot;go&quot;</span><span class="p">]</span>
+    <span class="n">time_steps</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">plot_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">delta</span><span class="p">:</span>
+        <span class="n">future</span> <span class="o">=</span> <span class="n">delta</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">future</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">plot_data</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">future</span><span class="p">,</span> <span class="n">plot_data</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">marker</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time_steps</span><span class="p">,</span> <span class="n">plot_data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">marker</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="n">time_steps</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="n">future</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time-Step&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">return</span>
+
+
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">dataset_val</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">show_plot</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">]],</span>
+        <span class="n">future</span><span class="p">,</span>  
+        <span class="s2">&quot;Single Step Prediction&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">48</span><span class="o">-</span><span class="mi">3</span><span class="n">c4e33118dc5</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span>         <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">]],</span>
+<span class="g g-Whitespace">     </span><span class="mi">28</span>         <span class="n">future</span><span class="p">,</span>
+<span class="ne">---&gt; </span><span class="mi">29</span>         <span class="s2">&quot;Single Step Prediction&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">30</span>     <span class="p">)</span>
+
+<span class="nn">&lt;ipython-input-48-3c4e33118dc5&gt;</span> in <span class="ni">show_plot</span><span class="nt">(plot_data, delta, title)</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span>     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">plot_data</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>         <span class="k">if</span> <span class="n">i</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">15</span>             <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">future</span><span class="p">,</span> <span class="n">plot_data</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">marker</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span>         <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span>             <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time_steps</span><span class="p">,</span> <span class="n">plot_data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">marker</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+<span class="nn">~\anaconda3\lib\site-packages\matplotlib\pyplot.py</span> in <span class="ni">plot</span><span class="nt">(scalex, scaley, data, *args, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2840</span>     <span class="k">return</span> <span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">2841</span>         <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">scalex</span><span class="o">=</span><span class="n">scalex</span><span class="p">,</span> <span class="n">scaley</span><span class="o">=</span><span class="n">scaley</span><span class="p">,</span>
+<span class="ne">-&gt; </span><span class="mi">2842</span>         <span class="o">**</span><span class="p">({</span><span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">}</span> <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">{}),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2843</span> 
+<span class="g g-Whitespace">   </span><span class="mi">2844</span> 
+
+<span class="nn">~\anaconda3\lib\site-packages\matplotlib\axes\_axes.py</span> in <span class="ni">plot</span><span class="nt">(self, scalex, scaley, data, *args, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1741</span>         <span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1742</span><span class="s2">         kwargs = cbook.normalize_kwargs(kwargs, mlines.Line2D)</span>
+<span class="ne">-&gt; </span><span class="mi">1743</span><span class="s2">         lines = [*self._get_lines(*args, data=data, **kwargs)]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1744</span><span class="s2">         for line in lines:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1745</span><span class="s2">             self.add_line(line)</span>
+
+<span class="nn">~\anaconda3\lib\site-packages\matplotlib\axes\_base.py</span> in <span class="ni">__call__</span><span class="nt">(self, data, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">271</span><span class="s2">                 this += args[0],</span>
+<span class="g g-Whitespace">    </span><span class="mi">272</span><span class="s2">                 args = args[1:]</span>
+<span class="ne">--&gt; </span><span class="mi">273</span><span class="s2">             yield from self._plot_args(this, kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">274</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">275</span><span class="s2">     def get_next_color(self):</span>
+
+<span class="nn">~\anaconda3\lib\site-packages\matplotlib\axes\_base.py</span> in <span class="ni">_plot_args</span><span class="nt">(self, tup, kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">397</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">398</span><span class="s2">         if x.shape[0] != y.shape[0]:</span>
+<span class="ne">--&gt; </span><span class="mi">399</span><span class="s2">             raise ValueError(f&quot;x and y must have same first dimension, but &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">400</span><span class="s2">                              f&quot;have shapes </span><span class="si">{x.shape}</span><span class="s2"> and </span><span class="si">{y.shape}</span><span class="s2">&quot;)</span>
+<span class="g g-Whitespace">    </span><span class="mi">401</span><span class="s2">         if x.ndim &gt; 2 or y.ndim &gt; 2:</span>
+
+<span class="ne">ValueError</span>: x and y must have same first dimension, but have shapes (1,) and (120, 10)
+</pre></div>
+</div>
+<img alt="_images/57f0d702771aa6be6b51abd39abde7d868eaa4c62542310e86565310cb1c4935.png" src="_images/57f0d702771aa6be6b51abd39abde7d868eaa4c62542310e86565310cb1c4935.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#A modification of the initial model</span>
+<span class="n">inputs</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">inputs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+<span class="n">lstm_out</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span><span class="mi">60</span><span class="p">)(</span><span class="n">inputs</span><span class="p">)</span>
+<span class="n">outputs</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">)(</span><span class="n">lstm_out</span><span class="p">)</span>
+
+<span class="c1">#set the model</span>
+<span class="n">model2</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">outputs</span><span class="p">)</span>
+<span class="n">model2</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">),</span> <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;mse&quot;</span><span class="p">)</span>
+<span class="n">model2</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;functional_3&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input_2 (InputLayer)         [(None, 120, 31)]         0         
+_________________________________________________________________
+lstm_1 (LSTM)                (None, 60)                22080     
+_________________________________________________________________
+dense_1 (Dense)              (None, 1)                 61        
+=================================================================
+Total params: 22,141
+Trainable params: 22,141
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#set an early stopping callback</span>
+<span class="n">path_checkpoint</span> <span class="o">=</span> <span class="s2">&quot;model_checkpoint.h5&quot;</span>
+<span class="n">es_callback</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">EarlyStopping</span><span class="p">(</span><span class="n">monitor</span><span class="o">=</span><span class="s2">&quot;val_loss&quot;</span><span class="p">,</span> <span class="n">min_delta</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">patience</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+
+<span class="n">modelckpt_callback</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">ModelCheckpoint</span><span class="p">(</span>
+    <span class="n">monitor</span><span class="o">=</span><span class="s2">&quot;val_loss&quot;</span><span class="p">,</span>
+    <span class="n">filepath</span><span class="o">=</span><span class="n">path_checkpoint</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">save_weights_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">save_best_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="c1">#fit the model</span>
+<span class="n">history</span> <span class="o">=</span> <span class="n">model2</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">dataset_train</span><span class="p">,</span>
+    <span class="n">epochs</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span>
+    <span class="n">validation_data</span><span class="o">=</span><span class="n">dataset_val</span><span class="p">,</span>
+    <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">es_callback</span><span class="p">,</span> <span class="n">modelckpt_callback</span><span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/10
+193/193 [==============================] - ETA: 0s - loss: 0.6392
+Epoch 00001: val_loss improved from inf to 0.55618, saving model to model_checkpoint.h5
+193/193 [==============================] - 8s 44ms/step - loss: 0.6392 - val_loss: 0.5562
+Epoch 2/10
+192/193 [============================&gt;.] - ETA: 0s - loss: 0.4850
+Epoch 00002: val_loss improved from 0.55618 to 0.54816, saving model to model_checkpoint.h5
+193/193 [==============================] - 9s 47ms/step - loss: 0.4839 - val_loss: 0.5482
+Epoch 3/10
+193/193 [==============================] - ETA: 0s - loss: 0.4363
+Epoch 00003: val_loss improved from 0.54816 to 0.54663, saving model to model_checkpoint.h5
+193/193 [==============================] - 10s 53ms/step - loss: 0.4363 - val_loss: 0.5466
+Epoch 4/10
+193/193 [==============================] - ETA: 0s - loss: 0.4133
+Epoch 00004: val_loss improved from 0.54663 to 0.53404, saving model to model_checkpoint.h5
+193/193 [==============================] - 11s 56ms/step - loss: 0.4133 - val_loss: 0.5340
+Epoch 5/10
+193/193 [==============================] - ETA: 0s - loss: 0.3989
+Epoch 00005: val_loss improved from 0.53404 to 0.52225, saving model to model_checkpoint.h5
+193/193 [==============================] - 10s 51ms/step - loss: 0.3989 - val_loss: 0.5223
+Epoch 6/10
+193/193 [==============================] - ETA: 0s - loss: 0.3879
+Epoch 00006: val_loss did not improve from 0.52225
+193/193 [==============================] - 11s 56ms/step - loss: 0.3879 - val_loss: 0.5585
+Epoch 7/10
+193/193 [==============================] - ETA: 0s - loss: 0.3776
+Epoch 00007: val_loss did not improve from 0.52225
+193/193 [==============================] - 11s 56ms/step - loss: 0.3776 - val_loss: 0.5794
+Epoch 8/10
+193/193 [==============================] - ETA: 0s - loss: 0.3664
+Epoch 00008: val_loss did not improve from 0.52225
+193/193 [==============================] - 11s 57ms/step - loss: 0.3664 - val_loss: 0.5991
+Epoch 9/10
+192/193 [============================&gt;.] - ETA: 0s - loss: 0.3562
+Epoch 00009: val_loss did not improve from 0.52225
+193/193 [==============================] - 11s 59ms/step - loss: 0.3555 - val_loss: 0.5925
+Epoch 10/10
+192/193 [============================&gt;.] - ETA: 0s - loss: 0.3451
+Epoch 00010: val_loss did not improve from 0.52225
+193/193 [==============================] - 11s 56ms/step - loss: 0.3444 - val_loss: 0.5794
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#visualize the loss over epochs</span>
+
+<span class="k">def</span> <span class="nf">visualize_loss</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">]</span>
+    <span class="n">val_loss</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;val_loss&quot;</span><span class="p">]</span>
+    <span class="n">epochs</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">loss</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Training loss&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">val_loss</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Validation loss&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Epochs&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Loss&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="n">visualize_loss</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="s2">&quot;Training and Validation Loss&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/70022305365b049d73a61f636d97fefad86d1c7485e3005fe4bc5a6654740cd7.png" src="_images/70022305365b049d73a61f636d97fefad86d1c7485e3005fe4bc5a6654740cd7.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#function to visualize the predictions</span>
+
+<span class="k">def</span> <span class="nf">show_plot</span><span class="p">(</span><span class="n">plot_data</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;History&quot;</span><span class="p">,</span> <span class="s2">&quot;True Future&quot;</span><span class="p">,</span> <span class="s2">&quot;Model Prediction&quot;</span><span class="p">]</span>
+    <span class="n">marker</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;.-&quot;</span><span class="p">,</span> <span class="s2">&quot;rx&quot;</span><span class="p">,</span> <span class="s2">&quot;go&quot;</span><span class="p">]</span>
+    <span class="n">time_steps</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">plot_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">delta</span><span class="p">:</span>
+        <span class="n">future</span> <span class="o">=</span> <span class="n">delta</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">future</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">plot_data</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">future</span><span class="p">,</span> <span class="n">plot_data</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">marker</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time_steps</span><span class="p">,</span> <span class="n">plot_data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">marker</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="n">time_steps</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="n">future</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time-Step&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">return</span>
+
+
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">dataset_val</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">show_plot</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">model2</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">]],</span>
+        <span class="n">future</span><span class="p">,</span>  
+        <span class="s2">&quot;Single Step Prediction&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3ae06620d59382d6ed5d57d75f5c087ab916a10840af31a68ce68d1256417fcf.png" src="_images/3ae06620d59382d6ed5d57d75f5c087ab916a10840af31a68ce68d1256417fcf.png" />
+<img alt="_images/18acc8691afa4032bc87639dac54f646f8600b77129f70bdd45fb5dcbb170e0c.png" src="_images/18acc8691afa4032bc87639dac54f646f8600b77129f70bdd45fb5dcbb170e0c.png" />
+<img alt="_images/1551bfcfa999ce90c84aaf7f403890be3be2440dae6955066bc711cecc64453e.png" src="_images/1551bfcfa999ce90c84aaf7f403890be3be2440dae6955066bc711cecc64453e.png" />
+<img alt="_images/b4565d9780e46bcea673c744c0c284b8cb402e7f8e012a32e0feaabc82b66b32.png" src="_images/b4565d9780e46bcea673c744c0c284b8cb402e7f8e012a32e0feaabc82b66b32.png" />
+<img alt="_images/e0842afdb0eb945100ec70df32c73d62257ff39351d6f562a86a272e69a025b0.png" src="_images/e0842afdb0eb945100ec70df32c73d62257ff39351d6f562a86a272e69a025b0.png" />
+</div>
+</div>
+</section>
+<section id="deep-lstm-1-recreating-based-on-another-approach">
+<h2>Deep LSTM 1 – Recreating based on Another Approach<a class="headerlink" href="#deep-lstm-1-recreating-based-on-another-approach" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Recreating the model from https://github.com/balandhanka/Windspeed-Forecasting-LSTM-GRU/blob/master/final_lstm.ipynb</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_ts_data</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">lookback</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">predicted_col</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">temp</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">temp</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span><span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="o">-</span><span class="n">lookback</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">temp</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">predicted_value</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">predicted_value</span> <span class="o">=</span> <span class="n">predicted_value</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">lookback</span><span class="p">:,</span><span class="n">predicted_col</span><span class="p">]</span>
+    <span class="n">predicted_value</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Predcited&quot;</span><span class="p">]</span>
+    <span class="n">predicted_value</span><span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">predicted_value</span><span class="p">)</span>
+    
+    <span class="n">predicted_value</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span><span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">predicted_value</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">predicted_value</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">final_df</span><span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">temp</span><span class="p">,</span> <span class="n">predicted_value</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1">#final_df.columns = [&#39;var1(t-1)&#39;, &#39;var2(t-1)&#39;, &#39;var3(t-1)&#39;, &#39;var4(t-1)&#39;, &#39;var5(t-1)&#39;, &#39;var6(t-1)&#39;, &#39;var7(t-1)&#39;, &#39;var8(t-1)&#39;,&#39;var1(t)&#39;]</span>
+    <span class="c1">#final_df.set_index(&#39;Date&#39;, inplace=True)</span>
+    <span class="k">return</span> <span class="n">final_df</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#We now create the time series dataset with looking back one time step</span>
+
+<span class="n">reframed_df</span><span class="o">=</span> <span class="n">create_ts_data</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">reframed_df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">reframed_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;var1(t-1)&#39;</span><span class="p">,</span> <span class="s1">&#39;var2(t-1)&#39;</span><span class="p">,</span> <span class="s1">&#39;var3(t-1)&#39;</span><span class="p">,</span> <span class="s1">&#39;var4(t-1)&#39;</span><span class="p">,</span> <span class="s1">&#39;var5(t-1)&#39;</span><span class="p">,</span><span class="s1">&#39;var6(t-1)&#39;</span><span class="p">,</span><span class="s1">&#39;var7(t-1)&#39;</span><span class="p">,</span><span class="s1">&#39;var8(t-1)&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;var9(t-1)&#39;</span><span class="p">,</span><span class="s1">&#39;var10(t-1)&#39;</span><span class="p">,</span><span class="s1">&#39;var11(t-1)&#39;</span><span class="p">,</span><span class="s1">&#39;var12(t-1)&#39;</span><span class="p">,</span><span class="s1">&#39;var13(t-1)&#39;</span><span class="p">,</span><span class="s1">&#39;var14(t-1)&#39;</span><span class="p">,</span><span class="s1">&#39;var15(t-1)&#39;</span><span class="p">,</span><span class="s1">&#39;var16(t-1)&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;var17(t-1)&#39;</span><span class="p">,</span><span class="s1">&#39;var18(t-1)&#39;</span><span class="p">,</span><span class="s1">&#39;var19(t-1)&#39;</span><span class="p">,</span><span class="s1">&#39;var20(t-1)&#39;</span><span class="p">,</span><span class="s1">&#39;var21(t-1)&#39;</span><span class="p">,</span><span class="s1">&#39;var22(t-1)&#39;</span><span class="p">,</span><span class="s1">&#39;var23(t-1)&#39;</span><span class="p">,</span><span class="s1">&#39;var24(t-1)&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;var25(t-1)&#39;</span><span class="p">,</span><span class="s1">&#39;var26(t-1)&#39;</span><span class="p">,</span><span class="s1">&#39;var27(t-1)&#39;</span><span class="p">,</span><span class="s1">&#39;var28(t-1)&#39;</span><span class="p">,</span><span class="s1">&#39;var29(t-1)&#39;</span><span class="p">,</span><span class="s1">&#39;var30(t-1)&#39;</span><span class="p">,</span><span class="s1">&#39;var31(t-1)&#39;</span><span class="p">,</span><span class="s1">&#39;var32(t-1)&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">reframed_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    var1(t-1)  var2(t-1)  var3(t-1)  var4(t-1)  var5(t-1)  var6(t-1)  \
+id                                                                     
+1    0.666842  -0.889331  -0.031372  -0.025799  -0.563459  -0.404292   
+2    0.107474  -1.026942  -0.031372  -0.025799  -0.655199  -0.472108   
+3    0.331221  -1.072812  -0.031372  -0.025799  -0.716359  -0.539925   
+4    1.449957  -1.153085  -0.031372  -0.025799  -0.746939  -0.539925   
+
+    var7(t-1)  var8(t-1)  var9(t-1)  var10(t-1)  ...  var23(t-1)  var24(t-1)  \
+id                                               ...                           
+1   -0.518017  -0.876069  -1.111618   -0.819877  ...   -0.729012    -0.61152   
+2   -0.592012  -1.024685  -0.990544   -0.980986  ...   -0.729012    -0.61152   
+3   -0.666008  -1.070413  -0.967260   -1.027017  ...   -0.729012    -0.61152   
+4   -0.740004  -1.150437  -0.780992   -1.096063  ...   -0.729012    -0.61152   
+
+    var25(t-1)  var26(t-1)  var27(t-1)  var28(t-1)  var29(t-1)  var30(t-1)  \
+id                                                                           
+1    -0.883275   -0.388901   -0.789128   -0.484175    0.443108    0.183482   
+2    -1.034583   -0.185799   -0.937480   -0.569980    0.922227    0.887507   
+3    -1.125368   -0.592002   -1.085833   -0.596381    0.815756    0.998669   
+4    -1.135456   -0.592002   -1.108656   -0.635983    1.667522    1.406263   
+
+    var31(t-1)  var32(t-1)  
+id                          
+1    -1.660325   -0.025799  
+2    -1.515821   -0.025799  
+3    -1.371317   -0.025799  
+4    -1.226813   -0.025799  
+
+[4 rows x 32 columns]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># split into train and test sets</span>
+<span class="n">values</span> <span class="o">=</span> <span class="n">reframed_df</span><span class="o">.</span><span class="n">values</span>
+<span class="n">training_sample</span> <span class="o">=</span><span class="nb">int</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span><span class="n">hourly</span><span class="p">)</span> <span class="o">*</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">values</span><span class="p">[:</span><span class="n">training_sample</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="n">training_sample</span><span class="p">:,</span> <span class="p">:]</span>
+<span class="c1"># split into input and outputs</span>
+<span class="n">train_X</span><span class="p">,</span> <span class="n">train_y</span> <span class="o">=</span> <span class="n">train</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">train</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">test_X</span><span class="p">,</span> <span class="n">test_y</span> <span class="o">=</span> <span class="n">test</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">test</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># reshape input to be 3D [samples, time steps, features]</span>
+<span class="n">train_X</span> <span class="o">=</span> <span class="n">train_X</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">train_X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="n">train_X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<span class="n">test_X</span> <span class="o">=</span> <span class="n">test_X</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">test_X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="n">test_X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">train_X</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">train_y</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">test_X</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">test_y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(6148, 1, 31) (6148,) (2635, 1, 31) (2635,)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_lstm</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+<span class="n">model_lstm</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LSTM</span><span class="p">(</span><span class="mi">75</span><span class="p">,</span> <span class="n">return_sequences</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="n">train_X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">train_X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">])))</span>
+<span class="n">model_lstm</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LSTM</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">return_sequences</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="n">model_lstm</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LSTM</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="mi">30</span><span class="p">))</span>
+<span class="n">model_lstm</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="n">model_lstm</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;mse&#39;</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_lstm</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential_14&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+lstm_25 (LSTM)               (None, 1, 75)             32100     
+_________________________________________________________________
+lstm_26 (LSTM)               (None, 1, 30)             12720     
+_________________________________________________________________
+lstm_27 (LSTM)               (None, 30)                7320      
+_________________________________________________________________
+dense_5 (Dense)              (None, 1)                 31        
+=================================================================
+Total params: 52,171
+Trainable params: 52,171
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_lstm</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;mse&#39;</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">)</span>
+<span class="n">lstm_history</span> <span class="o">=</span> <span class="n">model_lstm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_X</span><span class="p">,</span> <span class="n">train_y</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">test_X</span><span class="p">,</span> <span class="n">test_y</span><span class="p">),</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/10
+97/97 [==============================] - 2s 17ms/step - loss: 1.0219 - val_loss: 4.9989e-04
+Epoch 2/10
+97/97 [==============================] - 0s 4ms/step - loss: 1.0187 - val_loss: 2.6031e-04
+Epoch 3/10
+97/97 [==============================] - 0s 4ms/step - loss: 1.0103 - val_loss: 6.2905e-04
+Epoch 4/10
+97/97 [==============================] - 0s 4ms/step - loss: 0.9849 - val_loss: 0.0016
+Epoch 5/10
+97/97 [==============================] - 0s 4ms/step - loss: 0.9281 - val_loss: 0.0027
+Epoch 6/10
+97/97 [==============================] - 0s 4ms/step - loss: 0.8564 - val_loss: 0.0021
+Epoch 7/10
+97/97 [==============================] - 0s 4ms/step - loss: 0.7974 - val_loss: 0.0013
+Epoch 8/10
+97/97 [==============================] - 0s 4ms/step - loss: 0.7554 - val_loss: 0.0011
+Epoch 9/10
+97/97 [==============================] - 0s 4ms/step - loss: 0.7251 - val_loss: 9.2207e-04
+Epoch 10/10
+97/97 [==============================] - 0s 4ms/step - loss: 0.7006 - val_loss: 0.0014
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pred_y</span> <span class="o">=</span>  <span class="n">model_lstm</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">test_X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1/83 [..............................] - ETA: 0s - loss: 0.0000e+00WARNING:tensorflow:Callbacks method `on_test_batch_end` is slow compared to the batch time (batch time: 0.0000s vs `on_test_batch_end` time: 0.0010s). Check your callbacks.
+83/83 [==============================] - 0s 719us/step - loss: 0.0000e+00
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lstm_history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;lstm train&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;brown&#39;</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lstm_history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;val_loss&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;lstm test&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/2531d836de86e55b92dab590846edde787ac8c658e2c33facec9f35d99b87efc.png" src="_images/2531d836de86e55b92dab590846edde787ac8c658e2c33facec9f35d99b87efc.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_y</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2635</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-0.02579926],
+       [-0.02579926],
+       [-0.02579926],
+       ...,
+       [-0.02579926],
+       [-0.02579926],
+       [-0.02579926]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pred_y</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-0.02612374],
+       [-0.02612132],
+       [-0.02614242],
+       ...,
+       [-0.02588367],
+       [-0.02588575],
+       [-0.02593128]], dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
+
+<span class="n">MSE</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">pred_y</span><span class="p">)</span>
+<span class="n">R2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">pred_y</span><span class="p">)</span>
+<span class="n">RMSE</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">pred_y</span><span class="p">))</span>
+<span class="n">MAE</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">pred_y</span><span class="p">)</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="n">MSE</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">R2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">RMSE</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">MAE</span><span class="p">)</span>
+
+<span class="c1">#plotting predicted test value vs actual test value</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Actual&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pred_y</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Predicted&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.094107541057569e-05
+-0.02965799524279844
+0.004576141978848087
+0.0009094030408406897
+</pre></div>
+</div>
+<img alt="_images/ca39ccf60eafc3a35f21bc00f7d13a63d789ce6001d81bfde2455026a1062eb4.png" src="_images/ca39ccf60eafc3a35f21bc00f7d13a63d789ce6001d81bfde2455026a1062eb4.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Recreating some of the RNNs from the M7_3 tutorial</span>
+
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">x_val</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">keras</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.8505681231851796
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="basic-rnn">
+<h2>Basic RNN<a class="headerlink" href="#basic-rnn" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Back to basics. Let&#39;s try a simple RNN</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">set_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">modelR</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Sequential</span><span class="p">([</span>
+    <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">SimpleRNN</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">])</span>
+
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.005</span><span class="p">)</span>
+<span class="n">modelR</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s2">&quot;mse&quot;</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">)</span>
+<span class="n">historyR</span> <span class="o">=</span> <span class="n">modelR</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">dataset_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+                    <span class="n">validation_data</span><span class="o">=</span><span class="n">dataset_val</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/20
+193/193 [==============================] - 2s 10ms/step - loss: 0.9972 - val_loss: 0.6643
+Epoch 2/20
+193/193 [==============================] - 2s 9ms/step - loss: 0.7330 - val_loss: 0.5941
+Epoch 3/20
+193/193 [==============================] - 2s 9ms/step - loss: 0.6806 - val_loss: 0.5828
+Epoch 4/20
+193/193 [==============================] - 2s 9ms/step - loss: 0.6689 - val_loss: 0.5802
+Epoch 5/20
+193/193 [==============================] - 2s 9ms/step - loss: 0.6650 - val_loss: 0.5790
+Epoch 6/20
+193/193 [==============================] - 2s 9ms/step - loss: 0.6630 - val_loss: 0.5784
+Epoch 7/20
+193/193 [==============================] - 2s 9ms/step - loss: 0.6619 - val_loss: 0.5780
+Epoch 8/20
+193/193 [==============================] - 2s 9ms/step - loss: 0.6611 - val_loss: 0.5779
+Epoch 9/20
+193/193 [==============================] - 2s 9ms/step - loss: 0.6607 - val_loss: 0.5780
+Epoch 10/20
+193/193 [==============================] - 2s 9ms/step - loss: 0.6605 - val_loss: 0.5781
+Epoch 11/20
+193/193 [==============================] - 2s 9ms/step - loss: 0.6603 - val_loss: 0.5782
+Epoch 12/20
+193/193 [==============================] - 2s 9ms/step - loss: 0.6603 - val_loss: 0.5784
+Epoch 13/20
+193/193 [==============================] - 2s 9ms/step - loss: 0.6602 - val_loss: 0.5786
+Epoch 14/20
+193/193 [==============================] - 2s 9ms/step - loss: 0.6602 - val_loss: 0.5788
+Epoch 15/20
+193/193 [==============================] - 2s 9ms/step - loss: 0.6602 - val_loss: 0.5789
+Epoch 16/20
+193/193 [==============================] - 2s 9ms/step - loss: 0.6602 - val_loss: 0.5791
+Epoch 17/20
+193/193 [==============================] - 2s 9ms/step - loss: 0.6602 - val_loss: 0.5793
+Epoch 18/20
+193/193 [==============================] - 2s 9ms/step - loss: 0.6602 - val_loss: 0.5794
+Epoch 19/20
+193/193 [==============================] - 2s 9ms/step - loss: 0.6602 - val_loss: 0.5796
+Epoch 20/20
+193/193 [==============================] - 2s 9ms/step - loss: 0.6602 - val_loss: 0.5797
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">modelR</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">dataset_val</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>71/71 [==============================] - 0s 4ms/step - loss: 0.5797
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5797474384307861
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">visualize_loss</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">]</span>
+    <span class="n">val_loss</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;val_loss&quot;</span><span class="p">]</span>
+    <span class="n">epochs</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">loss</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Training loss&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">val_loss</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Validation loss&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Epochs&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Loss&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="n">visualize_loss</span><span class="p">(</span><span class="n">historyR</span><span class="p">,</span> <span class="s2">&quot;Training and Validation Loss&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f8188778b1c5d479fee37b4602e411d0c03f292774955f569871dc31513c04aa.png" src="_images/f8188778b1c5d479fee37b4602e411d0c03f292774955f569871dc31513c04aa.png" />
+</div>
+</div>
+</section>
+<section id="deep-rnn">
+<h2>Deep RNN<a class="headerlink" href="#deep-rnn" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Let&#39;s try a deep rnn</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">set_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">modelDR</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Sequential</span><span class="p">([</span>
+    <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">SimpleRNN</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">return_sequences</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+    <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">SimpleRNN</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">return_sequences</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+    <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">SimpleRNN</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">])</span>
+
+<span class="n">modelDR</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s2">&quot;mse&quot;</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="s2">&quot;adam&quot;</span><span class="p">)</span>
+<span class="n">historyDR</span> <span class="o">=</span> <span class="n">modelDR</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">dataset_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+                    <span class="n">validation_data</span><span class="o">=</span><span class="n">dataset_val</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/20
+WARNING:tensorflow:Layer simple_rnn is casting an input tensor from dtype float64 to the layer&#39;s dtype of float32, which is new behavior in TensorFlow 2.  The layer has dtype float32 because its dtype defaults to floatx.
+
+If you intended to run this layer in float32, you can safely ignore this warning. If in doubt, this warning is likely only an issue if you are porting a TensorFlow 1.X model to TensorFlow 2.
+
+To change all layers to have dtype float64 by default, call `tf.keras.backend.set_floatx(&#39;float64&#39;)`. To change just this layer, pass dtype=&#39;float64&#39; to the layer constructor. If you are the author of this layer, you can disable autocasting by passing autocast=False to the base Layer constructor.
+
+193/193 [==============================] - 8s 43ms/step - loss: 0.8834 - val_loss: 0.7232
+Epoch 2/20
+193/193 [==============================] - 9s 46ms/step - loss: 0.6431 - val_loss: 0.5462
+Epoch 3/20
+193/193 [==============================] - 10s 53ms/step - loss: 0.5728 - val_loss: 0.5850
+Epoch 4/20
+193/193 [==============================] - 10s 52ms/step - loss: 0.5416 - val_loss: 0.5614
+Epoch 5/20
+193/193 [==============================] - 10s 52ms/step - loss: 0.5245 - val_loss: 0.5483
+Epoch 6/20
+193/193 [==============================] - 11s 56ms/step - loss: 0.5138 - val_loss: 0.5402
+Epoch 7/20
+193/193 [==============================] - 11s 57ms/step - loss: 0.5064 - val_loss: 0.5346
+Epoch 8/20
+193/193 [==============================] - 15s 76ms/step - loss: 0.5006 - val_loss: 0.5308
+Epoch 9/20
+193/193 [==============================] - 14s 73ms/step - loss: 0.4960 - val_loss: 0.5274
+Epoch 10/20
+193/193 [==============================] - 13s 67ms/step - loss: 0.4921 - val_loss: 0.5242
+Epoch 11/20
+193/193 [==============================] - 13s 70ms/step - loss: 0.4887 - val_loss: 0.5213
+Epoch 12/20
+193/193 [==============================] - 14s 71ms/step - loss: 0.4855 - val_loss: 0.5182
+Epoch 13/20
+193/193 [==============================] - 13s 66ms/step - loss: 0.4826 - val_loss: 0.5150
+Epoch 14/20
+193/193 [==============================] - 13s 68ms/step - loss: 0.4799 - val_loss: 0.5113
+Epoch 15/20
+193/193 [==============================] - 13s 67ms/step - loss: 0.4772 - val_loss: 0.5071
+Epoch 16/20
+193/193 [==============================] - 13s 67ms/step - loss: 0.4746 - val_loss: 0.5025
+Epoch 17/20
+193/193 [==============================] - 13s 67ms/step - loss: 0.4720 - val_loss: 0.4980
+Epoch 18/20
+193/193 [==============================] - 13s 66ms/step - loss: 0.4693 - val_loss: 0.5429
+Epoch 19/20
+193/193 [==============================] - 13s 67ms/step - loss: 0.4665 - val_loss: 0.5408
+Epoch 20/20
+193/193 [==============================] - 13s 68ms/step - loss: 0.4637 - val_loss: 0.5386
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">modelDR</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">dataset_val</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">39</span><span class="o">-</span><span class="n">fa59d3e96c28</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">modelDR</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">dataset_val</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;modelDR&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">visualize_loss</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">]</span>
+    <span class="n">val_loss</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;val_loss&quot;</span><span class="p">]</span>
+    <span class="n">epochs</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">loss</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Training loss&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">val_loss</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Validation loss&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Epochs&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Loss&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="n">visualize_loss</span><span class="p">(</span><span class="n">historyDR</span><span class="p">,</span> <span class="s2">&quot;Training and Validation Loss&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/719727d5778a1ebd22f772183a11c60d511493a7e527448eec430111d5911ad0.png" src="_images/719727d5778a1ebd22f772183a11c60d511493a7e527448eec430111d5911ad0.png" />
+</div>
+</div>
+</section>
+<section id="deep-lstm">
+<h2>Deep LSTM<a class="headerlink" href="#deep-lstm" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#The deep rnn structure but with LSTM</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">set_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">modelLSTM</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Sequential</span><span class="p">([</span>
+    <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">return_sequences</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+    <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">return_sequences</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+    <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">])</span>
+
+<span class="n">modelLSTM</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s2">&quot;mse&quot;</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="s2">&quot;adam&quot;</span><span class="p">)</span>
+<span class="n">historyLSTM</span> <span class="o">=</span> <span class="n">modelLSTM</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">dataset_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+                    <span class="n">validation_data</span><span class="o">=</span><span class="n">dataset_val</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/20
+WARNING:tensorflow:Layer lstm_7 is casting an input tensor from dtype float64 to the layer&#39;s dtype of float32, which is new behavior in TensorFlow 2.  The layer has dtype float32 because its dtype defaults to floatx.
+
+If you intended to run this layer in float32, you can safely ignore this warning. If in doubt, this warning is likely only an issue if you are porting a TensorFlow 1.X model to TensorFlow 2.
+
+To change all layers to have dtype float64 by default, call `tf.keras.backend.set_floatx(&#39;float64&#39;)`. To change just this layer, pass dtype=&#39;float64&#39; to the layer constructor. If you are the author of this layer, you can disable autocasting by passing autocast=False to the base Layer constructor.
+
+193/193 [==============================] - 33s 172ms/step - loss: 0.8539 - val_loss: 0.7600
+Epoch 2/20
+193/193 [==============================] - 33s 169ms/step - loss: 0.7752 - val_loss: 0.7454
+Epoch 3/20
+193/193 [==============================] - 26s 134ms/step - loss: 0.7259 - val_loss: 0.7301
+Epoch 4/20
+193/193 [==============================] - 24s 125ms/step - loss: 0.6807 - val_loss: 0.7148
+Epoch 5/20
+193/193 [==============================] - 29s 153ms/step - loss: 0.6473 - val_loss: 0.7146
+Epoch 6/20
+193/193 [==============================] - 28s 145ms/step - loss: 0.6170 - val_loss: 0.7208
+Epoch 7/20
+193/193 [==============================] - 24s 124ms/step - loss: 0.5947 - val_loss: 0.7076
+Epoch 8/20
+193/193 [==============================] - 28s 147ms/step - loss: 0.5761 - val_loss: 0.6830
+Epoch 9/20
+193/193 [==============================] - 28s 146ms/step - loss: 0.5582 - val_loss: 0.6890
+Epoch 10/20
+193/193 [==============================] - 29s 153ms/step - loss: 0.5432 - val_loss: 0.6778
+Epoch 11/20
+193/193 [==============================] - 29s 151ms/step - loss: 0.5307 - val_loss: 0.6733
+Epoch 12/20
+193/193 [==============================] - 28s 143ms/step - loss: 0.5164 - val_loss: 0.6748
+Epoch 13/20
+193/193 [==============================] - 28s 143ms/step - loss: 0.5058 - val_loss: 0.6853
+Epoch 14/20
+193/193 [==============================] - 28s 146ms/step - loss: 0.4945 - val_loss: 0.7018
+Epoch 15/20
+193/193 [==============================] - 25s 129ms/step - loss: 0.4876 - val_loss: 0.6998
+Epoch 16/20
+193/193 [==============================] - 22s 113ms/step - loss: 0.4863 - val_loss: 0.6809
+Epoch 17/20
+193/193 [==============================] - 22s 113ms/step - loss: 0.4849 - val_loss: 0.6678
+Epoch 18/20
+193/193 [==============================] - 22s 115ms/step - loss: 0.4679 - val_loss: 0.7017
+Epoch 19/20
+193/193 [==============================] - 22s 115ms/step - loss: 0.4641 - val_loss: 0.6652
+Epoch 20/20
+193/193 [==============================] - 22s 112ms/step - loss: 0.4687 - val_loss: 0.6624
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">modelLSTM</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">dataset_val</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">visualize_loss</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">]</span>
+    <span class="n">val_loss</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;val_loss&quot;</span><span class="p">]</span>
+    <span class="n">epochs</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">loss</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Training loss&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">val_loss</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Validation loss&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Epochs&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Loss&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="n">visualize_loss</span><span class="p">(</span><span class="n">historyLSTM</span><span class="p">,</span> <span class="s2">&quot;Training and Validation Loss&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3f253bdae6fcd9fe95d2637cb5da9f581bedcdeb32589c57362998d510d2eff8.png" src="_images/3f253bdae6fcd9fe95d2637cb5da9f581bedcdeb32589c57362998d510d2eff8.png" />
+</div>
+</div>
+</section>
+<section id="model-tuning">
+<h2>Model Tuning<a class="headerlink" href="#model-tuning" title="Permalink to this heading">#</a></h2>
+<section id="regularization">
+<h3>Regularization<a class="headerlink" href="#regularization" title="Permalink to this heading">#</a></h3>
+<section id="deep-rnn-based-off-other-code">
+<h4>Deep RNN Based off Other Code<a class="headerlink" href="#deep-rnn-based-off-other-code" title="Permalink to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#The deep rnn structure but with LSTM</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">set_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">modelLSTM_2</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Sequential</span><span class="p">([</span>
+    <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">return_sequences</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+    <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">BatchNormalization</span><span class="p">(),</span>
+    <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">return_sequences</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+    <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">BatchNormalization</span><span class="p">(),</span>
+    <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span><span class="mi">1</span><span class="p">)])</span>
+
+<span class="n">modelLSTM_2</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s2">&quot;mse&quot;</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="s2">&quot;adam&quot;</span><span class="p">)</span>
+<span class="n">historyLSTM_2</span> <span class="o">=</span> <span class="n">modelLSTM_2</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">dataset_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+                    <span class="n">validation_data</span><span class="o">=</span><span class="n">dataset_val</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/20
+WARNING:tensorflow:Layer lstm_12 is casting an input tensor from dtype float64 to the layer&#39;s dtype of float32, which is new behavior in TensorFlow 2.  The layer has dtype float32 because its dtype defaults to floatx.
+
+If you intended to run this layer in float32, you can safely ignore this warning. If in doubt, this warning is likely only an issue if you are porting a TensorFlow 1.X model to TensorFlow 2.
+
+To change all layers to have dtype float64 by default, call `tf.keras.backend.set_floatx(&#39;float64&#39;)`. To change just this layer, pass dtype=&#39;float64&#39; to the layer constructor. If you are the author of this layer, you can disable autocasting by passing autocast=False to the base Layer constructor.
+
+193/193 [==============================] - 19s 100ms/step - loss: 0.9249 - val_loss: 0.7940
+Epoch 2/20
+193/193 [==============================] - 22s 114ms/step - loss: 0.7903 - val_loss: 0.7312
+Epoch 3/20
+193/193 [==============================] - 22s 115ms/step - loss: 0.7181 - val_loss: 0.7449
+Epoch 4/20
+193/193 [==============================] - 22s 116ms/step - loss: 0.6540 - val_loss: 0.6987
+Epoch 5/20
+193/193 [==============================] - 22s 114ms/step - loss: 0.6211 - val_loss: 0.7422
+Epoch 6/20
+193/193 [==============================] - 23s 121ms/step - loss: 0.5888 - val_loss: 0.6833
+Epoch 7/20
+193/193 [==============================] - 23s 120ms/step - loss: 0.5643 - val_loss: 0.7199
+Epoch 8/20
+193/193 [==============================] - 22s 115ms/step - loss: 0.5464 - val_loss: 0.8787
+Epoch 9/20
+193/193 [==============================] - 22s 114ms/step - loss: 0.5341 - val_loss: 0.9211
+Epoch 10/20
+193/193 [==============================] - 22s 116ms/step - loss: 0.5207 - val_loss: 0.8851
+Epoch 11/20
+193/193 [==============================] - 23s 118ms/step - loss: 0.5114 - val_loss: 0.8952
+Epoch 12/20
+193/193 [==============================] - 23s 117ms/step - loss: 0.5034 - val_loss: 0.9522
+Epoch 13/20
+193/193 [==============================] - 24s 125ms/step - loss: 0.4967 - val_loss: 0.8014
+Epoch 14/20
+193/193 [==============================] - 25s 130ms/step - loss: 0.5554 - val_loss: 0.7374
+Epoch 15/20
+193/193 [==============================] - 23s 121ms/step - loss: 0.5421 - val_loss: 0.6664
+Epoch 16/20
+193/193 [==============================] - 24s 124ms/step - loss: 0.4926 - val_loss: 0.6759
+Epoch 17/20
+193/193 [==============================] - 24s 123ms/step - loss: 0.4706 - val_loss: 0.7202
+Epoch 18/20
+193/193 [==============================] - 23s 120ms/step - loss: 0.4580 - val_loss: 0.7475
+Epoch 19/20
+193/193 [==============================] - 22s 117ms/step - loss: 0.4517 - val_loss: 0.7358
+Epoch 20/20
+193/193 [==============================] - 23s 118ms/step - loss: 0.4505 - val_loss: 0.7416
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">modelLSTM_2</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">dataset_val</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>71/71 [==============================] - 1s 19ms/step - loss: 0.7416
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.741614043712616
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">visualize_loss</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">]</span>
+    <span class="n">val_loss</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;val_loss&quot;</span><span class="p">]</span>
+    <span class="n">epochs</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">loss</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Training loss&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">val_loss</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Validation loss&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Epochs&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Loss&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="n">visualize_loss</span><span class="p">(</span><span class="n">historyLSTM_2</span><span class="p">,</span> <span class="s2">&quot;Training and Validation Loss&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/09c8fefaaccc78af9f648b9e7845877bab565cb136995353c4bac38b7fcdc82f.png" src="_images/09c8fefaaccc78af9f648b9e7845877bab565cb136995353c4bac38b7fcdc82f.png" />
+</div>
+</div>
+</section>
+<section id="other-deep-lstm">
+<h4>Other Deep LSTM<a class="headerlink" href="#other-deep-lstm" title="Permalink to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_lstm</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+<span class="n">model_lstm</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LSTM</span><span class="p">(</span><span class="mi">75</span><span class="p">,</span> <span class="n">return_sequences</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="n">train_X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">train_X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">])))</span>
+<span class="n">model_lstm</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LSTM</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">return_sequences</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="n">model_lstm</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">BatchNormalization</span><span class="p">())</span>
+<span class="n">model_lstm</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LSTM</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="mi">30</span><span class="p">))</span>
+<span class="n">model_lstm</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_lstm</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;mse&#39;</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">)</span>
+<span class="n">lstm_history</span> <span class="o">=</span> <span class="n">model_lstm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_X</span><span class="p">,</span> <span class="n">train_y</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">test_X</span><span class="p">,</span> <span class="n">test_y</span><span class="p">),</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/10
+97/97 [==============================] - 1s 12ms/step - loss: 1.0336 - val_loss: 6.3848e-04
+Epoch 2/10
+97/97 [==============================] - 1s 6ms/step - loss: 1.0107 - val_loss: 9.0753e-04
+Epoch 3/10
+97/97 [==============================] - 0s 5ms/step - loss: 0.9905 - val_loss: 6.5714e-04
+Epoch 4/10
+97/97 [==============================] - 0s 4ms/step - loss: 0.9637 - val_loss: 6.2440e-04
+Epoch 5/10
+97/97 [==============================] - 0s 4ms/step - loss: 0.9269 - val_loss: 0.0011
+Epoch 6/10
+97/97 [==============================] - 0s 4ms/step - loss: 0.8977 - val_loss: 0.0013
+Epoch 7/10
+97/97 [==============================] - 0s 4ms/step - loss: 0.8754 - val_loss: 0.0035
+Epoch 8/10
+97/97 [==============================] - 0s 4ms/step - loss: 0.8574 - val_loss: 0.0146
+Epoch 9/10
+97/97 [==============================] - 0s 4ms/step - loss: 0.8357 - val_loss: 0.0089
+Epoch 10/10
+97/97 [==============================] - 0s 4ms/step - loss: 0.8202 - val_loss: 0.0132
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="wavenet-implementation">
+<h2>WaveNet Implementation<a class="headerlink" href="#wavenet-implementation" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">set_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># # mse only at the last time step -- found in textbook 511 </span>
+<span class="c1"># def last_time_step_mse(Y_true, Y_pred):</span>
+<span class="c1">#     return keras.metrics.mean_squared_error(Y_true[:-1], Y_pred[:,-1])</span>
+
+
+<span class="c1"># found from pg 522 of textbook</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">InputLayer</span><span class="p">(</span><span class="n">input_shape</span><span class="o">=</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+<span class="k">for</span> <span class="n">rate</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="p">:</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Conv1D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;causal&quot;</span><span class="p">,</span> 
+                                 <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span> <span class="n">dilation_rate</span><span class="o">=</span><span class="n">rate</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Conv1D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # model compiling</span>
+<span class="c1"># model.compile(loss=&quot;mse&quot;, optimizer=&quot;adam&quot;)</span>
+<span class="c1"># history = model.fit(dataset_train, epochs=20,</span>
+<span class="c1">#                     validation_data=dataset_val)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This model didn’t really work.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Transformers with Time Series Dat</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="dl_apps_initial.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Initial Long-Short Term Memory Models</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="fantasyfootball_winner_part1.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Assembling, Preparing and Exploring the Data</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cory-clayton-emily-lien-prabhjot-singh">Cory Clayton, Emily Lien, Prabhjot Singh</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-lstm">Basic LSTM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-lstm-1-recreating-based-on-another-approach">Deep LSTM 1 – Recreating based on Another Approach</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-rnn">Basic RNN</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-rnn">Deep RNN</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-lstm">Deep LSTM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-tuning">Model Tuning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization">Regularization</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-rnn-based-off-other-code">Deep RNN Based off Other Code</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#other-deep-lstm">Other Deep LSTM</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wavenet-implementation">WaveNet Implementation</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

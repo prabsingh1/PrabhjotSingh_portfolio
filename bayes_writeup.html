@@ -1,0 +1,658 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Bayesian Methods to Assess Uncertainties related to the Classification of Tornado Magnitude &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'bayes_writeup';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Data Cleaning" href="bayes_clean.html" />
+    <link rel="prev" title="Sentiment Analysis" href="nlp_SentimentAnalysis.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Prabhjot Singh’s Data Science and Machine Learning Portfolio
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">More About Me</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="aboutme.html">My Journey into Data Science</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Amateur Meterology</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="weathernarratives.html">NLP Analysis of Storm Report Final Writeup</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="nlp_clean.html">Data Exploration and Cleaning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nlp_TableCreation.html">Creating LIB, TOKEN, VOCAB, BOW, TFIDF Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nlp_Clustering.html">Vector Space Models &amp; Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nlp_PCA.html">Principal Component Analysis (PCA)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nlp_TopicModeling2.html">Topic Modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nlp_SentimentAnalysis.html">Sentiment Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Bayesian Methods to Assess Uncertainties related to the Classification of Tornado Magnitude</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="bayes_clean.html">Data Cleaning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bayes_naivebayes.html">Naive Bayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bayes_sampling.html">Sampling, Trace and Forest plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bayes_variational.html">Variational Approximation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bayes_hierarchical.html">Hierachical Logisitc Regression</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="windenergy_preds.html">Application of Neural Networks to Enable Efficient Use of Wind Energy Final Writeup</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="dl_apps_clean.html">Data Cleaning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dl_apps_initial.html">Initial Long-Short Term Memory Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dl_apps_tuning.html">Model Building</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hacking Fantasy Football</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="fantasyfootball_winner_part1.html">Assembling, Preparing and Exploring the Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fantasyfootball_winner_part2.html">Building Models to Predict Draft Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Other Projects</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="other.html">Other Projects</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fbayes_writeup.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/bayes_writeup.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Bayesian Methods to Assess Uncertainties related to the Classification of Tornado Magnitude</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#latifa-hasan-kevin-hoffman-prabhjot-singh-jae-yoon-sung">Latifa Hasan, Kevin Hoffman, Prabhjot Singh, Jae Yoon Sung</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#description-of-the-data">Description of the Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#models-used-and-mathematical-linkage-between-problem-and-methods">Models Used and Mathematical Linkage Between Problem and Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mixed-naive-bayes">Mixed Naive Bayes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-logistic-regression">Multinomial Logistic Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hierarchical-model-using-regions-binned-states">Hierarchical Model Using Regions (binned states)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-results">Model Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusions">Conclusions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="bayesian-methods-to-assess-uncertainties-related-to-the-classification-of-tornado-magnitude">
+<h1>Bayesian Methods to Assess Uncertainties related to the Classification of Tornado Magnitude<a class="headerlink" href="#bayesian-methods-to-assess-uncertainties-related-to-the-classification-of-tornado-magnitude" title="Permalink to this heading">#</a></h1>
+<section id="latifa-hasan-kevin-hoffman-prabhjot-singh-jae-yoon-sung">
+<h2>Latifa Hasan, Kevin Hoffman, Prabhjot Singh, Jae Yoon Sung<a class="headerlink" href="#latifa-hasan-kevin-hoffman-prabhjot-singh-jae-yoon-sung" title="Permalink to this heading">#</a></h2>
+<p>Tornadoes are rotating columns of air that have the ability to condensate into a funnel-like structure that reaches towards the ground. Once at the ground level, tornadoes are capable of uprooting trees and houses, leaving cities and towns leveled, and causing mass casualty. The exact intensity and speed of a tornado is classified after assessing the damage profile of the storm and is rated using the Fujita (F) and Enhanced Fujita (EF) scale [1]. The EF scale is an updated version that takes into account engineered wind estimates and better damage descriptions, and went into effect in 2007. Since our primary focus will be an assessment of tornadoes from the years 2010-2018, we will not be worried about inconsistencies regarding the measurement of tornadoes. For comparison, an F0/EF0 tornado is typically regarded as weak in intensity, while F5/EF5 tornadoes are regarded as violent and are among the most damaging and deadliest of tornadoes [2]. More on the magnitudes and wind speeds of each tornado can be seen in the table below. Despite advancements in meteorological technologies over the years, tornadoes have remained extremely difficult to both predict and classify on the F/EF scale. Therefore in this project we hope to apply many of the concepts we have learned in Bayesian Machine Learning to implement probabilistic models to assess the uncertainties around the classification of tornadoes in the F/EF scale.</p>
+<figure class="align-default" id="barplot-fig">
+<img alt="_images/bayes1.png" src="_images/bayes1.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 7 </span><span class="caption-text">Table showing the various magnitudes of Tornoadoes and their associated wind speeds.</span><a class="headerlink" href="#barplot-fig" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="description-of-the-data">
+<h2>Description of the Data<a class="headerlink" href="#description-of-the-data" title="Permalink to this heading">#</a></h2>
+<p>We obtained a collection of tornadoes (summer of 2010 to 2018) from the National Oceanic and Atmospheric Administration (NOAA)  database that openly allows users to obtain weather related datasets.  We also web-scraped to obtain weather conditions an hour and two hours prior to tornadogenesis or the formation of a tornado. The rationale being that these conditions could provide additional insight into the varying nature of tornado intensity and thus the classification of tornadoes. Any significant findings could also be pivotal in determining what weather conditions are ripe for dangerous tornadoes. In addition, all variables used were standardized and centered to have a mean of 0.</p>
+<p>Response Variable: Magnitude - (mag, from 0-5, categorical) - Classification of tornado ranging from EF0-EF5
+Predictors: NOAA Database - Time (time_binned, binned numerical times into categorical), State (st, categorical), Injury(injuries, numerical) , Fatalities (fat, numerical),  estimated property loss in dollars (loss, numerical), amount of crop loss in million of dollars (closs, numerical), starting and ending location coordinates (slat, slon, elong, elat; numerical), length tornado traveled in miles (lenm, numerical), width tornado traveled in miles (wid, numerical)
+Web-scrapped - weather conditions (wind speed, visibility distance, temperature, temperature_dewpoint, air pressure 1 hr/2hr before tornado)</p>
+</section>
+<section id="models-used-and-mathematical-linkage-between-problem-and-methods">
+<h2>Models Used and Mathematical Linkage Between Problem and Methods<a class="headerlink" href="#models-used-and-mathematical-linkage-between-problem-and-methods" title="Permalink to this heading">#</a></h2>
+<section id="mixed-naive-bayes">
+<h3>Mixed Naive Bayes<a class="headerlink" href="#mixed-naive-bayes" title="Permalink to this heading">#</a></h3>
+<p>In a Naive Bayesian model we assume features of a multidimensional likelihood are independent, even though they are not. In this case we know that many of our variables are dependent and related to one another. However this suboptimal approach still offers a method to obtain good parameter estimation, and thus we decided to build the Naive Bayes model.</p>
+<figure class="align-default" id="id1">
+<img alt="_images/bayes2.png" src="_images/bayes2.png" />
+</figure>
+<p>Where x is the data and giis the classification of the tornado. It is important to note that we have both categorical and numerical variables.  Therefore we require a mixed naive bayes approach: multinomial for categorical data and Gaussian for numerical. From here the probability of an observation belonging to a class is simply the product of both of the categorical and numerical naive bayes probabilities. The class with the greatest probability is the determined class, or in this case magnitude, of the tornado. This model yielded an accuracy of 57.1%.</p>
+</section>
+<section id="multinomial-logistic-regression">
+<h3>Multinomial Logistic Regression<a class="headerlink" href="#multinomial-logistic-regression" title="Permalink to this heading">#</a></h3>
+<p>Since our response variable is categorical with more than two classes, we modeled our data using a multinomial logistic regression model. Multinomial logistic regression uses a softmax function to compute the regression parameters, as opposed to the sigmoid function used in binary logistic regression.</p>
+<figure class="align-default" id="id2">
+<img alt="_images/bayes3.png" src="_images/bayes3.png" />
+</figure>
+<p>Here, P(yi = k|X) is the probability that yi, the ith observation is in class k, and K is the total number of classes. Here, we constructed two models to test whether a certain set of predictors can predict the magnitude of tornadoes better. The plot on the right shows the graphical representation of the models that were created. We constructed a multinomial logistic regression model  by incorporating all the predictor variables, and obtained an accuracy of 64.1%. The forest plots and probabilities generated from this model indicated that the variables ‘loss’, ‘length’, and ‘width’ were significant. We then constructed the second model  using the set of significant predictors and obtained an accuracy of 64.5%.The accuracy score from the model using the significant predictors is very similar to that of the model using all predictors, indicating similar predictive power.</p>
+<figure class="align-default" id="id3">
+<img alt="_images/bayes4.png" src="_images/bayes4.png" />
+</figure>
+</section>
+<section id="hierarchical-model-using-regions-binned-states">
+<h3>Hierarchical Model Using Regions (binned states)<a class="headerlink" href="#hierarchical-model-using-regions-binned-states" title="Permalink to this heading">#</a></h3>
+<p>We also modeled this data as a hierarchical multinomial logistic regression. Our assumption was that the weather and climates in different states vary and this could have an impact on the strength of tornadoes. A hierarchical model allows us to have a different slope and intercept for each state. The accuracy of the model when making hard classifications was about 48%. Most likely, there were too many groups and some states shared the same weather characteristics. NOAA group states into 9 weather regions based on climate and we used these as the basis of our groups for the hierarchical model [4]. Below is a graphical representation of our model using all predictors.</p>
+<figure class="align-default" id="id4">
+<img alt="_images/bayes5.png" src="_images/bayes5.png" />
+</figure>
+<p>The inputs of our class probabilities p are the intercepts, features(data), betas, and the region associated with each tornado. We modeled the betas as a normal distribution. There is a different beta for each feature (23), each region (9), and for each of the classes except one (the 6th class probability can be inferred from the other 5). Similarly the intercept is modeled as a normal distribution and there is a different one for each region (9) and class (5). We put priors on the intercept and betas, using a normal distribution for the means and a half normal distribution on the sigmas (since sigma must not be negative). We get a probability for each class for each of the 4,459 tornados in the training data and that goes into the y, the true class label of the tornado. The features, region, and category are in data containers so after using variational approximation or sampling to approximate the posterior we can swap out the training data for the test data to make predictions and assess accuracy. Sampling generally produced better accuracy as it can get closer to the true distribution, but took longer to train. To produce predictions, we sampled from the posterior and made hard classifications by selecting the class with the highest probability. For the full model, the accuracy from sampling was 56.7%.</p>
+<p>To improve this model, we looked at correlations between the features to see what features we could drop.</p>
+<figure class="align-default" id="id5">
+<img alt="_images/bayes6.png" src="_images/bayes6.png" />
+</figure>
+<p>All of the weather features from 1 hour and 2 hours before the tornado touchdown were correlated so we transformed those features into a difference between each pair of observations. Inj, fat, loss, closs had some correlations together and very low variance (the majority of the observations were 0) so we removed those as well. This model with only 7 predictors of len, wid, delta_wind_speed, delta_visibility, delta_temperature, delta_dewpoint, and delta_air_pressure produced much better results. Below is the trace plot of the first three predictors for the first class and region from sampling. They show good convergence.</p>
+<figure class="align-default" id="id6">
+<img alt="_images/bayes7.png" src="_images/bayes7.png" />
+</figure>
+<p>After approximating the posterior with the MCMC No-U-Turn sampling and sampling from the posterior to make predictions on our test set, the accuracy improved to 63.5%. We compared the WAIC of the two models and used Bayesian Model Averaging to make predictions from the combined models.</p>
+<figure class="align-default" id="id7">
+<img alt="_images/bayes8.png" src="_images/bayes8.png" />
+</figure>
+<p>The weight of the small model (one with only 7 predictors)  is 1 because the WAIC is much closer to 0 than the full model so this would give us the same result as just making predictions with the small model.</p>
+</section>
+</section>
+<section id="model-results">
+<h2>Model Results<a class="headerlink" href="#model-results" title="Permalink to this heading">#</a></h2>
+<table class="table" id="results2">
+<caption><span class="caption-number">Table 1 </span><span class="caption-text">Results of Bayesian Approaches to Tornado Classification</span><a class="headerlink" href="#results2" title="Permalink to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Model</p></th>
+<th class="head"><p>Predictor</p></th>
+<th class="head"><p>Accuracy</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Naive Bayes</p></td>
+<td><p>All</p></td>
+<td><p>0.571</p></td>
+</tr>
+<tr class="row-odd"><td><p>Multinomial</p></td>
+<td><p>All</p></td>
+<td><p>0.641</p></td>
+</tr>
+<tr class="row-even"><td><p>Multinomial</p></td>
+<td><p>‘len’, ‘’wid’, and ‘loss’</p></td>
+<td><p>0.643</p></td>
+</tr>
+<tr class="row-odd"><td><p>Hierarchical</p></td>
+<td><p>All</p></td>
+<td><p>0.567</p></td>
+</tr>
+<tr class="row-even"><td><p>Hierarchical</p></td>
+<td><p>‘len’,’wid’, change in weather predictors</p></td>
+<td><p>0.635</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="conclusions">
+<h2>Conclusions<a class="headerlink" href="#conclusions" title="Permalink to this heading">#</a></h2>
+<p>Generally, we obtained similar predictions for all three of the models that were created. The Naive Bayes, surprisingly, performed up to par with the other models, indicating that a simple Bayesian model design can be successful is the classification of magnitudes of tornadoes with an accuracy of about 57%. In the Multinomial Logistic Regression model, we were able to better assess the uncertainties that lie within our parameter estimates. This was evident through our forest plots (may be seen in the Multinomial Logistic Regression Notebook) that indicated that only the length, width, and loss predictors were significant as they did not include 0 in their credible interval. Overall the accuracy of these two models was reported to be generally around 64%. Lastly, in our Hierarchical Multinomial Logistic Regression Model, we were able to create a precise model by first binning states into discrete regions, to furthermore be used as the categorical feature by which we created a hierarchical model. The parameter estimates from this model were very interesting, as we were able to clearly see the combinations of predictors that worked for each region and class and obtained an accuracy of about 57%, similar to our Naive Bayes model. After analyzing a correlations plot, we were able to improve these initial estimates by removing some features, increasing the accuracy up 64%.  Although this was slightly below the accuracy reported for the multinomial model, we believe that the insight into the uncertainty of parameters across regions provides a very novel look into how classification may differ based on where in the United States a tornado happened.</p>
+<p>One overall takeaway that can’t be ignored is the amount of influence that the predictors length and width that a tornado travels had in all our models. The credible interval on the coefficients were negative for weaker tornadoes and positive for stronger tornadoes. This makes sense as the length or width traveled by a tornado logically plays a role in the damage profile that ultimately happens after a tornado. A disappointing result that we did not expect was how poorly of an indicator weather (and change in weather) was to any of the models that were created. Although we included it in the Hierarchical model, it most certainly is not a predictor that we have much confidence in alone in the classification of tornadoes.</p>
+<p>For future research, since we are confident that the stronger tornadoes are more certain to predict the magnitude of tornadoes than the weaker tornadoes, we can try differentiating the tornadoes with EF greater than 2 or not.</p>
+<p>One other interesting novel application worth exploring that is related to tornado classification, is taking advantage of doppler radar, and creating a Gaussian Mixture Model or K-means image classifier to locate pixels and signals indicative of a different magnitude of tornadoes. Radar images are particularly interesting because they provide a plethora of interesting weather patterns that could all be important indicators to a storm’s development. In addition, a classification of this sort would be interesting as it could be used to classify tornadoes before or during its origination, rather than the current system where a tornado is classified with its respective damage profile.</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<p>[1] The Online Tornado FAQ (by Roger Edwards, SPC). <a class="reference external" href="http://Web.archive.org">Web.archive.org</a>
+[2] Fujita Tornado Damage Scale. <a class="reference external" href="http://Spc.noaa.gov">Spc.noaa.gov</a>.
+[3] Chris Albon. 2017. Multinomial Logistic Regression. (December 2017). Retrieved December 8, 2020 from <a class="reference external" href="https://chrisalbon.com/machine_learning/naive_bayes/multinomial_logistic_regression/">https://chrisalbon.com/machine_learning/naive_bayes/multinomial_logistic_regression/</a>
+[4] Thomas R. Karl and Walter James Koss, 1984: “Regional and National Monthly, Seasonal, and Annual Temperature Weighted by Area, 1895-1983.” Historical Climatology Series 4-3, National Climatic Data Center, Asheville, NC, 38 pp.
+*[5] Yves Jacquot (11 Oct. 2017.). Predicting tornado magnitude with Machine Learning.</p>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="nlp_SentimentAnalysis.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Sentiment Analysis</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="bayes_clean.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Data Cleaning</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#latifa-hasan-kevin-hoffman-prabhjot-singh-jae-yoon-sung">Latifa Hasan, Kevin Hoffman, Prabhjot Singh, Jae Yoon Sung</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#description-of-the-data">Description of the Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#models-used-and-mathematical-linkage-between-problem-and-methods">Models Used and Mathematical Linkage Between Problem and Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mixed-naive-bayes">Mixed Naive Bayes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-logistic-regression">Multinomial Logistic Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hierarchical-model-using-regions-binned-states">Hierarchical Model Using Regions (binned states)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-results">Model Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusions">Conclusions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
